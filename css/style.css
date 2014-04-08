@@ -1,0 +1,28 @@
+#sortMenu .panel > .list-group {
+	border-top: 1px solid #ddd;
+}
+
+.span-right {
+	float: right;
+}
+.panel > .panel-heading > a > span.collapse-arrow {
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+	-ms-transition: all 0.25s ease-in-out;
+	-o-transition: all 0.25s ease-in-out;
+	transition: all 0.25s ease-in-out;
+}
+
+.panel > .panel-heading > a.collapsed > span.collapse-arrow {
+	-moz-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.itemBlock {
+	display: inline-block;
+	border: 1px solid #ddd;
+	margin: 2px 0px;
+}
