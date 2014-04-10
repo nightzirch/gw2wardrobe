@@ -62,8 +62,12 @@ var gw2w = {
 			// Update
 			gw2w.update();
 			
+			// Storage
+			gw2w.storage.get();
+			
 			// Plugins
 			gw2w.plugins.tooltip();
+			$('.gw2tooltip').tooltip()
 			
 			// Listeners
 			gw2w.listeners.all();
@@ -87,13 +91,14 @@ var gw2w = {
 		self.weaponSubtypes = ko.observableArray();
 		
 		// Item details
-		self.detailId = ko.observable();
-		self.detailName = ko.observable();
-		self.detailDesc = ko.observable();
-		self.detailIcon = ko.observable();
-		self.detailImage = ko.observable();
-		self.detailPage = ko.observable();
-		self.detailAcquire = ko.observable();
+		self.detailEmpty = ko.observable(true);
+		self.detailId = ko.observable(null);
+		self.detailName = ko.observable(null);
+		self.detailDesc = ko.observable(null);
+		self.detailIcon = ko.observable(null);
+		self.detailImage = ko.observable(null);
+		self.detailPage = ko.observable(null);
+		self.detailAcquire = ko.observable(null);
 		self.detailRecipe = ko.observable(false);
 		
 		self.detailRecipeText = ko.computed(function(){
@@ -101,6 +106,23 @@ var gw2w = {
 			return text;
 		});
 		
+		// Tracker array
+		self.tracker = ko.observableArray();
+		self.trackerAvailable = ko.observable(true);
+		self.trackerAddText = ko.computed(function() {
+			// If we're allowed to add stuff to the tracker
+			if(self.trackerAvailable()) {
+				return "Add to tracker";
+			}
+			// If there's nothing to add
+			else if(!self.detailId()) {
+				return "Add to tracker";
+			}
+			// If we're not...
+			else {
+				return "Already in tracker";
+			}
+		});
 	},
 	
 	api: {
@@ -141,6 +163,25 @@ var gw2w = {
 		}
 	},
 	
+	listeners: {
+		all: function() {
+			gw2w.listeners.itemBlock();
+			gw2w.listeners.trackerAdd();
+		},
+		itemBlock: function() {
+			$(".itemBlock").on("click", function() {
+				var id = $(this).attr("data-gw2item");
+				gw2w.populate.itemDetails(id);
+			});
+		},
+		trackerAdd: function() {
+			$("#trackerAdd").on("click", function() {
+				gw2w.tracker.add();
+				gw2w.tracker.exist(gw2w.vm.detailId());
+			});
+		}
+	},
+	
 	class: {
 		// Class to represent an armor item
 		armor: function(obj) {
@@ -171,18 +212,13 @@ var gw2w = {
 			var self = this;
 			self.id = obj.id;
 			self.name = obj.name;
-		}
-	},
-	
-	listeners: {
-		all: function() {
-			gw2w.listeners.itemBlock();
 		},
-		itemBlock: function() {
-			$(".itemBlock").on("click", function() {
-				var id = $(this).attr("data-gw2item");
-				gw2w.populate.itemDetails(id);
-			});
+		// Class for the tracker
+		trackerItem: function(obj) {
+			var self = this;
+			self.id = obj.id;
+			self.name = obj.name;
+			self.icon = obj.icon;
 		}
 	},
 	
@@ -325,20 +361,17 @@ var gw2w = {
 			var vm = gw2w.vm;
 			var details = gw2w.items.details;
 			
-			// Clean the variables
-			vm.detailId(null);
-			vm.detailName(null);
-			vm.detailDesc(null);
-			vm.detailIcon(null);
-			vm.detailImage(null);
-			vm.detailPage(null);
-			vm.detailAcquire(null);
-			vm.detailRecipe(false);
+			// Clear the variables
+			gw2w.clear();
 			
+			// Check if this guy already exists in the tracker
+			gw2w.tracker.exist(details.item_id);
 			
 			// Fetch item details from the official wiki
 			gw2w.populate.itemPage(details.name);
 			
+			// Give the variables some data
+			vm.detailEmpty(false);
 			vm.detailId(details.item_id);
 			vm.detailName(details.name);
 			vm.detailDesc(details.description);
@@ -394,6 +427,87 @@ var gw2w = {
 		}
 	},
 	
+	tracker: {
+		add: function() {
+			var vm = gw2w.vm;
+			
+			// Creating the object
+			var obj = {
+				id: vm.detailId(),
+				name: vm.detailName(),
+				icon: vm.detailIcon()
+			}
+			
+			// Add the stuff
+			vm.tracker.push(new gw2w.class.trackerItem(obj));
+			
+			// Update localStorage
+			gw2w.storage.set();
+		},
+		remove: function(obj) {
+			var vm = gw2w.vm;
+			
+			vm.tracker.remove(function(item) {
+				return item.id === obj.id;
+			});
+			
+			// Lets check again if the currently displayed item exists in the tracker
+			gw2w.tracker.exist(vm.detailId());
+			
+			// Update localStorage
+			gw2w.storage.set();
+		},
+		click: function(obj) {
+			// If the item is not the same as the  currently displayed item
+			if(obj.id != gw2w.vm.detailId()) {
+				gw2w.populate.itemDetails(obj.id);
+			}
+		},
+		exist: function(id) {
+			var vm = gw2w.vm;
+			// If already exist
+			var alreadyExist = false;
+			
+			// Loop through every item
+			$(vm.tracker()).each(function() {
+				if(this.id == id) {
+					alreadyExist = true;
+				}
+			});
+			
+			// Setting global variable
+			vm.trackerAvailable(!alreadyExist);
+		}
+	},
+	
+	storage: {
+		get: function() {
+			var vm = gw2w.vm;
+			
+			// Let's get our hands on some sweet storage
+			var tracker = JSON.parse(localStorage.getItem("tracker"));
+			
+			// Making sure it's there
+			if(tracker) {
+				// Now lets put this shit into the tracker array
+				$(tracker).each(function() {
+					vm.tracker.push(new gw2w.class.trackerItem(this));
+				});
+			}
+		},
+		set: function() {
+			var vm = gw2w.vm;
+			var tracker = vm.tracker();
+			
+			// Now, let's save it
+			localStorage.setItem("tracker", JSON.stringify(tracker));
+		},
+		clear: function() {
+			// For some reason I felt that this function was needed
+			localStorage.clear();
+		}
+	},
+	
 	items: {
 		details: null,
 		page: null,
@@ -407,6 +521,21 @@ var gw2w = {
 	update: function() {
 		gw2w.vm.armors.push();
 		gw2w.vm.weapons.push();
+	},
+	
+	clear: function() {
+		var vm = gw2w.vm;
+		
+		// Clear the variables
+		vm.detailEmpty(true);
+		vm.detailId(null);
+		vm.detailName(null);
+		vm.detailDesc(null);
+		vm.detailIcon(null);
+		vm.detailImage(null);
+		vm.detailPage(null);
+		vm.detailAcquire(null);
+		vm.detailRecipe(false);
 	},
 	
 	loading: function(state) {

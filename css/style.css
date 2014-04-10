@@ -30,10 +30,47 @@
 	margin: 0 auto;
 }
 
-#itemDetails .panel-body > img.detailIcon {
-	margin-right: 15px;
+#itemDetails ul.list-group > li.list-group-item:first-child {
+	min-height: 100px;
 }
+
+#itemDetails ul.list-group > li.list-group-item > img.detailIcon {
+	margin-right: 15px;
+	margin-top: 8px;
+}
+
+#itemDetails ul.list-group > li.list-group-item:last-child {
+	margin-bottom: -1px;
+}
+
+#itemDetails .panel
 
 nav > .bg-primary {
 	color: #fff;
+}
+
+#tracker ul {
+	margin-bottom: -1px;
+}
+
+#tracker ul > a {
+	min-height: 53px;
+}
+
+#tracker ul > a > button {
+	visibility: hidden;
+	margin-top: -1px;
+}
+
+#tracker ul > a:hover > button {
+	visibility: visible;
+}
+
+#tracker ul > a > img.trackerIcon {
+	height: 32px;
+	margin-right: 10px;
+}
+
+#tracker ul > a > .trackerName {
+	margin-top: 6px;
 }

@@ -185,24 +185,34 @@
 								<h5>Item Details</h5>
 							</div>
 							
-							<div class="panel-body">
-								<img class="detailIcon pull-left" data-bind="attr: {src: detailIcon}" />
-								<h5 class="detailName" data-bind="text: detailName"></h5>
-								<p class="detailDesc text-muted" data-bind="text: detailDesc"></p>
+							<ul class="list-group" data-bind="visible: detailId">
+								<li class="list-group-item">
+									<img class="detailIcon pull-left" data-bind="attr: {src: detailIcon}" />
+									<h5 class="detailName" data-bind="text: detailName"></h5>
+									<p class="detailDesc text-muted" data-bind="text: detailDesc"></p>
+								</li>
 								
-								<div data-bind="visible: detailAcquire">
-									<h5>Acquisition</h5>
-									<div data-bind="html: detailAcquire"></div>
-								</div>
-								
-								<div data-bind="visible: detailRecipe">
-									<h5>Recipe</h5>
-									<div data-bind="html: detailRecipeText"></div>
-								</div>
-								
-								<button type="button" class="btn btn-primary" id="trackerAdd" data-bind='attr: {"data-id": detailId}'>Add to tracker</button>
-								<a class="btn btn-default" role="button" data-bind="attr: {href: detailPage}">Official Wiki</a>
-								
+								<li class="list-group-item" data-bind="visible: detailAcquire || detailRecipe">
+									<div data-bind="visible: detailAcquire">
+										<h5>Acquisition</h5>
+										<div data-bind="html: detailAcquire"></div>
+									</div>
+									
+									<div data-bind="visible: detailRecipe">
+										<h5>Recipe</h5>
+										<div data-bind="html: detailRecipeText"></div>
+									</div>
+								</li>
+							</ul>
+							
+							<div class="panel-body" data-bind="visible: detailEmpty">
+								<p class="text-muted">Click on an item to show details.</p>
+							</div>
+							
+							<div class="panel-footer">
+								<button type="button" class="btn btn-primary" id="trackerAdd" data-bind='attr: {"data-id": detailId}, enable: (detailId() && trackerAvailable()), text: trackerAddText'></button>
+								<a class="btn btn-default" role="button" data-bind="attr: {href: detailPage}, css: {disabled: detailEmpty}">Official Wiki</a>
+								<a class="btn btn-link pull-right" role="button" data-bind="click: gw2w.clear, visible: detailId">Clear</a>
 							</div>
 						</div>
 					</div>
@@ -210,11 +220,19 @@
 					<div id="tracker">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h5>Item Tracker</h5>
+								<h5>Item Tracker <span class="gw2tooltip glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="The item tracker saves automagically! You can close your browser and everything will still be here."></span></h5>
 							</div>
 							
-							<div class="panel-body">
-								
+							<ul class="list-group" data-bind="foreach: tracker, visible: tracker().length > 0">
+								<a href="#" class="trackerItem list-group-item" data-bind='attr: {"data-id": id}, click: gw2w.tracker.click'>
+									<button type="button" class="btn btn-danger pull-right" data-bind='click: gw2w.tracker.remove'>Remove</button>
+									<img class="trackerIcon pull-left" data-bind="attr: {src: icon}" />
+									<p class="trackerName list-group-item-heading" data-bind="text: name"></p>
+								</a>
+							</ul>
+							
+							<div class="panel-body" data-bind="visible: tracker().length < 1">
+								<p class="text-muted">There are currently no items in the tracker.</p>
 							</div>
 						</div>
 					</div>
