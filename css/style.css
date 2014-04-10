@@ -2,9 +2,6 @@
 	border-top: 1px solid #ddd;
 }
 
-.span-right {
-	float: right;
-}
 .panel > .panel-heading > a > span.collapse-arrow {
 	-webkit-transition: all 0.25s ease-in-out;
 	-moz-transition: all 0.25s ease-in-out;
@@ -25,4 +22,18 @@
 	display: inline-block;
 	border: 1px solid #ddd;
 	margin: 2px 0px;
+	cursor: pointer;
+}
+
+#loading > img {
+	display: block;
+	margin: 0 auto;
+}
+
+#itemDetails .panel-body > img.detailIcon {
+	margin-right: 15px;
+}
+
+nav > .bg-primary {
+	color: #fff;
 }
