@@ -32,15 +32,15 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Guild Wars 2 Wardrobe <span class="badge badge-danger">ALPHA</span></a>
+					<a class="navbar-brand" href="/">Guild Wars 2 Wardrobe <span class="badge badge-danger">ALPHA</span></a>
 				</div>
 				
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="">Wardrobe</a></li>
-						<li><a href="about.php">About</a></li>
-						<li><a href="changelog.php">Changelog</a></li>
+						<li class="active"><a href="/">Wardrobe</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="https://github.com/nightzirch/gw2wardrobe/commits/master">Changelog</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
@@ -51,7 +51,7 @@
 			<div class="alert alert-danger">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<h4>Guild Wars 2 Wardrobe is in alpha!</h4>
-				Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about planned <a class="alert-link" href="features.php">upcoming features</a> or check out <a class="alert-link" href="changelog.php">the changelog</a>.
+				Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about planned <a class="alert-link" href="/about">upcoming features</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.
 			</div>
 			
 			<div class="row">
