@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Guild Wars 2 Wardrobe</title>
+		<title>GuildWars2 Wardrobe</title>
 		
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 			<!-- Danger alert -->
 			<div class="alert alert-danger">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<h4>Guild Wars 2 Wardrobe is in alpha!</h4>
+				<h4>GuildWars2 Wardrobe is in alpha!</h4>
 				Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about upcoming features on the <a class="alert-link" href="/about">about page</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.
 			</div>
 			
