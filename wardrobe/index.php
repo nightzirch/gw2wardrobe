@@ -7,11 +7,11 @@
 		<title>Guild Wars 2 Wardrobe</title>
 		
 		<!-- Bootstrap -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		
 		<!-- Custom style -->
-		<link href="css/style.css" rel="stylesheet">
-		<link href="js/theme/default/guildwars2-tooltip.css" rel="stylesheet">
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../js/theme/default/guildwars2-tooltip.css" rel="stylesheet">
 		
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,7 +23,7 @@
 	
 	<body>
 		<?php
-			include('includes/header.php');
+			include('../includes/header.php');
 		?>
 		
 		<div class="container-fluid">
@@ -103,7 +103,7 @@
 				
 				<div class="col-md-7">
 					<div id="loading" data-bind="visible: loading">
-						<img src="img/loading.gif" alt="Loading" />
+						<img src="../img/loading.gif" alt="Loading" />
 					</div>
 					
 					<div id="itemsContainer" class="panel-group">
@@ -203,18 +203,18 @@
 		</div>
 		
 		<?php
-			include('includes/footer.php');
+			include('../includes/footer.php');
 		?>
 		
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/bootstrap.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
 		<!-- Knockout JS -->
-		<script src="js/knockout-3.1.0.js"></script>
+		<script src="../js/knockout-3.1.0.js"></script>
 		<!-- Custom Script -->
-		<script src="js/guildwars2-tooltip.jquery.min.js"></script>
-		<script src="js/script.js"></script>
+		<script src="../js/guildwars2-tooltip.jquery.min.js"></script>
+		<script src="../js/script.js"></script>
 		
 		
 	</body>

@@ -1,8 +1,9 @@
-#sortMenu .panel > .list-group {
+#sortMenu .panel > .list-group,
+#menu .panel > .list-group {
 	border-top: 1px solid #ddd;
 }
 
-.panel > .panel-heading > a > span.collapse-arrow {
+.panel > .panel-heading a > span.collapse-arrow {
 	-webkit-transition: all 0.25s ease-in-out;
 	-moz-transition: all 0.25s ease-in-out;
 	-ms-transition: all 0.25s ease-in-out;
@@ -10,7 +11,7 @@
 	transition: all 0.25s ease-in-out;
 }
 
-.panel > .panel-heading > a.collapsed > span.collapse-arrow {
+.panel > .panel-heading a.collapsed > span.collapse-arrow {
 	-moz-transform: rotate(90deg);
 	-webkit-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
