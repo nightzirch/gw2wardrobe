@@ -181,7 +181,16 @@ var gw2w = {
 		collapseToggle: function() {
 			$("#collapseToggle").on("click", function(e) {
 				e.preventDefault();
-				$("#itemsContainer div.panel-collapse").collapse("toggle");
+				var panels = $("#itemsContainer .panel-collapse.in");
+				
+				// If any of the panels are not collapsed, collapse all
+				if(panels.length > 0) {
+					$("#itemsContainer .panel-collapse").collapse("hide");
+				}
+				// If all are collapsed, show all
+				else {
+					$("#itemsContainer .panel-collapse").collapse("show");
+				}
 			});
 		}
 	},
