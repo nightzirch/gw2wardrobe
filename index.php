@@ -31,7 +31,7 @@
 			<div class="alert alert-danger">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<h4>Guild Wars 2 Wardrobe is in alpha!</h4>
-				Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about planned upcoming features and known issues on the <a class="alert-link" href="/about">about page</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.
+				Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about upcoming features on the <a class="alert-link" href="/about">about page</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.
 			</div>
 			
 			<div class="row">
@@ -110,10 +110,10 @@
 						<div data-bind="foreach: armors">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<a data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
+									<a class="collapsed" data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
 								</div>
 								
-								<div class="panel-collapse collapse in" data-bind="attr: {id: id}">
+								<div class="panel-collapse collapse" data-bind="attr: {id: id}">
 									<div class="panel-body" data-bind="foreach: value">
 										<div class="itemBlock" data-bind='attr: {"data-gw2item": id}'>
 											<img data-bind="attr: {src: img}" />
@@ -126,10 +126,10 @@
 						<div data-bind="foreach: weapons">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<a data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
+									<a class="collapsed" data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
 								</div>
 								
-								<div class="panel-collapse collapse in" data-bind="attr: {id: id}">
+								<div class="panel-collapse collapse" data-bind="attr: {id: id}">
 									<div class="panel-body" data-bind="foreach: value">
 										<div class="itemBlock" data-bind='attr: {"data-gw2item": id}'>
 											<img data-bind="attr: {src: img}" />

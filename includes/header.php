@@ -1,7 +1,8 @@
 <?php
 	function activePage($page) {
 		$pattern = '/' . $page . '/';
-		$regex = preg_match($pattern, $_SERVER['PHP_SELF']);
+		$server = $_SERVER['PHP_SELF'];
+		$regex = preg_match($pattern, $server);
 		
         if($regex) {
 			return 'class="active"';
@@ -19,15 +20,14 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">Guild Wars 2 Wardrobe <span class="badge badge-danger">ALPHA</span></a>
+			<a class="navbar-brand" href="/">GuildWars2 Wardrobe <span class="badge badge-danger">ALPHA</span></a>
 		</div>
 		
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="/">Home</a></li>
-				<li <?php echo activePage("wardrobe") ?>><a href="/wardrobe">Wardrobe</a></li>
-				<li <?php echo activePage("fashion") ?>><a href="/fashion">Passion for Fashion</a></li>
+				<li data-bind="css: {active: pathHome}"><a href="/">Home</a></li>
+				<!--<li <?php echo activePage("fashion") ?>><a href="/fashion">Passion for Fashion</a></li>-->
 				<li <?php echo activePage("about") ?>><a href="/about">About</a></li>
 				<li><a href="https://github.com/nightzirch/gw2wardrobe/commits/master">Changelog</a></li>
 			</ul>

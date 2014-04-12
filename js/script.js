@@ -78,6 +78,19 @@ var gw2w = {
 	viewModel: function() {
 		var self = this;
 		
+		// Pathname
+		self.pathHome = ko.computed(function() {
+			var path = document.location.pathname;
+			var pathClean = path.replace(new RegExp("/", "g"), "");
+			
+			if(pathClean.length < 1) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		});
+		
 		// Loading
 		self.loading = ko.observable(false);
 		
