@@ -60,6 +60,16 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h5>
+									<a id="collapseToggle" href="#" >
+										Toggle collapse all
+									</a>
+								</h5>
+							</div>
+						</div>
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5>
 									<a href="#sortArmor" data-toggle="collapse" data-parent="#sortMenu">
 										Armor Skins
 										<span class="collapse-arrow pull-right">&#x25B2;</span>
@@ -67,11 +77,10 @@
 								</h5>
 							</div>
 							
-							<ul id="sortArmor" class="list-group collapse in">
-								<li class="list-group-item">All weights</li>
-								<li class="list-group-item">Light</li>
-								<li class="list-group-item">Medium</li>
-								<li class="list-group-item">Heavy</li>
+							<ul id="sortArmor" class="list-group collapse" data-bind="foreach: armors">
+								<li class="list-group-item">
+									<a data-bind='attr: {href: "#" + id}, text: name'></a>
+								</li>
 							</ul>
 						</div>
 						
@@ -85,26 +94,10 @@
 								</h5>
 							</div>
 							
-							<ul id="sortWeapon" class="list-group collapse">
-								<li class="list-group-item">Axe</li>
-								<li class="list-group-item">Dagger</li>
-								<li class="list-group-item">Focus</li>
-								<li class="list-group-item">Greatsword</li>
-								<li class="list-group-item">Hammer</li>
-								<li class="list-group-item">Harpoon Gun</li>
-								<li class="list-group-item">Longbow</li>
-								<li class="list-group-item">Mace</li>
-								<li class="list-group-item">Pistol</li>
-								<li class="list-group-item">Rifle</li>
-								<li class="list-group-item">Scepter</li>
-								<li class="list-group-item">Shield</li>
-								<li class="list-group-item">Short Bow</li>
-								<li class="list-group-item">Spear</li>
-								<li class="list-group-item">Staff</li>
-								<li class="list-group-item">Sword</li>
-								<li class="list-group-item">Torch</li>
-								<li class="list-group-item">Trident</li>
-								<li class="list-group-item">Warhorn</li>
+							<ul id="sortWeapon" class="list-group collapse" data-bind="foreach: weapons">
+								<li class="list-group-item">
+									<a data-bind='attr: {href: "#" + id}, text: name'></a>
+								</li>
 							</ul>
 						</div>
 						
@@ -133,24 +126,11 @@
 						<img src="img/loading.gif" alt="Loading" />
 					</div>
 					
-					<div id="itemsContainer" class="panel-group" data-bind="foreach: armors">
-						
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<a data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
-							</div>
-							
-							<div class="panel-collapse collapse in" data-bind="attr: {id: id}">
-								<div class="panel-body" data-bind="foreach: value">
-									<div class="itemBlock" data-bind='attr: {"data-gw2item": id}'>
-										<img data-bind="attr: {src: img}" />
-									</div>
-								</div>
-							</div>
-							
-							<!-- ko if: $index() == 0 -->
-								<!--<div class="panel-heading">
-									<a data-toggle="collapse" data-bind='html: name + arrow, attr: {href: "#" + id}'></a>
+					<div id="itemsContainer" class="panel-group">
+						<div data-bind="foreach: armors">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
 								</div>
 								
 								<div class="panel-collapse collapse in" data-bind="attr: {id: id}">
@@ -159,22 +139,24 @@
 											<img data-bind="attr: {src: img}" />
 										</div>
 									</div>
-								</div>-->
-							<!-- /ko -->
-							
-							<!-- ko if: $index() != 0 -->
-								<!--<div class="panel-heading">
-									<a data-toggle="collapse" class="collapsed" data-bind='html: name + arrow, attr: {href: "#" + id}'></a>
+								</div>
+							</div>
+						</div>
+						
+						<div data-bind="foreach: weapons">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
 								</div>
 								
-								<div class="panel-collapse collapse" data-bind="attr: {id: id}">
+								<div class="panel-collapse collapse in" data-bind="attr: {id: id}">
 									<div class="panel-body" data-bind="foreach: value">
 										<div class="itemBlock" data-bind='attr: {"data-gw2item": id}'>
 											<img data-bind="attr: {src: img}" />
 										</div>
 									</div>
-								</div>-->
-							<!-- /ko -->
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -192,7 +174,7 @@
 									<p class="detailDesc text-muted" data-bind="text: detailDesc"></p>
 								</li>
 								
-								<li class="list-group-item" data-bind="visible: detailAcquire || detailRecipe">
+								<li class="list-group-item" data-bind="visible: (detailAcquire() || detailRecipe())">
 									<div data-bind="visible: detailAcquire">
 										<h5>Acquisition</h5>
 										<div data-bind="html: detailAcquire"></div>

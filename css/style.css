@@ -30,6 +30,10 @@
 	margin: 0 auto;
 }
 
+#itemsContainer > div:last-child {
+	margin-top: 5px;
+}
+
 #itemDetails ul.list-group > li.list-group-item:first-child {
 	min-height: 100px;
 }

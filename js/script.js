@@ -28,7 +28,6 @@ var gw2w = {
 				dataType: "json",
 				url: gw2w.api.gw2spidy.types(),
 				success: function(data) {
-					console.log(data);
 					gw2w.items.types = data;
 					gw2w.process.types();
 				}
@@ -39,7 +38,6 @@ var gw2w = {
 				dataType: "json",
 				url: gw2w.api.gw2spidy.allArmors(),
 				success: function(data) {
-					console.log(data);
 					gw2w.items.armors = data;
 					gw2w.process.armors();
 				}
@@ -50,7 +48,6 @@ var gw2w = {
 				dataType: "json",
 				url: gw2w.api.gw2spidy.allWeapons(),
 				success: function(data) {
-					console.log(data);
 					gw2w.items.weapons = data;
 					gw2w.process.weapons();
 				}
@@ -167,6 +164,7 @@ var gw2w = {
 		all: function() {
 			gw2w.listeners.itemBlock();
 			gw2w.listeners.trackerAdd();
+			gw2w.listeners.collapseToggle();
 		},
 		itemBlock: function() {
 			$(".itemBlock").on("click", function() {
@@ -178,6 +176,12 @@ var gw2w = {
 			$("#trackerAdd").on("click", function() {
 				gw2w.tracker.add();
 				gw2w.tracker.exist(gw2w.vm.detailId());
+			});
+		},
+		collapseToggle: function() {
+			$("#collapseToggle").on("click", function(e) {
+				e.preventDefault();
+				$("#itemsContainer div.panel-collapse").collapse("toggle");
 			});
 		}
 	},
@@ -297,7 +301,6 @@ var gw2w = {
 				url: "get.php",
 				data: "url=" + url,
 				success: function(data) {
-					console.log(data);
 					gw2w.items.page = data;
 					gw2w.process.itemPage();
 				}
@@ -311,11 +314,18 @@ var gw2w = {
 			var armors = gw2w.items.armors.results;
 			
 			$.each(armors, function(index, obj) {
-				var i = obj.sub_type_id;
+				// Only proceed to add it if the item can be found
+				var imgSubdomain = obj.img.split(".")[0].split("//")[1];
 				
-				// Lets organize the armor types.
-				// We place the object into a multidimentional array.
-				vm.armors()[i].value.push(new gw2w.class.armor(obj));
+				// "render" is the new subdomain for image rendering.
+				// The old one is not working, but some items still use it.
+				if(imgSubdomain == "render") {
+					var i = obj.sub_type_id;
+					
+					// Lets organize the armor types.
+					// We place the object into a multidimentional array.
+					vm.armors()[i].value.push(new gw2w.class.armor(obj));
+				}
 			});
 		},
 		weapons: function() {
@@ -323,11 +333,35 @@ var gw2w = {
 			var weapons = gw2w.items.weapons.results;
 			
 			$.each(weapons, function(index, obj) {
-				var i = obj.sub_type_id;
+				// Only proceed to add it if the item can be found
+				var imgSubdomain = obj.img.split(".")[0].split("//")[1];
 				
-				// Lets organize the weapon types.
-				// We place the object into a multidimentional array.
-				vm.weapons()[i].value.push(new gw2w.class.weapon(obj));
+				// "render" is the new subdomain for image rendering.
+				// The old one is not working, but some items still use it.
+				if(imgSubdomain == "render") {
+					var i = obj.sub_type_id;
+					
+					// Lets organize the weapon types.
+					// We place the object into a multidimentional array.
+					vm.weapons()[i].value.push(new gw2w.class.weapon(obj));
+				}
+			});
+			
+			// Because of missing subtypes, we have some null values in the weapons array.
+			// Lets remove those empty values!
+			vm.weapons.remove(function(item) {
+				return typeof(item) != "object";
+			});
+			
+			// Also, let's remove some of the bullshit subtypes.
+			// To make it simple, we remove those that have less than 10 items in them.
+			vm.weapons.remove(function(item) {
+				return item.value.length < 10;
+			});
+			
+			// And lastly, let's sort them alphabetically
+			vm.weapons.sort(function(left, right) {
+				return left.id == right.id ? 0 : (left.id < right.id ? -1 : 1);
 			});
 		},
 		types: function() {
@@ -394,28 +428,33 @@ var gw2w = {
 				var acq = $("#Acquisition", page);
 				
 				// If the page has a section about acquisition
-				if(acq) {
+				if(acq.length > 0) {
 					// Find the text about how to acquire
 					acq = $(acq).parent().next();
 					
 					// Convert from jQuery element to pure JS to new String
 					acq = $(acq)[0].outerHTML;
 					
-					console.log(acq);
-					
 					var vm = gw2w.vm;
 					vm.detailAcquire(acq);
+					
+					// This means there's no recipe
+					vm.detailRecipe(false);
 				}
 				
 				// If not
 				else {
 					// Locate the recipe
-					var recipe = $("#Recipes", page);
+					var recipe = $("#Recipe, #Recipes", page);
 					
 					// If there is a recipe
-					if(recipe) {
+					if(recipe.length > 0) {
 						// Set recipe to true
 						vm.detailRecipe(true);
+					}
+					// Or if there isn't one
+					else {
+						vm.detailRecipe(false);
 					}
 				}
 			}
@@ -562,6 +601,12 @@ var gw2w = {
 	plugins: {
 		tooltip: function() {
 			$.gw2tooltip('[data-gw2item]');
+		}
+	},
+	
+	collapse: {
+		toggle: function() {
+			
 		}
 	}
 }
