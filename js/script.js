@@ -57,6 +57,7 @@ var gw2w = {
 		// Item details
 		self.detailEmpty = ko.observable(true);
 		self.detailId = ko.observable(null);
+		self.detailCode = ko.observable(null);
 		self.detailName = ko.observable(null);
 		self.detailDesc = ko.observable(null);
 		self.detailIcon = ko.observable(null);
@@ -169,6 +170,75 @@ var gw2w = {
 		},
 		replace: function(find, replace, str) {
 			return str.replace(new RegExp(find, 'g'), replace);
+		},
+		copy: function(text) {
+			
+		},
+		BEtoLE: function(be) {
+			// Thanks to ArenaNet for creating this!
+			var le = String.fromCharCode(be.charCodeAt(0) & 255) + String.fromCharCode(be.charCodeAt(0) >> 8);
+			return le;
+		},
+		encodeId: function(id) {
+			// First off, let's declare our favorite object, Base64!
+			// Thanks to ArenaNet for creating this!
+			var Base64 = {
+				// private property
+				_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+				
+				// public method for encoding
+				encode: function (input) {
+					var output = "";
+					var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+					var i = 0;
+					
+					while (i < input.length) {
+						chr1 = input.charCodeAt(i++);
+						chr2 = input.charCodeAt(i++);
+						chr3 = input.charCodeAt(i++);
+						
+						enc1 = chr1 >> 2;
+						enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+						enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+						enc4 = chr3 & 63;
+						
+						if (isNaN(chr2)) {
+							enc3 = enc4 = 64;
+						}
+						else if (isNaN(chr3)) {
+							enc4 = 64;
+						}
+						
+						output = output +
+						this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+						this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+					}
+					
+					return output;
+				}
+			}
+			
+			
+			// Since this site will only work with items, we can hard code the type
+			var type = "2";
+			
+			// Thanks to ArenaNet for doing the magic!
+			if (type.toString().match(/(1|2|4|7|8|10)/)) {
+				var typeId = String.fromCharCode(type);
+				
+				if (type == 2)
+					typeId += String.fromCharCode(1);
+				
+				id = gw2w.general.BEtoLE(String.fromCharCode(parseInt(id)));
+				var pad = String.fromCharCode(0) + String.fromCharCode(0);
+				var chatLink = "[&" + Base64.encode(typeId + id + pad) + "]";
+				
+				return chatLink;
+			}
+			else {
+				// Unknown item type
+				return null;
+			}
 		}
 	},
 	
@@ -257,6 +327,7 @@ var gw2w = {
 			gw2w.listeners.searchClear();
 			gw2w.listeners.trackerAdd();
 			gw2w.listeners.collapseToggle();
+			gw2w.listeners.linkCode();
 		},
 		itemBlock: function() {
 			$(".itemBlock").on("click", function() {
@@ -300,6 +371,38 @@ var gw2w = {
 				else {
 					$("#itemsContainer .panel-collapse").collapse("show");
 				}
+			});
+		},
+		linkCode: function() {
+			var vm = gw2w.vm;
+			var self = $(".detailCode");
+			
+			// Create a tooltip when copied
+			$(self).tooltip({
+				title: "Copied",
+				placement: "top",
+				trigger: 'manual'
+			});
+			
+			// Create the copy client
+			var detailClient = new ZeroClipboard($(".detailCode"), {
+				moviePath: "includes/ZeroClipboard.swf",
+				forceHandCursor: true,
+				debug: false
+			});
+			
+			// Event that triggers when tries to copy
+			detailClient.on('dataRequested', function (client, args) {
+				// Let's put something in the console
+				console.log("The code for " + vm.detailName() + " was copied to clipboard.");
+				
+				// Show the tooltip
+				$(self).tooltip("show");
+				
+				// Hide the tooltip
+				setTimeout(function() {
+					$(self).tooltip("hide");
+				}, 1000);
 			});
 		}
 	},
@@ -493,6 +596,7 @@ var gw2w = {
 			// Give the variables some data
 			vm.detailEmpty(false);
 			vm.detailId(details.item_id);
+			vm.detailCode(gw2w.general.encodeId(details.item_id));
 			vm.detailName(details.name);
 			vm.detailDesc(details.description);
 			vm.detailIcon(gw2w.api.render(details.icon_file_signature, details.icon_file_id));
@@ -573,7 +677,7 @@ var gw2w = {
 			
 			// Error handling, if target page does not exist
 			else {
-				
+				// I dont know what to do :(
 			}
 		},
 		search: function() {
@@ -652,7 +756,7 @@ var gw2w = {
 			vm.tracker.push(new gw2w.class.trackerItem(obj));
 			
 			// Update localStorage
-			gw2w.storage.set();
+			gw2w.storage.tracker.set();
 		},
 		remove: function(obj) {
 			var vm = gw2w.vm;
@@ -665,7 +769,7 @@ var gw2w = {
 			gw2w.tracker.exist(vm.detailId());
 			
 			// Update localStorage
-			gw2w.storage.set();
+			gw2w.storage.tracker.set();
 		},
 		click: function(obj) {
 			// If the item is not the same as the  currently displayed item
@@ -860,6 +964,7 @@ var gw2w = {
 		// Clear the variables
 		vm.detailEmpty(true);
 		vm.detailId(null);
+		vm.detailCode(null);
 		vm.detailName(null);
 		vm.detailDesc(null);
 		vm.detailIcon(null);

@@ -82,6 +82,8 @@
 											<li>When clicking an item, details will be pulled from GuildWars2's official API and displayed.</li>
 											<li>If there is a page on the official wiki about the currently selected item, there will a link to that page.</li>
 											<li>If the official wiki page of the currently selected item contains either a recipe or information on how to acquire the item, the according information will be pulled and displayed with the rest of the item details.</li>
+											<li>Thanks to ArenaNet for giving me the opportunity to steal the code they use to generate the ingame link codes.</li>
+											<li>Users are able to copy chat codes for the currently displayed item.</li>
 										</ul>
 									</li>
 									<li>

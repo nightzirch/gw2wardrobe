@@ -167,8 +167,11 @@
 							</div>
 							
 							<ul class="list-group" data-bind="visible: detailId">
-								<li class="list-group-item">
-									<img class="detailIcon pull-left" data-bind="attr: {src: detailIcon}" />
+								<li class="list-group-item detailMain">
+									<div class="detailLeft pull-left">
+										<img class="detailIcon" data-bind="attr: {src: detailIcon}" />
+										<small class="detailCode" data-copied-hint="Copied" data-bind='text: detailCode, attr: {"data-clipboard-text": detailCode}'></small>
+									</div>
 									<h5 class="detailName" data-bind="text: detailName"></h5>
 									<p class="detailDesc text-muted" data-bind="text: detailDesc"></p>
 								</li>
@@ -232,6 +235,7 @@
 		<!-- Knockout JS -->
 		<script src="js/knockout-3.1.0.js"></script>
 		<!-- Custom Script -->
+		<script src="js/ZeroClipboard.min.js"></script>
 		<script src="js/guildwars2-tooltip.jquery.min.js"></script>
 		<script src="js/script.js"></script>
 		
