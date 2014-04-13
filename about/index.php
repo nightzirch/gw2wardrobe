@@ -58,7 +58,7 @@
 							<p>When the new wardrobe UI comes out, I'd love to go to a site/app that lets me click a slot in the wardrobe to display info on how that skin is obtained.</p>
 							<footer><a href="http://www.reddit.com/user/Moonfishie">/u/Moonfishie</a></footer>
 						</blockquote>
-						<p>I thought this was a great idea, and quickly started the development. This tool is built on <a href="http://getbootstrap.com/">Twitter Bootstrap</a>, <a href="http://jquery.com/">jQuery</a>, <a href="http://knockoutjs.com/index.html">Knockout JS</a>, <a href="https://github.com/rubensayshi/gw2spidy">GW2Spidy</a> and <a href="http://wiki.guildwars2.com/wiki/API:Main">GuildWars2's official API</a>.</p>
+						<p>I thought this was a great idea, and quickly started the development. This tool is built on <a href="http://getbootstrap.com/">Twitter Bootstrap</a>, <a href="http://jquery.com/">jQuery</a>, <a href="http://knockoutjs.com/index.html">Knockout JS</a>, <a href="https://github.com/zeroclipboard/zeroclipboard">ZeroClipboard</a>, <a href="https://github.com/rubensayshi/gw2spidy">GW2Spidy</a> and <a href="http://wiki.guildwars2.com/wiki/API:Main">GuildWars2's official API</a>.</p>
 					</div>
 					
 					<div id="features">
@@ -160,7 +160,7 @@
 							
 							<ul class="list-group">
 								<li class="list-group-item">
-									<a href="https://github.com/nightzirch/gw2wardrobe/commits/master">GitHub</a>
+									<a href="https://github.com/nightzirch/gw2wardrobe/commits/master">GuildWars2 Wardrobe on GitHub</a>
 								</li>
 							</ul>
 						</div>
