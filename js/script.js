@@ -526,7 +526,7 @@ var gw2w = {
 			var vm = gw2w.vm;
 			var armors = vm.armors();
 			var weapons = vm.weapons();
-			var search = new RegExp(vm.search(), "g");
+			var search = new RegExp(vm.search(), "i");
 			
 			// Each armor type
 			$(armors).each(function() {
