@@ -100,6 +100,9 @@ var gw2w = {
 		self.armorSubtypes = ko.observableArray();
 		self.weaponSubtypes = ko.observableArray();
 		
+		// Search
+		self.search = ko.observable(undefined);
+		
 		// Item details
 		self.detailEmpty = ko.observable(true);
 		self.detailId = ko.observable(null);
@@ -133,6 +136,48 @@ var gw2w = {
 				return "Already in tracker";
 			}
 		});
+	},
+	
+	class: {
+		// Class to represent an armor item
+		armor: function(obj) {
+			var self = this;
+			self.id = obj.data_id;
+			self.name = obj.name;
+			self.img = obj.img;
+			self.type = obj.type_id;
+			self.subType = obj.sub_type_id;
+			self.visible = ko.observable(true);
+		},		
+		// Class to represent a weapon item
+		weapon: function(obj) {
+			var self = this;
+			self.id = obj.data_id;
+			self.name = obj.name;
+			self.img = obj.img;
+			self.type = obj.type_id;
+			self.subType = obj.sub_type_id;
+			self.visible = ko.observable(true);
+		},
+		// Class to represent armor subtypes
+		armorSubtype: function(obj) {
+			var self = this;
+			self.id = obj.id;
+			self.name = obj.name;
+		},
+		// Class to represent weapon subtypes
+		weaponSubtype: function(obj) {
+			var self = this;
+			self.id = obj.id;
+			self.name = obj.name;
+		},
+		// Class for the tracker
+		trackerItem: function(obj) {
+			var self = this;
+			self.id = obj.id;
+			self.name = obj.name;
+			self.icon = obj.icon;
+		}
 	},
 	
 	api: {
@@ -176,6 +221,8 @@ var gw2w = {
 	listeners: {
 		all: function() {
 			gw2w.listeners.itemBlock();
+			gw2w.listeners.search();
+			gw2w.listeners.searchClear();
 			gw2w.listeners.trackerAdd();
 			gw2w.listeners.collapseToggle();
 		},
@@ -183,6 +230,23 @@ var gw2w = {
 			$(".itemBlock").on("click", function() {
 				var id = $(this).attr("data-gw2item");
 				gw2w.populate.itemDetails(id);
+			});
+		},
+		search: function() {
+			$("#search form").on("submit", function(e) {
+				e.preventDefault();
+				gw2w.process.search();
+			});
+			
+			$("#search form").on("focusout", function(e) {
+				gw2w.process.search();
+			});
+		},
+		searchClear: function() {
+			$("#clearSearch").on("click", function(e) {
+				gw2w.vm.search(undefined);
+				gw2w.process.search();
+				//$("#inputSearch").blur();	// Won't work for some reason
 			});
 		},
 		trackerAdd: function() {
@@ -205,46 +269,6 @@ var gw2w = {
 					$("#itemsContainer .panel-collapse").collapse("show");
 				}
 			});
-		}
-	},
-	
-	class: {
-		// Class to represent an armor item
-		armor: function(obj) {
-			var self = this;
-			self.id = obj.data_id;
-			self.name = obj.name;
-			self.img = obj.img;
-			self.type = obj.type_id;
-			self.subType = obj.sub_type_id;
-		},		
-		// Class to represent a weapon item
-		weapon: function(obj) {
-			var self = this;
-			self.id = obj.data_id;
-			self.name = obj.name;
-			self.img = obj.img;
-			self.type = obj.type_id;
-			self.subType = obj.sub_type_id;
-		},
-		// Class to represent armor subtypes
-		armorSubtype: function(obj) {
-			var self = this;
-			self.id = obj.id;
-			self.name = obj.name;
-		},
-		// Class to represent weapon subtypes
-		weaponSubtype: function(obj) {
-			var self = this;
-			self.id = obj.id;
-			self.name = obj.name;
-		},
-		// Class for the tracker
-		trackerItem: function(obj) {
-			var self = this;
-			self.id = obj.id;
-			self.name = obj.name;
-			self.icon = obj.icon;
 		}
 	},
 	
@@ -378,7 +402,7 @@ var gw2w = {
 			// Also, let's remove some of the bullshit subtypes.
 			// To make it simple, we remove those that have less than 10 items in them.
 			vm.weapons.remove(function(item) {
-				return item.value.length < 10;
+				return item.value().length < 10;
 			});
 			
 			// And lastly, let's sort them alphabetically
@@ -406,11 +430,23 @@ var gw2w = {
 			// Creating multidimentional arrays inside gw2w.vm.armors and gw2w.vm.weapons
 			$.each(armorSubtypes, function(index, obj) {
 				//vm.armors()[obj.id] = {"name": obj.name, "value": ko.observableArray()};
-				vm.armors()[obj.id] = {"id": gw2w.general.unspacify(obj.name), "name": obj.name, "arrow": gw2w.items.arrow, "value": new Array()};
+				vm.armors()[obj.id] = {
+					"id": gw2w.general.unspacify(obj.name),
+					"name": obj.name,
+					"arrow": gw2w.items.arrow,
+					"size": ko.observable(null),
+					"value": ko.observableArray()
+				};
 			});
 			$.each(weaponSubtypes, function(index, obj) {
 				//vm.weapons()[obj.id] = {"name": obj.name, "value": ko.observableArray()};
-				vm.weapons()[obj.id] = {"id": gw2w.general.unspacify(obj.name), "name": obj.name, "arrow": gw2w.items.arrow, "value": new Array()};
+				vm.weapons()[obj.id] = {
+					"id": gw2w.general.unspacify(obj.name),
+					"name": obj.name,
+					"arrow": gw2w.items.arrow,
+					"size": ko.observable(null),
+					"value": ko.observableArray()
+				};
 			});
 		},
 		itemDetails: function() {
@@ -485,6 +521,65 @@ var gw2w = {
 			else {
 				
 			}
+		},
+		search: function() {
+			var vm = gw2w.vm;
+			var armors = vm.armors();
+			var weapons = vm.weapons();
+			var search = new RegExp(vm.search(), "g");
+			
+			// Each armor type
+			$(armors).each(function() {
+				// Counter for armor.size
+				var counter = 0;
+				
+				// Each armor item
+				$(this.value()).each(function() {
+					if(search.exec(this.name)) {
+						this.visible(true);
+						counter++;
+					}
+					else {
+						this.visible(false);
+					}
+				});
+				
+				// Setting this.size to null if counter == value().length
+				if(counter == this.value().length) {
+					this.size(null);
+				}
+				// If it's not, then we want to show the number of visible items
+				else {
+					this.size(counter);
+				}
+			});
+			
+			// Each weapon type
+			$(weapons).each(function() {
+				// Counter for weapon.size
+				var counter = 0;
+				
+				// Each weapon item
+				$(this.value()).each(function() {
+					if(search.exec(this.name)) {
+						this.visible(true);
+						counter++;
+					}
+					else {
+						this.visible(false);
+					}
+				});
+				
+				// Setting this.size to null if counter == value().length
+				if(counter == this.value().length) {
+					this.size(null);
+				}
+				// If it's not, then we want to show the number of visible items
+				else {
+					this.size(counter);
+				}
+			});
+			
 		}
 	},
 	

@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<div id="welcome">
 						<h1>GuildWars2 Wardrobe</h1>
 						<p>Welcome to GuildWars2 Wardrobe! This is an online tool that will help you guys figuring out how to get your dirty, little hands on all the armor and weapon items this game has to offer. It all started when I asked <a href="http://www.reddit.com/r/Guildwars2/comments/22e0mm/what_kind_of_online_tool_do_you_miss/">Reddit what kind of online tool they would like to see made</a>. The overwhelming 6 upvotes made me appreciate the great community <a href="http://www.reddit.com/r/guildwars2/">/r/GuildWars2</a> is! A friendly user named <a href="http://www.reddit.com/user/Moonfishie">/u/Moonfishie</a> came up with this great suggestion.</p>
@@ -75,6 +75,7 @@
 											<li>Using GW2Spidy's API, all armor and weapon items are stored and displayed categorized.</li>
 										</ul>
 									</li>
+									<li>Search for items</li>
 									<li>
 										See details
 										<ul>
@@ -98,6 +99,7 @@
 						
 						<h3>Upcoming features <small>Features I would like to add in the future.</small></h3>
 						<ul>
+							<li>Performance improvements.</li>
 							<li>Various design improvements.</li>
 							<li>
 								Wardrobe
@@ -106,12 +108,6 @@
 										View only unique skins.
 										<ul>
 											<li>At the moment there are no options in the API to let us remove duplicate skins, so the list of items will include every stat combination available for that particular item.</li>
-										</ul>
-									</li>
-									<li>
-										Search
-										<ul>
-											<li>I wish to add a search functionality so you can quickly and effortlessly find the item piece you are looking for.</li>
 										</ul>
 									</li>
 								</ul>
@@ -145,8 +141,27 @@
 					
 					<div id="author">
 						<h1>The author</h1>
+						
+						<img class="pull-left" src="../img/author.png" />
+						
 						<p>Let's not be strangers, so allow me to talk a little bit about me. My name is Christian Grimsgaard. I am a 23 year old guy from Norway with a bachelor's degree in Web Development from <a href="www.hig.no">Gjøvik University College</a>. I am currently studying for a master's degree in Interaction Design, but as this study does not involve any development, I crave for fun side projects once in a while. Other than the typical nerdy computer stuff, I love diving and golfing, and I have in many occations proved to be a social guy. I tell terrible jokes, and I'm a huge fan of movies and TV shows. I naturally identify myself with <a href="http://www.imdb.com/name/nm0002071/">Will Ferrell</a>, the most handsome actor of them all.</p>
 						<p>If you would like to contact me for some reason, you can either <a href="mailto:mail (at) christiangrimsgaard.net">mail me</a> or whisper me ingame (IGN: nightzirch.3126, main character is Elriwun Awesome).</p>
+					</div>
+				</div>
+				
+				<div class="col-md-2">
+					<div id="ressources" class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5>Ressources</h5>
+							</div>
+							
+							<ul class="list-group">
+								<li class="list-group-item">
+									<a href="https://github.com/nightzirch/gw2wardrobe/commits/master">GitHub</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

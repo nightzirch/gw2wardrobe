@@ -31,7 +31,9 @@
 			<div class="alert alert-danger">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<h4>GuildWars2 Wardrobe is in alpha!</h4>
-				Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about upcoming features on the <a class="alert-link" href="/about">about page</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.
+				<p>Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about upcoming features on the <a class="alert-link" href="/about">about page</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.</p>
+				<br />
+				<p><strong>Important!</strong> Due to the API fetching <em>all</em> armors and weapons compared to those with a unique skin only, the performance will be extremely poor when loading this page and the first few times you perform a search. I am looking into ways of improving performance, but am first of all focusing on functionality as the redicilously large array of items is only temporary until ArenaNet updates their API so I the array will only include unique skins. Thank you for your patience. It is after all an alpha release.</p>
 			</div>
 			
 			<div class="row">
@@ -108,14 +110,17 @@
 					
 					<div id="itemsContainer" class="panel-group">
 						<div data-bind="foreach: armors">
-							<div class="panel panel-default">
+							<div class="panel panel-default" data-bind="visible: size() != 0">
 								<div class="panel-heading">
-									<a class="collapsed" data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
+									<a class="collapsed" data-toggle="collapse" data-bind='html: name + arrow, attr: {href: "#" + id}'></a>
+									<span style="margin-right: -3px">(</span>
+									<span data-bind='text: size() + " / ", visible: size() != null'></span>
+									<span data-bind='text: value().length + ")"'></span>
 								</div>
 								
 								<div class="panel-collapse collapse" data-bind="attr: {id: id}">
 									<div class="panel-body" data-bind="foreach: value">
-										<div class="itemBlock" data-bind='attr: {"data-gw2item": id}'>
+										<div class="itemBlock" data-bind='attr: {"data-gw2item": id}, visible: visible'>
 											<img data-bind="attr: {src: img}" />
 										</div>
 									</div>
@@ -124,23 +129,37 @@
 						</div>
 						
 						<div data-bind="foreach: weapons">
-							<div class="panel panel-default">
+							<div class="panel panel-default" data-bind="visible: size() != 0">
 								<div class="panel-heading">
-									<a class="collapsed" data-toggle="collapse" data-bind='html: name + " (" + value.length + ")" + arrow, attr: {href: "#" + id}'></a>
+									<a class="collapsed" data-toggle="collapse" data-bind='html: name + arrow, attr: {href: "#" + id}'></a>
+									<span style="margin-right: -3px">(</span>
+									<span data-bind='text: size() + " / ", visible: size() != null'></span>
+									<span data-bind='text: value().length + ")"'></span>
 								</div>
 								
 								<div class="panel-collapse collapse" data-bind="attr: {id: id}">
 									<div class="panel-body" data-bind="foreach: value">
-										<div class="itemBlock" data-bind='attr: {"data-gw2item": id}'>
+										<div class="itemBlock" data-bind='attr: {"data-gw2item": id}, visible: visible'>
 											<img data-bind="attr: {src: img}" />
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 				<div class="col-md-3">
+					<div id="search">
+						<form class="form-inline" role="form">
+							<div class="form-group has-feedback">
+								<input type="search" class="form-control" id="inputSearch" placeholder="Search items" data-bind="value: search, valueUpdate: 'input'">
+								<span class="glyphicon glyphicon-remove form-control-feedback" data-bind="visible: search" id="clearSearch"></span>
+								<span class="glyphicon glyphicon-search form-control-feedback" data-bind="visible: !search()"></span>
+							</div>
+						</form>
+					</div>
+					
 					<div id="itemDetails">
 						<div class="panel panel-default">
 							<div class="panel-heading">

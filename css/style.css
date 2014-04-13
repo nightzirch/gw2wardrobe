@@ -1,5 +1,6 @@
 #sortMenu .panel > .list-group,
-#menu .panel > .list-group {
+#menu .panel > .list-group,
+#ressources .panel > .list-group {
 	border-top: 1px solid #ddd;
 }
 
@@ -54,6 +55,19 @@ nav > .bg-primary {
 	color: #fff;
 }
 
+#search {
+	margin-bottom: 20px;
+}
+
+#search .form-group,
+#search .form-group input {
+	width: 100%;
+}
+
+#search #clearSearch {
+	cursor: pointer;
+}
+
 #tracker ul {
 	margin-bottom: -1px;
 }
@@ -78,4 +92,9 @@ nav > .bg-primary {
 
 #tracker ul > a > .trackerName {
 	margin-top: 6px;
+}
+
+#author img {
+	width: 100px;
+	margin: 0 10px 10px 0;
 }
