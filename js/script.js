@@ -18,57 +18,8 @@ var gw2w = {
 		// Applies the view model
 		ko.applyBindings(gw2w.vm);
 		
-		// Fetch ALL the stuff o/
-		$.when(
-			// Start loading
-			gw2w.loading(true),
-			
-			// Types
-			$.ajax({
-				dataType: "json",
-				url: gw2w.api.gw2spidy.types(),
-				success: function(data) {
-					gw2w.items.types = data;
-					gw2w.process.types();
-				}
-			}),
-			
-			// Armors
-			$.ajax({
-				dataType: "json",
-				url: gw2w.api.gw2spidy.allArmors(),
-				success: function(data) {
-					gw2w.items.armors = data;
-					gw2w.process.armors();
-				}
-			}),
-			
-			// Weapons
-			$.ajax({
-				dataType: "json",
-				url: gw2w.api.gw2spidy.allWeapons(),
-				success: function(data) {
-					gw2w.items.weapons = data;
-					gw2w.process.weapons();
-				}
-			})
-		).then(function() {
-			// Stop loading
-			gw2w.loading(false),
-				
-			// Update
-			gw2w.update();
-			
-			// Storage
-			gw2w.storage.get();
-			
-			// Plugins
-			gw2w.plugins.tooltip();
-			$('.gw2tooltip').tooltip()
-			
-			// Listeners
-			gw2w.listeners.all();
-		});
+		// Do the ajax calls
+		gw2w.ajax.exec();
 	},
 	
 	// The view model object
@@ -215,6 +166,82 @@ var gw2w = {
 		},
 		replace: function(find, replace, str) {
 			return str.replace(new RegExp(find, 'g'), replace);
+		}
+	},
+	
+	ajax: {
+		done: function() {
+			console.log("AJAX DONE!");
+			
+			// Stop loading
+			gw2w.loading(false),
+				
+			// Update
+			gw2w.update();
+			
+			// Storage
+			gw2w.storage.tracker.get();
+			
+			// Plugins
+			gw2w.plugins.tooltip();
+			$('.gw2tooltip').tooltip()
+			
+			// Listeners
+			gw2w.listeners.all();
+		},
+		exec: function() {
+			// First we see if everything is in the localStorage
+			var arraysExist = gw2w.storage.get();
+			
+			// So, they exist in the storage. Now we dont have to do ajax calls and process the data. That's good!
+			if(arraysExist) {
+				// We're done!
+				gw2w.ajax.done();
+			}
+			// Uh oh, they didn't exist. Gotta do dem ajax calls. Oh dear, god! THE PERFORMANCE LOSS!
+			else {
+				// Fetch ALL the stuff o/
+				$.when(
+					// Start loading
+					gw2w.loading(true),
+					
+					// Types
+					$.ajax({
+						dataType: "json",
+						url: gw2w.api.gw2spidy.types(),
+						success: function(data) {
+							gw2w.items.types = data;
+							gw2w.process.types();
+						}
+					}),
+					
+					// Armors
+					$.ajax({
+						dataType: "json",
+						url: gw2w.api.gw2spidy.allArmors(),
+						success: function(data) {
+							gw2w.items.armors = data;
+							gw2w.process.armors();
+						}
+					}),
+					
+					// Weapons
+					$.ajax({
+						dataType: "json",
+						url: gw2w.api.gw2spidy.allWeapons(),
+						success: function(data) {
+							gw2w.items.weapons = data;
+							gw2w.process.weapons();
+						}
+					})
+				).then(function() {
+					// Let's store the arrays in localStorage
+					gw2w.storage.set();
+					
+					// Soon done!
+					gw2w.ajax.done();
+				});
+			}
 		}
 	},
 	
@@ -638,25 +665,135 @@ var gw2w = {
 	
 	storage: {
 		get: function() {
-			var vm = gw2w.vm;
+			console.log("GETTING!");
+			var armors = gw2w.storage.armors.get();
+			var weapons = gw2w.storage.weapons.get();
 			
-			// Let's get our hands on some sweet storage
-			var tracker = JSON.parse(localStorage.getItem("tracker"));
-			
-			// Making sure it's there
-			if(tracker) {
-				// Now lets put this shit into the tracker array
-				$(tracker).each(function() {
-					vm.tracker.push(new gw2w.class.trackerItem(this));
-				});
-			}
+			// If all exist, we return true. If not, we return false
+			return (armors && weapons) ? true : false;
 		},
 		set: function() {
-			var vm = gw2w.vm;
-			var tracker = vm.tracker();
-			
-			// Now, let's save it
-			localStorage.setItem("tracker", JSON.stringify(tracker));
+			console.log("SETTING!");
+			console.log(gw2w.vm.armors());
+			console.log(gw2w.vm.weapons());
+			// Lets set all the storage values
+			gw2w.storage.armors.set();
+			gw2w.storage.weapons.set();
+		},
+		armors: {
+			name: "armors",
+			get: function() {
+				var vm = gw2w.vm;
+				
+				// Let's get our hands on some sweet storage
+				var name = gw2w.storage.armors.name;
+				var armors = JSON.parse(localStorage.getItem(name));
+				
+				// Making sure it's there
+				if(armors) {
+					// Knockout functions are not created from JSON.parse, so we gotta create those manually
+					$(armors).each(function() {
+						this.size = ko.observable(this.size);
+						this.value = ko.observableArray(this.value);
+					});
+					
+					// Now lets make this shit the new armors array
+					vm.armors(armors);
+					
+					// And lets also return true, so we know some shit went down here!
+					return true;
+				}
+				// If it's not there...
+				else {
+					return false;
+				}
+			},
+			set: function() {
+				var vm = gw2w.vm;
+				var armors = vm.armors();
+				var name = gw2w.storage.armors.name;
+				
+				// Now, let's save it
+				localStorage.setItem(name, ko.toJSON(armors));
+			},
+			clear: function() {
+				// Will remove only the armors
+				var name = gw2w.storage.armors.name;
+				localStorage.removeItem(name);
+			}
+		},
+		weapons: {
+			name: "weapons",
+			get: function() {
+				var vm = gw2w.vm;
+				
+				// Let's get our hands on some sweet storage
+				var name = gw2w.storage.weapons.name;
+				var weapons = JSON.parse(localStorage.getItem(name));
+				
+				// Making sure it's there
+				if(weapons) {
+					// Knockout functions are not created from JSON.parse, so we gotta create those manually
+					$(weapons).each(function() {
+						this.size = ko.observable(this.size);
+						this.value = ko.observableArray(this.value);
+					});
+					
+					// Now lets make this shit the new weapons array
+					vm.weapons(weapons);
+					
+					// And lets also return true, so we know some shit went down here!
+					return true;
+				}
+				// If it's not there...
+				else {
+					return false;
+				}
+			},
+			set: function() {
+				var vm = gw2w.vm;
+				var weapons = vm.weapons();
+				var name = gw2w.storage.weapons.name;
+				
+				// Now, let's save it
+				localStorage.setItem(name, ko.toJS(weapons));
+			},
+			clear: function() {
+				// Will remove only the weapons
+				var name = gw2w.storage.weapons.name;
+				localStorage.removeItem(name);
+			}
+		},
+		tracker: {
+			name: "tracker",
+			get: function() {
+				var vm = gw2w.vm;
+				
+				// Let's get our hands on some sweet storage
+				var name = gw2w.storage.tracker.name;
+				var tracker = JSON.parse(localStorage.getItem(name));
+				
+				// Making sure it's there
+				if(tracker) {
+					// Now lets put this shit into the tracker array
+					$(tracker).each(function() {
+						vm.tracker.push(new gw2w.class.trackerItem(this));
+					});
+				}
+			},
+			set: function() {
+				var vm = gw2w.vm;
+				var tracker = vm.tracker();
+				var name = gw2w.storage.tracker.name;
+				
+				// Now, let's save it
+				localStorage.setItem(name, JSON.stringify(tracker));
+			},
+			clear: function() {
+				// Will remove only the tracker
+				var name = gw2w.storage.tracker.name;
+				localStorage.removeItem(name);
+			}
 		},
 		clear: function() {
 			// For some reason I felt that this function was needed
