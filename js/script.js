@@ -171,8 +171,6 @@ var gw2w = {
 	
 	ajax: {
 		done: function() {
-			console.log("AJAX DONE!");
-			
 			// Stop loading
 			gw2w.loading(false),
 				
@@ -188,6 +186,8 @@ var gw2w = {
 			
 			// Listeners
 			gw2w.listeners.all();
+			
+			console.log("Stuff is ready. Let's make this page happen.");
 		},
 		exec: function() {
 			// First we see if everything is in the localStorage
@@ -200,6 +200,8 @@ var gw2w = {
 			}
 			// Uh oh, they didn't exist. Gotta do dem ajax calls. Oh dear, god! THE PERFORMANCE LOSS!
 			else {
+				console.log("Data not found in localStorage. Downloading and processing...");
+				
 				// Fetch ALL the stuff o/
 				$.when(
 					// Start loading
@@ -307,7 +309,6 @@ var gw2w = {
 				dataType: "json",
 				url: url,
 				success: function(data) {
-					console.log(data);
 					gw2w.items.raw = data;
 					
 					// Callback to details
@@ -334,7 +335,6 @@ var gw2w = {
 				dataType: "json",
 				url: url,
 				success: function(data) {
-					console.log(data);
 					gw2w.items.types = data;
 					gw2w.process.types();
 				}
@@ -347,7 +347,6 @@ var gw2w = {
 				dataType: "json",
 				url: url,
 				success: function(data) {
-					console.log(data);
 					gw2w.items.armors = data;
 					gw2w.process.armors();
 				}
@@ -360,7 +359,6 @@ var gw2w = {
 				dataType: "json",
 				url: url,
 				success: function(data) {
-					console.log(data);
 					gw2w.items.weapons = data;
 					gw2w.process.weapons();
 				}
@@ -665,17 +663,18 @@ var gw2w = {
 	
 	storage: {
 		get: function() {
-			console.log("GETTING!");
 			var armors = gw2w.storage.armors.get();
 			var weapons = gw2w.storage.weapons.get();
 			
 			// If all exist, we return true. If not, we return false
-			return (armors && weapons) ? true : false;
+			if(armors && weapons) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		},
 		set: function() {
-			console.log("SETTING!");
-			console.log(gw2w.vm.armors());
-			console.log(gw2w.vm.weapons());
 			// Lets set all the storage values
 			gw2w.storage.armors.set();
 			gw2w.storage.weapons.set();
@@ -691,10 +690,16 @@ var gw2w = {
 				
 				// Making sure it's there
 				if(armors) {
+					console.log("Data found in localStorage. Extracting...");
+					
 					// Knockout functions are not created from JSON.parse, so we gotta create those manually
 					$(armors).each(function() {
 						this.size = ko.observable(this.size);
 						this.value = ko.observableArray(this.value);
+						
+						$(this.value()).each(function() {
+							this.visible = ko.observable(true);
+						});
 					});
 					
 					// Now lets make this shit the new armors array
@@ -737,6 +742,10 @@ var gw2w = {
 					$(weapons).each(function() {
 						this.size = ko.observable(this.size);
 						this.value = ko.observableArray(this.value);
+						
+						$(this.value()).each(function() {
+							this.visible = ko.observable(true);
+						});
 					});
 					
 					// Now lets make this shit the new weapons array
@@ -756,7 +765,7 @@ var gw2w = {
 				var name = gw2w.storage.weapons.name;
 				
 				// Now, let's save it
-				localStorage.setItem(name, ko.toJS(weapons));
+				localStorage.setItem(name, ko.toJSON(weapons));
 			},
 			clear: function() {
 				// Will remove only the weapons
