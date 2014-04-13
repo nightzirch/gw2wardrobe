@@ -157,6 +157,9 @@ var gw2w = {
 			allWeapons: function() {
 				return "http://www.gw2spidy.com/api/v0.9/json/all-items/18";
 			}
+		},
+		wiki: function() {
+			return "http://wiki.guildwars2.com";
 		}
 	},
 	
@@ -506,6 +509,32 @@ var gw2w = {
 			if(page) {
 				// Convert the page contents from a string to elements
 				page = $(page);
+				
+				// Fix all the paths
+				$("a, img", page).each(function() {
+					// Fetch the href or src.
+					// Let's find out if it's an <a> or <img>
+					var tag = $(this)[0].tagName;
+					var path = (tag == "A") ? $(this).attr("href") : $(this).attr("src");
+					
+					// Making sure path has a value
+					if(path) {
+						// Check if the path is relative or absolute
+						if(path.match("http")) {
+							// Absolute path. No need to fix
+							// Do nothing
+						}
+						else {
+							// Relative path. Fix!
+							if(tag == "A") {
+								$(this).attr("href", gw2w.api.wiki() + path);
+							}
+							else {
+								$(this).attr("src", gw2w.api.wiki() + path);
+							}
+						}
+					}
+				});
 				
 				// Locate the content about acquisition
 				var acq = $("#Acquisition", page);
