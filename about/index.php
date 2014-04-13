@@ -53,7 +53,7 @@
 				<div class="col-md-8">
 					<div id="welcome">
 						<h1>GuildWars2 Wardrobe</h1>
-						<p>Welcome to GuildWars2 Wardrobe! This is an online tool that will help you guys figuring out how to get your dirty, little hands on all the armor and weapon items this game has to offer. It all started when I asked <a href="http://www.reddit.com/r/Guildwars2/comments/22e0mm/what_kind_of_online_tool_do_you_miss/">Reddit what kind of online tool they would like to see made</a>. The overwhelming 6 upvotes made me appreciate the great community <a href="http://www.reddit.com/r/guildwars2/">/r/GuildWars2</a> is! A friendly user named <a href="http://www.reddit.com/user/Moonfishie">/u/Moonfishie</a> came up with this great suggestion.</p>
+						<p>Welcome to GuildWars2 Wardrobe! This is an online tool that will help you guys figure out how to get your dirty, little hands on all the armor and weapon items this game has to offer. It all started when I asked <a href="http://www.reddit.com/r/Guildwars2/comments/22e0mm/what_kind_of_online_tool_do_you_miss/">Reddit what kind of online tool they would like to see made</a>. The overwhelming 6 upvotes made me appreciate the great community <a href="http://www.reddit.com/r/guildwars2/">/r/GuildWars2</a> is! A friendly user named <a href="http://www.reddit.com/user/Moonfishie">/u/Moonfishie</a> came up with this great suggestion.</p>
 						<blockquote>
 							<p>When the new wardrobe UI comes out, I'd love to go to a site/app that lets me click a slot in the wardrobe to display info on how that skin is obtained.</p>
 							<footer><a href="http://www.reddit.com/user/Moonfishie">/u/Moonfishie</a></footer>
