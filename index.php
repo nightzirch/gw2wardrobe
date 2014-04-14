@@ -230,6 +230,7 @@
 		</div>
 		
 		<?php
+			include('includes/modals.php');
 			include('includes/footer.php');
 		?>
 		

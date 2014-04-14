@@ -45,6 +45,9 @@ var gw2w = {
 		// Loading
 		self.loading = ko.observable(false);
 		
+		// Local Storage
+		self.localStorage = ko.observable();
+		
 		// Armor and weapon array
 		self.armors = ko.observableArray();
 		self.weapons = ko.observableArray();
@@ -276,8 +279,12 @@ var gw2w = {
 			// First we see if everything is in the localStorage
 			var arraysExist = gw2w.storage.get();
 			
+			// Then we check if the user want to use localStorage
+			var active = gw2w.storage.active();
+			
 			// So, they exist in the storage. Now we dont have to do ajax calls and process the data. That's good!
-			if(arraysExist) {
+			// But, the users must want to use localStorage!
+			if(arraysExist && active) {
 				// We're done!
 				gw2w.ajax.done();
 			}
@@ -339,6 +346,7 @@ var gw2w = {
 			gw2w.listeners.collapseToggle();
 			gw2w.listeners.linkCode();
 			gw2w.listeners.linkCodeAll();
+			gw2w.listeners.radioLocalStorage();
 		},
 		itemBlock: function() {
 			$(".itemBlock").on("click", function() {
@@ -388,87 +396,105 @@ var gw2w = {
 			var vm = gw2w.vm;
 			var self = $(".detailCode");
 			
-			// Create a tooltip when copied
-			$(self).tooltip({
-				title: "Copied",
-				placement: "top",
-				trigger: 'manual'
-			});
-			
-			// Create the copy client
-			var detailClient = new ZeroClipboard(self, {
-				moviePath: "includes/ZeroClipboard.swf",
-				forceHandCursor: true,
-				debug: false
-			});
-			
-			// Event that triggers when tries to copy
-			detailClient.on('dataRequested', function (client, args) {
-				// Let's put something in the console
-				console.log("The code for " + vm.detailName() + " was copied to clipboard.");
+			// If there are any .detailCode on the page
+			if(self.length > 0) {
+				// Create a tooltip when copied
+				$(self).tooltip({
+					title: "Copied",
+					placement: "top",
+					trigger: 'manual'
+				});
 				
-				// Show the tooltip
-				$(self).tooltip("show");
+				// Create the copy client
+				var detailClient = new ZeroClipboard(self, {
+					moviePath: "includes/ZeroClipboard.swf",
+					forceHandCursor: true,
+					debug: false
+				});
 				
-				// Hide the tooltip
-				setTimeout(function() {
-					$(self).tooltip("hide");
-				}, 1000);
-			});
+				// Event that triggers when tries to copy
+				detailClient.on('dataRequested', function (client, args) {
+					// Let's put something in the console
+					console.log("The code for " + vm.detailName() + " was copied to clipboard.");
+					
+					// Show the tooltip
+					$(self).tooltip("show");
+					
+					// Hide the tooltip
+					setTimeout(function() {
+						$(self).tooltip("hide");
+					}, 1000);
+				});
+			}
 		},
 		linkCodeAll: function() {
 			var vm = gw2w.vm;
 			var self = $("#trackerCopy");
 			
-			// Create a tooltip when copied
-			$(self).tooltip({
-				title: "Copied",
-				placement: "top",
-				trigger: 'manual'
-			});
-			
-			// Create the copy client
-			var allClient = new ZeroClipboard(self, {
-				moviePath: "includes/ZeroClipboard.swf",
-				forceHandCursor: true,
-				debug: false
-			});
-			
-			// Event that triggers when tries to copy
-			allClient.on('dataRequested', function (client, args) {
-				// Tracker names
-				var vm = gw2w.vm;
-				var names = new Array();
-				var tracker = vm.tracker();
-				$(tracker).each(function() {
-					names.push(this.name);
+			// If there are any #trackerCopy on the page
+			if(self.length > 0) {
+				// Create a tooltip when copied
+				$(self).tooltip({
+					title: "Copied",
+					placement: "top",
+					trigger: 'manual'
 				});
 				
-				// If there are more than one item in the tracker
-				if(names.length > 1) {
-					// Combining the two last elements in the array, adding "and" between them and removing the last item
-					names[names.length-2] = names[names.length-2] + " and " + names[names.length-1];
-					names.pop();
-				}
+				// Create the copy client
+				var allClient = new ZeroClipboard(self, {
+					moviePath: "includes/ZeroClipboard.swf",
+					forceHandCursor: true,
+					debug: false
+				});
 				
-				// Adding comma between
-				names = names.join(", ");
-				
-				// Let's put something in the console
-				if(tracker.length > 1) {
-					console.log("The codes for " + names + " was copied to clipboard.");
-				}
-				else if(tracker.length == 1) {
-					console.log("The code for " + names + " was copied to clipboard.");
-				}
-				
-				// Show the tooltip
-				$(self).tooltip("show");
-				
-				// Hide the tooltip
-				setTimeout(function() {
-					$(self).tooltip("hide");
-				}, 1000);
+				// Event that triggers when tries to copy
+				allClient.on('dataRequested', function (client, args) {
+					// Tracker names
+					var vm = gw2w.vm;
+					var names = new Array();
+					var tracker = vm.tracker();
+					$(tracker).each(function() {
+						names.push(this.name);
+					});
+					
+					// If there are more than one item in the tracker
+					if(names.length > 1) {
+						// Combining the two last elements in the array, adding "and" between them and removing the last item
+						names[names.length-2] = names[names.length-2] + " and " + names[names.length-1];
+						names.pop();
+					}
+					
+					// Adding comma between
+					names = names.join(", ");
+					
+					// Let's put something in the console
+					if(tracker.length > 1) {
+						console.log("The codes for " + names + " was copied to clipboard.");
+					}
+					else if(tracker.length == 1) {
+						console.log("The code for " + names + " was copied to clipboard.");
+					}
+					
+					// Show the tooltip
+					$(self).tooltip("show");
+					
+					// Hide the tooltip
+					setTimeout(function() {
+						$(self).tooltip("hide");
+					}, 1000);
+				});
+			}
+		},
+		radioLocalStorage: function() {
+			$(".radioLocalStorage button").each(function() {
+				$(this).on("click", function() {
+					var active = $(this).attr("data-active");
+					
+					// Values might be string. Converting...
+					active = (active === "true");
+					
+					gw2w.storage.active(active);
+				});
 			});
 		}
 	},
@@ -870,16 +896,73 @@ var gw2w = {
 	},
 	
 	storage: {
-		get: function() {
-			var armors = gw2w.storage.armors.get();
-			var weapons = gw2w.storage.weapons.get();
-			
-			// If all exist, we return true. If not, we return false
-			if(armors && weapons) {
-				return true;
+		active: function(value) {
+			// Write
+			if(value == true || value == false) {
+				// We want to store the value in the localStorage
+				localStorage.setItem("active", value);
+				
+				// Update viewmodel
+				gw2w.vm.localStorage(value);
+			}
+			// Read
+			else if(value === undefined || value === null) {
+				// We want to check the current status
+				var active = localStorage.getItem("active");
+				
+				// Default is true
+				if(active == null) {
+					active = true;
+				}
+				else {
+					// Values might be string. Converting...
+					active = (active === "true");
+				}
+				
+				gw2w.vm.localStorage(active);
+				
+				return active;
 			}
 			else {
-				return false;
+				// Unexpected value
+				console.log("Error: gw2w.storage.active(value) recieved unexpected value: " + value);
+			}
+		},
+		clear: function() {
+			// For some reason I felt that this function was needed
+			// Starting by saving the user's choice of using localStorage or not
+			var active = gw2w.vm.localStorage()
+			
+			// Clear the storage
+			localStorage.clear();
+			
+			// Ironically, store user's choice in localStorage, lol
+			gw2w.storage.active(active);
+			
+			// Refresh page
+			location.reload();
+		},
+		get: function() {
+			// First of all, let's see if the user even wanna do business with all these so-called "Lokel straw-edge"!
+			var active = gw2w.storage.active();
+			
+			// User don't want localStorage!
+			if(!active) {
+				console.log("It seems like you don't want us to store stuff in the localStorage. Fine, let's do it the old-fashioned way, and ignore it.");
+				return false
+			}
+			//Okay, fine. The user want localStorage
+			else {
+				var armors = gw2w.storage.armors.get();
+				var weapons = gw2w.storage.weapons.get();
+				
+				// If all exist, we return true. If not, we return false
+				if(armors && weapons) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 		},
 		set: function() {
@@ -1011,10 +1094,6 @@ var gw2w = {
 				var name = gw2w.storage.tracker.name;
 				localStorage.removeItem(name);
 			}
-		},
-		clear: function() {
-			// For some reason I felt that this function was needed
-			localStorage.clear();
 		}
 	},
 	
@@ -1047,6 +1126,15 @@ var gw2w = {
 		vm.detailPage(null);
 		vm.detailAcquire(null);
 		vm.detailRecipe(false);
+	},
+	
+	modal: {
+		clearLocalStorage: function() {
+			var modal = $("#modalClearLocalStorage");
+			
+			// Show the modal
+			$(modal).modal("show");
+		}
 	},
 	
 	loading: function(state) {

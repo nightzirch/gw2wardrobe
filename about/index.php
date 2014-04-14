@@ -93,6 +93,7 @@
 											<li>The tracker will allow users to store particular items of interest and easily acquire the item details by clicking the item in the tracker.</li>
 											<li>The tracker information is stored in the web browsers localStorage, which is supported by all the major browsers. There is no support for Internet Explorer 7 and earlier.</li>
 											<li>If you by any chance are using Internet Explorer 7 or earlier, and refuse to upgrade, you deserve the unhappiness the lack of the tracker will bring you.</li>
+											<li>Users are able to copy all the chat codes for the items in the tracker.</li>
 										</ul>
 									</li>
 								</ul>
@@ -170,11 +171,13 @@
 		</div>
 		
 		<?php
+			include('../includes/modals.php');
 			include('../includes/footer.php');
 		?>
 		
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+		<script src="../js/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="../js/bootstrap.min.js"></script>
 		<!-- Knockout JS -->

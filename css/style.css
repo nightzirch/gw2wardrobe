@@ -1,3 +1,7 @@
+#loginForm > * {
+	margin: 3px;
+}
+
 #sortMenu .panel > .list-group,
 #menu .panel > .list-group,
 #ressources .panel > .list-group {
@@ -110,6 +114,11 @@ nav > .bg-primary {
 #author img {
 	width: 100px;
 	margin: 0 10px 10px 0;
+}
+
+div.modal hr {
+	margin-left: -20px;
+	margin-right: -20px;
 }
 
 .inline-icon {
