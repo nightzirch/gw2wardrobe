@@ -196,7 +196,7 @@
 							<div class="panel-footer">
 								<button type="button" class="btn btn-primary" id="trackerAdd" data-bind='attr: {"data-id": detailId}, enable: (detailId() && trackerAvailable()), text: trackerAddText'></button>
 								<a class="btn btn-default" role="button" data-bind="attr: {href: detailPage}, css: {disabled: detailEmpty}">Official Wiki</a>
-								<a class="btn btn-link pull-right" role="button" data-bind="click: gw2w.clear, visible: detailId">Clear</a>
+								<a class="btn btn-danger pull-right" role="button" data-bind="click: gw2w.clear, visible: detailId">Clear</a>
 							</div>
 						</div>
 					</div>
@@ -204,12 +204,12 @@
 					<div id="tracker">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h5>Item Tracker <span class="gw2tooltip glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="The item tracker saves automagically! You can close your browser and everything will still be here."></span></h5>
+								<h5>Item Tracker <span class="gw2tooltip glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="The item tracker saves automagically! You can close or refresh your browser and everything will still be here."></span></h5>
 							</div>
 							
 							<ul class="list-group" data-bind="foreach: tracker, visible: tracker().length > 0">
 								<a href="#" class="trackerItem list-group-item" data-bind='attr: {"data-id": id}, click: gw2w.tracker.click'>
-									<button type="button" class="btn btn-danger pull-right" data-bind='click: gw2w.tracker.remove'>Remove</button>
+									<button type="button" class="btn btn-link pull-right" data-bind='click: gw2w.tracker.remove'>Remove</button>
 									<img class="trackerIcon pull-left" data-bind="attr: {src: icon}" />
 									<p class="trackerName list-group-item-heading" data-bind="text: name"></p>
 								</a>
@@ -221,7 +221,7 @@
 							
 							<div class="panel-footer">
 								<button type="button" class="btn btn-default" data-copied-hint="Copied" id="trackerCopy" data-bind='enable: tracker().length > 0, attr: {"data-clipboard-text": trackerCode}'>Copy chat codes</button>
-								<a class="btn btn-link pull-right" role="button" data-bind="click: gw2w.tracker.clear, visible: tracker().length > 0">Clear</a>
+								<a class="btn btn-danger pull-right" role="button" data-bind="click: gw2w.tracker.clear, visible: tracker().length > 0">Clear</a>
 							</div>
 						</div>
 					</div>
