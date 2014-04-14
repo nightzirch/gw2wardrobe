@@ -72,7 +72,7 @@
 									<li>
 										View items
 										<ul>
-											<li>Using GW2Spidy's API, all armor and weapon items are stored and displayed categorized.</li>
+											<li>Using GW2Spidy's API, all armor and weapon items are stored and displayed in categories.</li>
 										</ul>
 									</li>
 									<li>Search for items</li>
@@ -91,9 +91,16 @@
 										<ul>
 											<li>By clicking "Add to tracker" in the item details, the currently selected item will be added to the tracker.</li>
 											<li>The tracker will allow users to store particular items of interest and easily acquire the item details by clicking the item in the tracker.</li>
-											<li>The tracker information is stored in the web browsers localStorage, which is supported by all the major browsers. There is no support for Internet Explorer 7 and earlier.</li>
 											<li>If you by any chance are using Internet Explorer 7 or earlier, and refuse to upgrade, you deserve the unhappiness the lack of the tracker will bring you.</li>
 											<li>Users are able to copy all the chat codes for the items in the tracker.</li>
+										</ul>
+									</li>
+									<li>
+										Local Storage
+										<ul>
+											<li>GuildWars2 Wardrobe uses Local Storage by default, but in <em>Tools > Clear Local Storage</em>, users can force the tool to not use Local Storage.</li>
+											<li>All items will be stored in the Local Storage.</li>
+											<li>The tracker information is stored in the web browsers localStorage, which is supported by all the major browsers. There is no support for Internet Explorer 7 and earlier.</li>
 										</ul>
 									</li>
 								</ul>
