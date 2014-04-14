@@ -88,6 +88,16 @@ var gw2w = {
 				return "Already in tracker";
 			}
 		});
+		self.trackerCode = ko.computed(function() {
+			var tracker = self.tracker();
+			var codes = new Array();
+			
+			$(tracker).each(function() {
+				codes.push(gw2w.general.encodeId(this.id));
+			});
+			
+			return codes.join("");
+		});
 	},
 	
 	class: {
@@ -328,6 +338,7 @@ var gw2w = {
 			gw2w.listeners.trackerAdd();
 			gw2w.listeners.collapseToggle();
 			gw2w.listeners.linkCode();
+			gw2w.listeners.linkCodeAll();
 		},
 		itemBlock: function() {
 			$(".itemBlock").on("click", function() {
@@ -385,7 +396,7 @@ var gw2w = {
 			});
 			
 			// Create the copy client
-			var detailClient = new ZeroClipboard($(".detailCode"), {
+			var detailClient = new ZeroClipboard(self, {
 				moviePath: "includes/ZeroClipboard.swf",
 				forceHandCursor: true,
 				debug: false
@@ -395,6 +406,61 @@ var gw2w = {
 			detailClient.on('dataRequested', function (client, args) {
 				// Let's put something in the console
 				console.log("The code for " + vm.detailName() + " was copied to clipboard.");
+				
+				// Show the tooltip
+				$(self).tooltip("show");
+				
+				// Hide the tooltip
+				setTimeout(function() {
+					$(self).tooltip("hide");
+				}, 1000);
+			});
+		},
+		linkCodeAll: function() {
+			var vm = gw2w.vm;
+			var self = $("#trackerCopy");
+			
+			// Create a tooltip when copied
+			$(self).tooltip({
+				title: "Copied",
+				placement: "top",
+				trigger: 'manual'
+			});
+			
+			// Create the copy client
+			var allClient = new ZeroClipboard(self, {
+				moviePath: "includes/ZeroClipboard.swf",
+				forceHandCursor: true,
+				debug: false
+			});
+			
+			// Event that triggers when tries to copy
+			allClient.on('dataRequested', function (client, args) {
+				// Tracker names
+				var vm = gw2w.vm;
+				var names = new Array();
+				var tracker = vm.tracker();
+				$(tracker).each(function() {
+					names.push(this.name);
+				});
+				
+				// If there are more than one item in the tracker
+				if(names.length > 1) {
+					// Combining the two last elements in the array, adding "and" between them and removing the last item
+					names[names.length-2] = names[names.length-2] + " and " + names[names.length-1];
+					names.pop();
+				}
+				
+				// Adding comma between
+				names = names.join(", ");
+				
+				// Let's put something in the console
+				if(tracker.length > 1) {
+					console.log("The codes for " + names + " was copied to clipboard.");
+				}
+				else if(tracker.length == 1) {
+					console.log("The code for " + names + " was copied to clipboard.");
+				}
 				
 				// Show the tooltip
 				$(self).tooltip("show");
@@ -776,6 +842,15 @@ var gw2w = {
 			if(obj.id != gw2w.vm.detailId()) {
 				gw2w.populate.itemDetails(obj.id);
 			}
+		},
+		clear: function() {
+			var vm = gw2w.vm;
+			
+			// Clear
+			vm.tracker.removeAll();
+			
+			// Update localStorage
+			gw2w.storage.tracker.set();
 		},
 		exist: function(id) {
 			var vm = gw2w.vm;

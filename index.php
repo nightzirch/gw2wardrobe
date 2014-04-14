@@ -218,6 +218,11 @@
 							<div class="panel-body" data-bind="visible: tracker().length < 1">
 								<p class="text-muted">There are currently no items in the tracker.</p>
 							</div>
+							
+							<div class="panel-footer">
+								<button type="button" class="btn btn-default" data-copied-hint="Copied" id="trackerCopy" data-bind='enable: tracker().length > 0, attr: {"data-clipboard-text": trackerCode}'>Copy chat codes</button>
+								<a class="btn btn-link pull-right" role="button" data-bind="click: gw2w.tracker.clear, visible: tracker().length > 0">Clear</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -229,7 +234,8 @@
 		?>
 		
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+		<script src="js/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
 		<!-- Knockout JS -->
