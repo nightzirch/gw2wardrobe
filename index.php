@@ -176,6 +176,14 @@
 									<p class="detailDesc text-muted" data-bind="text: detailDesc"></p>
 								</li>
 								
+								<li class="list-group-item detailImages" data-bind="visible: detailImages">
+									<div class="center-block detailImageContainer" data-bind="foreach: detailImages">
+										<div class="detailImage">
+											<img data-bind="attr: {src: src, alt: alt}" />
+										</div>
+									</div>
+								</li>
+								
 								<li class="list-group-item" data-bind="visible: (detailAcquire() || detailRecipe())">
 									<div data-bind="visible: detailAcquire">
 										<h5>Acquisition</h5>

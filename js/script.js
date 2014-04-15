@@ -64,7 +64,7 @@ var gw2w = {
 		self.detailName = ko.observable(null);
 		self.detailDesc = ko.observable(null);
 		self.detailIcon = ko.observable(null);
-		self.detailImage = ko.observable(null);
+		self.detailImages = ko.observableArray();
 		self.detailPage = ko.observable(null);
 		self.detailAcquire = ko.observable(null);
 		self.detailRecipe = ko.observable(false);
@@ -142,6 +142,12 @@ var gw2w = {
 			self.id = obj.id;
 			self.name = obj.name;
 			self.icon = obj.icon;
+		},
+		// Class for detailImages
+		detailImage: function(obj) {
+			var self = this;
+			self.src = obj.src;
+			self.alt = obj.alt;
 		}
 	},
 	
@@ -692,7 +698,7 @@ var gw2w = {
 			vm.detailName(details.name);
 			vm.detailDesc(details.description);
 			vm.detailIcon(gw2w.api.render(details.icon_file_signature, details.icon_file_id));
-			vm.detailImage();
+//			vm.detailImages();	// Done automagically
 			vm.detailPage(gw2w.api.itemPage(details.name));
 //			vm.detailAcquire(); // Done automagically
 //			vm.detailRecipe();	// Done automagically
@@ -731,6 +737,21 @@ var gw2w = {
 						}
 					}
 				});
+				
+				// Set detailImage (not to be confused with detailIcon). We only bother with the first image (for now)
+				var detailImages = $("table.collapsible img", page);
+				
+				// But only if it exists
+				if(detailImages) {
+					$(detailImages).each(function() {
+						var obj = {
+							src: $(this).attr("src"),
+							alt: $(this).attr("alt")
+						}
+						
+						vm.detailImages.push(new gw2w.class.detailImage(obj));
+					});
+				}
 				
 				// Locate the content about acquisition
 				var acq = $("#Acquisition", page);
@@ -1122,7 +1143,7 @@ var gw2w = {
 		vm.detailName(null);
 		vm.detailDesc(null);
 		vm.detailIcon(null);
-		vm.detailImage(null);
+		vm.detailImages.removeAll();
 		vm.detailPage(null);
 		vm.detailAcquire(null);
 		vm.detailRecipe(false);
