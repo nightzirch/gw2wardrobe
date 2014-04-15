@@ -203,7 +203,7 @@
 							
 							<div class="panel-footer">
 								<button type="button" class="btn btn-primary" id="trackerAdd" data-bind='attr: {"data-id": detailId}, enable: (detailId() && trackerAvailable()), text: trackerAddText'></button>
-								<a class="btn btn-default" role="button" data-bind="attr: {href: detailPage}, css: {disabled: detailEmpty}">Official Wiki</a>
+								<a class="btn btn-default" role="button" target="_blank" data-bind="attr: {href: detailPage}, css: {disabled: detailEmpty}">Official Wiki</a>
 								<a class="btn btn-danger pull-right" role="button" data-bind="click: gw2w.clear, visible: detailId">Clear</a>
 							</div>
 						</div>
