@@ -163,7 +163,7 @@
 					<div id="ressources" class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h5>Ressources</h5>
+								<h5>Resources</h5>
 							</div>
 							
 							<ul class="list-group">
