@@ -20,7 +20,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">GuildWars2 Wardrobe <span class="badge badge-danger">ALPHA</span></a>
+			<a class="navbar-brand" href="/">GuildWars2 Wardrobe <span class="label label-info">ALPHA</span></a>
 		</div>
 		
 		<!-- Collect the nav links, forms, and other content for toggling -->
