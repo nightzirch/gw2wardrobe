@@ -384,7 +384,7 @@ var gw2w = {
 				
 				// If any of the panels are not collapsed, collapse all
 				if(panels.length > 0) {
-					$("#itemsContainer .panel-collapse").collapse("hide");
+					$("#itemsContainer .panel-collapse.in").collapse("hide");
 				}
 				// If all are collapsed, show all
 				else {
