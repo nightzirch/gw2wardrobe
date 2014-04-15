@@ -68,6 +68,48 @@
 	margin-bottom: 2px;
 }
 
+#itemDetails ul.list-group li.detailAcquire .recipe-box .heading,
+#itemDetails ul.list-group li.detailAcquire .recipe-box .subheading {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#itemDetails ul.list-group li.detailAcquire .recipe-box > p {
+	display: none;
+}
+
+#itemDetails ul.list-group li.detailAcquire .recipe-box .wrapper dl dt {
+	display: inline-block;
+	width: 91px;
+	border-right: 2px solid #ddd;
+	text-align: right;
+	padding-right: 10px;
+	margin-right: 10px;
+}
+
+#itemDetails ul.list-group li.detailAcquire .recipe-box .wrapper dl dd {
+	display: inline-block;
+}
+
+#itemDetails ul.list-group li.detailAcquire .recipe-box .wrapper dl dt:before {
+	content: " ";
+    display: block;
+}
+
+#itemDetails ul.list-group li.detailAcquire .recipe-box .ingredients dt {
+	display: inline-block;
+	width: 91px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+#itemDetails ul.list-group li.detailAcquire .recipe-box .ingredients dd {
+	display: inline-block;
+}
+
+
+
 #itemDetails ul.list-group > li.list-group-item:last-child {
 	margin-bottom: -1px;
 }

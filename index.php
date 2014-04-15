@@ -176,7 +176,7 @@
 									<p class="detailDesc text-muted" data-bind="text: detailDesc"></p>
 								</li>
 								
-								<li class="list-group-item detailImages" data-bind="visible: detailImages">
+								<li class="list-group-item detailImages" data-bind="visible: detailImages().length > 0">
 									<div class="center-block detailImageContainer" data-bind="foreach: detailImages">
 										<div class="detailImage">
 											<img data-bind="attr: {src: src, alt: alt}" />
@@ -184,7 +184,7 @@
 									</div>
 								</li>
 								
-								<li class="list-group-item" data-bind="visible: (detailAcquire() || detailRecipe())">
+								<li class="list-group-item detailAcquire" data-bind="visible: (detailAcquire() || detailRecipe())">
 									<div data-bind="visible: detailAcquire">
 										<h5>Acquisition</h5>
 										<div data-bind="html: detailAcquire"></div>
@@ -192,7 +192,7 @@
 									
 									<div data-bind="visible: detailRecipe">
 										<h5>Recipe</h5>
-										<div data-bind="html: detailRecipeText"></div>
+										<div data-bind="html: detailRecipe"></div>
 									</div>
 								</li>
 							</ul>

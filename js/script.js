@@ -67,12 +67,7 @@ var gw2w = {
 		self.detailImages = ko.observableArray();
 		self.detailPage = ko.observable(null);
 		self.detailAcquire = ko.observable(null);
-		self.detailRecipe = ko.observable(false);
-		
-		self.detailRecipeText = ko.computed(function(){
-			var text = 'This item is created through a recipe. Check out <a href="' + self.detailPage() + '">the Official Wiki</a> for the recipe.';
-			return text;
-		});
+		self.detailRecipe = ko.observable(null);
 		
 		// Tracker array
 		self.tracker = ko.observableArray();
@@ -738,6 +733,26 @@ var gw2w = {
 					}
 				});
 				
+				// Fix recipe-box
+				var recipeBox = $(".recipe-box", page);
+				
+				if(recipeBox) {
+					// Insert linebreak
+					var wrapper = $(".recipe-box .wrapper dl dd", page);
+					$(wrapper).after("<br />");
+					
+					var ingredients = $(".recipe-box .ingredients dl dd", page);
+					$(ingredients).after("<br />");
+					
+					// If the recipe wants to give you a link code
+					var linkCode = $(".recipe-box #gameLink2", page);
+					if(linkCode.length > 0) {
+						// Delete parent and parent's previous element
+						$(linkCode).parent().prev().remove();
+						$(linkCode).parent().remove();
+					}
+				}
+				
 				// Set detailImage (not to be confused with detailIcon). We only bother with the first image (for now)
 				var detailImages = $("table.collapsible img", page);
 				
@@ -778,8 +793,10 @@ var gw2w = {
 					
 					// If there is a recipe
 					if(recipe.length > 0) {
-						// Set recipe to true
-						vm.detailRecipe(true);
+						var recipeBox = $(".recipe-box", page)[0].outerHTML;
+						
+						// Set recipe html
+						vm.detailRecipe(recipeBox);
 					}
 					// Or if there isn't one
 					else {
