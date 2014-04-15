@@ -30,10 +30,10 @@
 			<!-- Danger alert -->
 			<div class="alert alert-danger">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<h4>GuildWars2 Wardrobe is in alpha!</h4>
-				<p>Hello and thanks for checking out the site. I would like to inform you that Guild Wars 2 Wardrobe is under development and that there are currently only a few features available. However, feel free to play around. If you want more information about the site, you can read about upcoming features on the <a class="alert-link" href="/about">about page</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.</p>
+				<h4>GuildWars2 Wardrobe is in beta!</h4>
+				<p>Hello and thanks for checking out the site. I would like to inform you that GuildWars2 Wardrobe is currently under development and that there are some features available, but there will be more. However, feel free to play around. If you want more information about the site, you can read about upcoming features on the <a class="alert-link" href="/about">about page</a> or check out <a class="alert-link" href="https://github.com/nightzirch/gw2wardrobe/commits/master">the changelog on GitHub</a>.</p>
 				<br />
-				<p><strong>Important!</strong> Due to the API fetching <em>all</em> armors and weapons compared to those with a unique skin only, the performance will be extremely poor when loading this page and the first few times you perform a search. I am looking into ways of improving performance, but am first of all focusing on functionality as the redicilously large array of items is only temporary until ArenaNet updates their API so I the array will only include unique skins. Thank you for your patience. It is after all an alpha release.</p>
+				<p><strong>Important!</strong> Due to the API fetching <em>all</em> armors and weapons compared to only those with a unique skin, the performance will be extremely poor when loading the wardrobe the first time and the first few times you perform a search. After that, the page will still take some time to load, but the load times depends more on your computer's power. After the browser has loaded the wardrobe once, searching performance will be alot better. I am looking into ways to improve performance, but I am first of all focusing on functionality as the redicilously large array of items is only temporary until ArenaNet updates their API. Then the array will only include unique skins. Thank you for your patience. It is after all a beta release.</p>
 			</div>
 			
 			<div class="row">
