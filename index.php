@@ -83,7 +83,7 @@
 							</ul>
 						</div>
 						
-						<div class="panel panel-default">
+						<!--<div class="panel panel-default">
 							<div class="panel-heading">
 								<h5>
 									<a href="#sortOutfit" class="collapsed" data-toggle="collapse" data-parent="#sortMenu">
@@ -99,7 +99,7 @@
 								<li class="list-group-item">Medium</li>
 								<li class="list-group-item">Heavy</li>
 							</ul>
-						</div>
+						</div>-->
 					</div>
 				</div>
 				
