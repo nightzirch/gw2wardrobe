@@ -1,5 +1,24 @@
 include ../mixins/flash-messages
 
+mixin menuitems
+	each link in navLinks
+		if link.subitems
+			li
+				ul.collapsible.collapsible-accordion
+					li
+						a.collapsible-header.waves-effect.waves-teal(href=link.href)= link.label
+						div.collapsible-body: ul
+							each subitem in link.subitems
+								li(class=(section == subitem.key ? 'active' : null)): a(href=subitem.href)= subitem.label
+		else
+			li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+	if user
+		if user.canAccessKeystone
+			li: a(href='/keystone') Admin
+		li: a(href='/keystone/signout') Sign Out
+	else
+		li: a(href='/keystone/signin') Admin
+
 doctype html
 html
 
@@ -13,7 +32,7 @@ html
 		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
 
 		//- Customise the stylesheet for your site by editing /public/styles/site.sass
-		link(href="/styles/site.css", rel="stylesheet")
+		link(href="/styles/site.min.css", rel="stylesheet")
 
 		//- This file provides the default styling for the KeystoneJS Content Editor
 		if user && user.canAccessKeystone
@@ -34,6 +53,12 @@ html
 
 	//- HTML BODY
 	body
+		header
+			nav(role="navigation")
+				ul#slide-out.side-nav.fixed
+					+menuitems
+				a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")
+					i.mdi-navigation-menu
 
 		//- HEADER
 		#header: .container
@@ -41,26 +66,7 @@ html
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
 
-			div(role="navigation").navbar.navbar-default
-				.container-fluid
-					.navbar-header
-						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-							span.sr-only Toggle navigation
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
-						a.navbar-brand(href='/') Guild Wars 2 Wardrobe
-					.collapse.navbar-collapse
-						ul.nav.navbar-nav.navbar-left
-							each link in navLinks
-								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
-						ul.nav.navbar-nav.navbar-right
-							if user
-								if user.canAccessKeystone
-									li: a(href='/keystone') Open Keystone
-								li: a(href='/keystone/signout') Sign Out
-							else
-								li: a(href='/keystone/signin') Sign In
+			
 
 		//- BODY
 		#body
@@ -83,8 +89,7 @@ html
 		//- FOOTER
 		.container: #footer
 
-			//- You don't _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it!
-			p Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
+			
 
 
 		//- JAVASCRIPT
@@ -96,7 +101,8 @@ html
 
 		//- Customise which Bootstrap javascript files are served by including
 		//- them specifically here, instead of bootstrap-3.2.0.min.js
-		script(src='/js/lib/bootstrap/bootstrap-3.2.0.min.js')
+		// Commented out Bootstrap as we don't need them for now
+		// script(src='/js/lib/bootstrap/bootstrap-3.2.0.min.js')
 
 		//- The KeystoneJS Content Editor provides support for ks-editable data attributes,
 		//- which generate links to edit content for users who can access Keystone
@@ -104,6 +110,8 @@ html
 			script(src='/keystone/js/content/editor.js')
 
 		//- Add scripts that are globally required by your site here.
-
+		script(src='/js/lib/materialize/materialize.min.js')
+		script(src='/js/script.js')
+		
 		//- Include template-specific javascript files by extending the js block
 		block js

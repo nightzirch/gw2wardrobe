@@ -32,5 +32,6 @@ node_modules
 
 # Ignore db
 db
-mongod_setup.bat
-mongo_setup.bat
+
+# Ignore helper bat files
+*.bat

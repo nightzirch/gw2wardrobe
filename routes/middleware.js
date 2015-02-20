@@ -24,7 +24,21 @@ exports.initLocals = function(req, res, next) {
 	var locals = res.locals;
 	
 	locals.navLinks = [
-		{ label: 'Home',		key: 'home',		href: '/' }
+		{ label: 'Home',		key: 'home',		href: '/' },
+		{ label: 'Armors',		key: 'armors',		href: '#',	subitems: [
+			{ label: 'All weights',	key: 'armors',				href: '/armors' },
+			{ label: 'Light',		key: 'armors-light',		href: '/armors/light' },
+		 	{ label: 'Medium',		key: 'armors-medium',		href: '/armors/medium' },
+			{ label: 'Heavy',		key: 'armors-heavy',		href: '/armors/heavy' }
+		]},
+		{ label: 'Weapons',		key: 'weapons',		href: '#',	subitems: [
+			{ label: 'All weapons',		key: 'weapons',		href: '/weapons' },
+			{ label: 'Two-handed',		key: 'weapons-twohanded',		href: '/weapons/twohanded' },
+		 	{ label: 'One-handed',		key: 'weapons-onehanded',		href: '/weapons/onehanded' },
+			{ label: 'Off hand',		key: 'weapons-offhand',			href: '/weapons/offhand' }
+		]},
+		{ label: 'About',		key: 'about',		href: '/about' },
+		{ label: 'Github',		key: 'github',		href: 'https://github.com/nightzirch/gw2wardrobe' }
 	];
 	
 	locals.user = req.user;
