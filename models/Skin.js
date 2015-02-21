@@ -36,6 +36,61 @@ Skin.schema.add({
 	restrictions: { type: [String] }
 });
 
+
+/**
+ * Weapon type
+ */
+
+Skin.schema.virtual('isTwoHanded').get(function() {
+	weaponTypes = ["Greatsword", "Hammer", "LongBow", "Rifle", "ShortBow", "Staff"];
+	
+	for (var i = 0; i < weaponTypes.length; i++) {
+		if (this.details.type == weaponTypes[i]) {
+			return true;
+		}
+	}
+	
+	return false;
+});
+
+Skin.schema.virtual('isOneHanded').get(function() {
+	weaponTypes = ["Axe", "Dagger", "Mace", "Pistol", "Scepter", "Sword"];
+	
+	for (var i = 0; i < weaponTypes.length; i++) {
+		if (this.details.type == weaponTypes[i]) {
+			return true;
+		}
+	}
+	
+	return false;
+});
+
+Skin.schema.virtual('isOffhand').get(function() {
+	weaponTypes = ["Focus", "Shield", "Torch", "Warhorn"];
+	
+	for (var i = 0; i < weaponTypes.length; i++) {
+		if (this.details.type == weaponTypes[i]) {
+			return true;
+		}
+	}
+	
+	return false;
+});
+
+Skin.schema.virtual('isAquatic').get(function() {
+	weaponTypes = ["Harpoon", "Speargun", "Trident"];
+	
+	for (var i = 0; i < weaponTypes.length; i++) {
+		if (this.details.type == weaponTypes[i]) {
+			return true;
+		}
+	}
+	
+	return false;
+});
+
+
+
 /**
  * Registration
  */

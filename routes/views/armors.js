@@ -13,7 +13,7 @@ exports = module.exports = function(req, res) {
 	
 	// Get the projects
 	view.on('init', function(next) {
-		var q = keystone.list('Skin').model.find({});
+		var q = keystone.list('Skin').model.find({type: 'Armor'});
 
 		q.exec(function(err, result) {
 			locals.skins = result;

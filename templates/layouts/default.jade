@@ -1,12 +1,15 @@
 include ../mixins/flash-messages
 
 mixin menuitems
+	li.logo
+		a#logo-container(href="/")
+			img(src="/images/logo.png")
 	each link in navLinks
 		if link.subitems
 			li
 				ul.collapsible.collapsible-accordion
 					li
-						a.collapsible-header.waves-effect.waves-teal(href=link.href)= link.label
+						a.collapsible-header.waves-effect.waves-red= link.label
 						div.collapsible-body: ul
 							each subitem in link.subitems
 								li(class=(section == subitem.key ? 'active' : null)): a(href=subitem.href)= subitem.label
@@ -18,6 +21,21 @@ mixin menuitems
 		li: a(href='/keystone/signout') Sign Out
 	else
 		li: a(href='/keystone/signin') Admin
+
+mixin itemcard(item)
+	.col.s2
+		.card
+			.card-image.waves-effect.waves-block.waves-light
+				img.activator(src= item.icon)
+			.card-content
+				span.card-title.activator.grey-text.text-darken-4= item.name
+					i.mdi-navigation-more-vert.right
+				p Testing
+			.card-reveal
+				span.card-title.grey-text.text-darken-4= item.name
+					i.mdi-navigation-close.right
+				p Here is some more information about this product that is only revealed once clicked on.
+
 
 doctype html
 html
