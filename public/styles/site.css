@@ -2180,7 +2180,7 @@ ul.staggered-list li {
 footer.page-footer {
   margin-top: 20px;
   padding-top: 20px;
-  background-color: #ee6e73; }
+  background-color: #b71c1c; }
   footer.page-footer .footer-copyright {
     overflow: hidden;
     height: 50px;
@@ -5002,7 +5002,7 @@ span.badge {
 
 nav {
   color: #fff;
-  background-color: #ee6e73;
+  background-color: #b71c1c;
   width: 100%;
   height: 56px;
   line-height: 56px; }
@@ -5530,7 +5530,7 @@ small {
     letter-spacing: .8px;
     width: 15%; }
     .tabs li.tab a {
-      color: #ee6e73;
+      color: #b71c1c;
       display: block;
       width: 100%;
       height: 100%;
@@ -5540,12 +5540,12 @@ small {
       -ms-transition: color 0.28s ease;
       transition: color 0.28s ease; }
       .tabs li.tab a:hover {
-        color: #f9c9cb; }
+        color: #e55454; }
   .tabs .indicator {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #f6b2b5;
+    background-color: #e13e3e;
     will-change: left, right; }
 
 ul.tabs li.tab {
@@ -6769,7 +6769,7 @@ ul.side-nav.fixed {
       left: auto; } }
 ul.side-nav .collapsible-body li.active,
 ul.side-nav.fixed .collapsible-body li.active {
-  background-color: #ee6e73; }
+  background-color: #b71c1c; }
   ul.side-nav .collapsible-body li.active a,
   ul.side-nav.fixed .collapsible-body li.active a {
     color: #fff; }
@@ -7906,5 +7906,14 @@ ul.side-nav.fixed .collapsible-body li.active {
 #body {
   margin-left: 240px;
   padding-left: 20px; }
+
+#slide-out li.logo {
+  padding: 0;
+  border-bottom: 1px solid #ddd; }
+  #slide-out li.logo a#logo-container {
+    padding: 0;
+    line-height: normal; }
+    #slide-out li.logo a#logo-container img {
+      width: 100%; }
 
 /*# sourceMappingURL=site.css.map */

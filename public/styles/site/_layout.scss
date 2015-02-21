@@ -6,3 +6,17 @@
 	margin-left: 240px;
 	padding-left: 20px;
 }
+
+#slide-out li.logo {
+	padding: 0;
+	border-bottom: 1px solid #ddd;
+	
+	a#logo-container {
+		padding: 0;
+		line-height: normal;
+
+		img {
+			width: 100%;
+		}
+	}
+}
