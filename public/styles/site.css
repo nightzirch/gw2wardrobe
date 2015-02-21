@@ -7903,4 +7903,8 @@ ul.side-nav.fixed .collapsible-body li.active {
 #header {
   margin-top: 30px; }
 
+#body {
+  margin-left: 240px;
+  padding-left: 20px; }
+
 /*# sourceMappingURL=site.css.map */

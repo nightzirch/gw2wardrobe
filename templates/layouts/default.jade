@@ -55,6 +55,9 @@ html
 	body
 		header
 			nav(role="navigation")
+				.container
+					.nav-wrapper
+						a.page-title= title
 				ul#slide-out.side-nav.fixed
 					+menuitems
 				a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")

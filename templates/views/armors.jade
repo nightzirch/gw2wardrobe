@@ -1,4 +1,17 @@
 extends ../layouts/default
 
 block content
-	
+	.row
+		each skin in skins
+			.col.s2
+				.card
+					.card-image.waves-effect.waves-block.waves-light
+						img.activator(src= skin.icon)
+					.card-content
+						span.card-title.activator.grey-text.text-darken-4= skin.name
+							i.mdi-navigation-more-vert.right
+						p Testing
+					.card-reveal
+						span.card-title.grey-text.text-darken-4= skin.name
+							i.mdi-navigation-close.right
+						p Here is some more information about this product that is only revealed once clicked on.
