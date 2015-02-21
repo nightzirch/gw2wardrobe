@@ -7900,20 +7900,38 @@ ul.side-nav.fixed .collapsible-body li.active {
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
+header .nav-wrapper {
+  margin-left: 240px; }
+  header .nav-wrapper a.page-title {
+    padding-left: 40px;
+    font-size: 32px; }
+header #slide-out {
+  line-height: 42px; }
+  header #slide-out li.logo {
+    padding: 0; }
+    header #slide-out li.logo a#logo-container {
+      padding: 0;
+      line-height: normal; }
+      header #slide-out li.logo a#logo-container img {
+        width: 100%; }
+  header #slide-out li.logo:hover {
+    background: none; }
+  header #slide-out li {
+    padding: 0;
+    margin: 0; }
+    header #slide-out li a {
+      padding: 0 15px;
+      margin: 0; }
+    header #slide-out li .collapsible-body a {
+      padding: 0 40px; }
+  header #slide-out ul.collapsible > li.active {
+    background-color: transparent; }
+
 #header {
   margin-top: 30px; }
 
 #body {
   margin-left: 240px;
   padding-left: 20px; }
-
-#slide-out li.logo {
-  padding: 0;
-  border-bottom: 1px solid #ddd; }
-  #slide-out li.logo a#logo-container {
-    padding: 0;
-    line-height: normal; }
-    #slide-out li.logo a#logo-container img {
-      width: 100%; }
 
 /*# sourceMappingURL=site.css.map */

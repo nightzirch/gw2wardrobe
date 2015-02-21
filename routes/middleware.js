@@ -37,8 +37,7 @@ exports.initLocals = function(req, res, next) {
 		 	{ label: 'One-handed',		key: 'weapons-onehanded',		href: '/weapons/onehanded' },
 			{ label: 'Off hand',		key: 'weapons-offhand',			href: '/weapons/offhand' }
 		]},
-		{ label: 'About',		key: 'about',		href: '/about' },
-		{ label: 'Github',		key: 'github',		href: 'https://github.com/nightzirch/gw2wardrobe' }
+		{ label: 'About',		key: 'about',		href: '/about' }
 	];
 	
 	locals.user = req.user;

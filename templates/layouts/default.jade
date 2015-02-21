@@ -4,23 +4,32 @@ mixin menuitems
 	li.logo
 		a#logo-container(href="/")
 			img(src="/images/logo.png")
+	
+	li.divider
+	
 	each link in navLinks
 		if link.subitems
 			li
 				ul.collapsible.collapsible-accordion
 					li
 						a.collapsible-header.waves-effect.waves-red= link.label
-						div.collapsible-body: ul
-							each subitem in link.subitems
-								li(class=(section == subitem.key ? 'active' : null)): a(href=subitem.href)= subitem.label
+						div.collapsible-body
+							ul
+								each subitem in link.subitems
+									li(class=(section == subitem.key ? 'active' : null))
+										a(href=subitem.href)= subitem.label
 		else
-			li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+			li(class=(section == link.key ? 'active' : null))
+				a.waves-effect.waves-red(href=link.href)= link.label
+	
+	li.divider
+	
 	if user
 		if user.canAccessKeystone
-			li: a(href='/keystone') Admin
+			li: a.waves-effect.waves-red(href='/keystone') Admin
 		li: a(href='/keystone/signout') Sign Out
 	else
-		li: a(href='/keystone/signin') Admin
+		li: a.waves-effect.waves-red(href='/keystone/signin') Admin
 
 mixin itemcard(item)
 	.col.s2
@@ -73,9 +82,13 @@ html
 	body
 		header
 			nav(role="navigation")
-				.container
-					.nav-wrapper
-						a.page-title= title
+				.nav-wrapper
+					a.page-title= title
+					form.right
+						.input-field.col.s4
+							input#search(type="text")
+							label(for="search")
+								i.mdi-action-search
 				ul#slide-out.side-nav.fixed
 					+menuitems
 				a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")

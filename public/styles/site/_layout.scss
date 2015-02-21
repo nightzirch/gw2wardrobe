@@ -1,3 +1,51 @@
+header {
+	.nav-wrapper {
+		margin-left: 240px;
+		
+		a.page-title {
+			padding-left: 40px;
+			font-size: 32px;
+		}
+	}
+	
+	
+	#slide-out {
+		line-height: 42px;
+		
+		li.logo {
+			padding: 0;
+
+			a#logo-container {
+				padding: 0;
+				line-height: normal;
+
+				img {
+					width: 100%;
+				}
+			}
+		}
+		li.logo:hover {
+			background: none;
+		}
+		li {
+			padding: 0;
+			margin: 0;
+			
+			a {
+				padding: 0 15px;
+				margin: 0;
+			}
+			
+			.collapsible-body a {
+				padding: 0 40px;
+			}
+		}
+		ul.collapsible > li.active {
+			background-color: transparent;
+		}
+	}
+}
+
 #header {
 	margin-top: 30px;
 }
@@ -7,16 +55,3 @@
 	padding-left: 20px;
 }
 
-#slide-out li.logo {
-	padding: 0;
-	border-bottom: 1px solid #ddd;
-	
-	a#logo-container {
-		padding: 0;
-		line-height: normal;
-
-		img {
-			width: 100%;
-		}
-	}
-}
