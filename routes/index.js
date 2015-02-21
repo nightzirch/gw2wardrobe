@@ -38,7 +38,7 @@ exports = module.exports = function(app) {
 	app.get('/', routes.views.index);
 	app.get('/about', routes.views.about);
 	app.get('/armors', routes.views.armors);
-	app.get('/armors/:type', routes.views.armors);
+	app.get('/armors/:weight', routes.views.armors);
 	app.get('/weapons', routes.views.weapons);
 	app.get('/weapons/:type', routes.views.weapons);
 	
