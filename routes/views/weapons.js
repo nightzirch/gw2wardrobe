@@ -19,7 +19,8 @@ exports = module.exports = function(req, res) {
 		};
 		
 		q = keystone.list('Skin').model.find({
-			type: 'Weapon'
+			type: 'Weapon',
+			"details.weapon_category": req.params.type
 		});
 	}
 	else {

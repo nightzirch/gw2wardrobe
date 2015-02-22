@@ -27,6 +27,7 @@ Skin.add({
 	description: { type: String },
 	details: {
 		type: { type: String },
+		weapon_category: { type: String },
 		weight_class: { type: String },
 		damage_type: { type: String }
 	}	
@@ -41,59 +42,32 @@ Skin.schema.add({
  * Weapon type
  */
 
-Skin.schema.virtual('isTwoHanded').get(function() {
-	weaponTypes = ["Greatsword", "Hammer", "LongBow", "Rifle", "ShortBow", "Staff"];
+Skin.schema.pre('save', function(next) {
+	var weaponTypes = [
+		["Greatsword", "Hammer", "LongBow", "Rifle", "ShortBow", "Staff"],
+		["Axe", "Dagger", "Mace", "Pistol", "Scepter", "Sword"],
+		["Focus", "Shield", "Torch", "Warhorn"],
+		["Harpoon", "Speargun", "Trident"]
+	];
+	var weaponTypesNames = ["twohanded", "onehanded", "offhand", "aquatic"];
+	var weaponType = null;
 	
 	for (var i = 0; i < weaponTypes.length; i++) {
-		if (this.details.type == weaponTypes[i]) {
-			return true;
+		for (var y = 0; y < weaponTypes[i].length; y++) {
+			if (this.details.type == weaponTypes[i][y]) {
+				weaponType = weaponTypesNames[i];
+			}
 		}
 	}
 	
-	return false;
+	this.details.weapon_category = weaponType;
+	next();
 });
-
-Skin.schema.virtual('isOneHanded').get(function() {
-	weaponTypes = ["Axe", "Dagger", "Mace", "Pistol", "Scepter", "Sword"];
-	
-	for (var i = 0; i < weaponTypes.length; i++) {
-		if (this.details.type == weaponTypes[i]) {
-			return true;
-		}
-	}
-	
-	return false;
-});
-
-Skin.schema.virtual('isOffhand').get(function() {
-	weaponTypes = ["Focus", "Shield", "Torch", "Warhorn"];
-	
-	for (var i = 0; i < weaponTypes.length; i++) {
-		if (this.details.type == weaponTypes[i]) {
-			return true;
-		}
-	}
-	
-	return false;
-});
-
-Skin.schema.virtual('isAquatic').get(function() {
-	weaponTypes = ["Harpoon", "Speargun", "Trident"];
-	
-	for (var i = 0; i < weaponTypes.length; i++) {
-		if (this.details.type == weaponTypes[i]) {
-			return true;
-		}
-	}
-	
-	return false;
-});
-
 
 
 /**
  * Registration
  */
 
-Skin.defaultColumns = 'name, type, added.build|20%';
+Skin.defaultColumns = 'name, type, added.build';
 Skin.register();
