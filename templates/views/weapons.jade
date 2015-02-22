@@ -1,9 +1,16 @@
 extends ../layouts/default
 
 block content
-	each value, key in weaponTypes
-		.row
-			h4= value
-			each skin in skins
-				if (skin.details.type == key)
-					+item(skin)
+	.row
+		.col.s12.m9.l10
+			each value, key in weaponTypes
+				.section.scrollspy.categoryContainer(id= key)
+					h4= value
+					.itemsContainer
+						each skin in skins
+							if (skin.details.type == key)
+								+item(skin)
+		.col.hide-on-small-only.m3.l2
+			ul.section.table-of-contents
+				each value, key in weaponTypes
+					li: a(href="#" + key)= value

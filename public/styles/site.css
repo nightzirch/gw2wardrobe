@@ -7927,9 +7927,6 @@ header #slide-out {
   header #slide-out ul.collapsible > li.active {
     background-color: transparent; }
 
-#header {
-  margin-top: 30px; }
-
 #body {
   margin-left: 240px;
   padding-left: 20px; }
