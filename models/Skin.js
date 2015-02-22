@@ -18,6 +18,7 @@ Skin.add({
 		build: { type: Number, required: true, default: 0},
 	},
 	type: { type: String },
+	typeUrl: { type: String },
 	flags: {
 		ShowInWardrobe: { type: Types.Boolean },
 		NoCost: { type: Types.Boolean },
@@ -43,6 +44,7 @@ Skin.schema.add({
  */
 
 Skin.schema.pre('save', function(next) {
+	// Weapon Category
 	var weaponTypes = [
 		["Greatsword", "Hammer", "LongBow", "Rifle", "ShortBow", "Staff"],
 		["Axe", "Dagger", "Mace", "Pistol", "Scepter", "Sword"],
@@ -61,6 +63,11 @@ Skin.schema.pre('save', function(next) {
 	}
 	
 	this.details.weapon_category = weaponType;
+	
+	// Type URL
+	this.typeUrl = this.type.toLowerCase() + "s";
+	
+	// Save it and continue
 	next();
 });
 

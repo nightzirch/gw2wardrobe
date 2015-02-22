@@ -53,5 +53,15 @@ header {
 #body {
 	margin-left: 240px;
 	padding-left: 20px;
+	
+	.skinItem {
+		margin: 0;
+		padding: 0;
+		
+		.skinItemImageContainer {
+			height: 64px;
+			width: 64px;
+		}
+	}
 }
 

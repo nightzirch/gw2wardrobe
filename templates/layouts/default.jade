@@ -45,6 +45,12 @@ mixin itemcard(item)
 					i.mdi-navigation-close.right
 				p Here is some more information about this product that is only revealed once clicked on.
 
+mixin item(item)
+	.skinItem.waves-effect.waves-light.z-depth-1
+		a(href='/#{item.typeUrl}/#{item.skinid}')
+			.skinItemImageContainer
+				img(src= item.icon)
+
 
 doctype html
 html

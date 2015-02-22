@@ -1,6 +1,9 @@
 extends ../layouts/default
 
 block content
-	.row
-		each skin in skins
-			+itemcard(skin)
+	each value, key in weaponTypes
+		.row
+			h4= value
+			each skin in skins
+				if (skin.details.type == key)
+					+item(skin)

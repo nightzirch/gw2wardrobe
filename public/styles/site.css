@@ -7933,5 +7933,11 @@ header #slide-out {
 #body {
   margin-left: 240px;
   padding-left: 20px; }
+  #body .skinItem {
+    margin: 0;
+    padding: 0; }
+    #body .skinItem .skinItemImageContainer {
+      height: 64px;
+      width: 64px; }
 
 /*# sourceMappingURL=site.css.map */
