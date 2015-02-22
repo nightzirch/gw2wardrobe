@@ -46,9 +46,9 @@ mixin itemcard(item)
 				p Here is some more information about this product that is only revealed once clicked on.
 
 mixin item(item)
-	.skinItem.waves-effect.waves-light.z-depth-1
+	.skin-item.waves-effect.waves-light.z-depth-1
 		a(href='/#{item.typeUrl}/#{item.skinid}')
-			.skinItemImageContainer
+			.skin-item-image-container
 				img(src= item.icon)
 
 
@@ -114,19 +114,20 @@ html
 		header
 			nav(role="navigation")
 				.nav-wrapper
-					a.page-title= title
-					form.right
-						.input-field.col.s4
-							input#search(type="text")
-							label(for="search")
-								i.mdi-action-search
+					.container
+						a.page-title= title
+						form.right
+							.input-field.col.hide-on-small-only.m4.l3
+								input#search(type="text")
+								label(for="search")
+									i.mdi-action-search
 				ul#slide-out.side-nav.fixed
 					+menuitems
 				a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")
 					i.mdi-navigation-menu
 
 		//- HEADER
-		#header: .container
+		header: .container
 
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
@@ -134,7 +135,7 @@ html
 			
 
 		//- BODY
-		#body
+		#body: .container
 
 			//- NOTE:
 			//- There is no .container wrapping class around body blocks to allow more flexibility in design.
@@ -152,7 +153,27 @@ html
 
 
 		//- FOOTER
-		.container: #footer
+		footer.page-footer
+			//.container
+				.row
+					.col.l6.s12
+						h5.white-text Footer Content
+						p.grey-text.text-lighten-4 You can use rows and columns here to organize your footer content.
+					.col.l4.offset-l2.s12
+						h5.white-text Links
+						ul
+							li: a.grey-text.text-lighten-3(href="#") Link
+							li: a.grey-text.text-lighten-3(href="#") Link
+							li: a.grey-text.text-lighten-3(href="#") Link
+			.footer-copyright
+				.container
+					.row
+						#footer-logo-wrapper.valign-wrapper.col.s12.m12.l3
+							img.valign.footer-logo(src="/images/logo-white.png")
+						#footer-content-wrapper.col.s12.m12.l9
+							p Guild Wars 2 Wardrobe is a non-profit fan-made site for Guild Wars 2. We consist of developers who enjoy Guild Wars 2 and our aim is to create a tools that players may find helpful. Guild Wars 2 Wardrobe is in no way associated with ArenaNet, NCSOFT Corporation or the Guild Wars 2 trademark.
+							p ©2015 Christian Grimsgaard
+							p ©2010–2015 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
 
 			
 

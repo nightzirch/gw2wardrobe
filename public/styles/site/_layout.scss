@@ -3,7 +3,6 @@ header {
 		margin-left: 240px;
 		
 		a.page-title {
-			padding-left: 40px;
 			font-size: 32px;
 		}
 	}
@@ -48,16 +47,57 @@ header {
 
 #body {
 	margin-left: 240px;
-	padding-left: 20px;
 	
-	.skinItem {
+	.skin-item {
 		margin: 0;
 		padding: 0;
 		
-		.skinItemImageContainer {
+		.skin-item-image-container {
 			height: 64px;
 			width: 64px;
 		}
 	}
 }
 
+footer.page-footer {
+	margin-left: 240px;
+	padding-top: 0;
+	
+	
+	
+	#footer-content-wrapper {
+		overflow: hidden;
+	}
+
+	.footer-copyright {
+		height: auto !important;
+		line-height: inherit !important;
+		padding: 15px 0;
+		font-size: 12px;
+
+		.footer-logo {
+			width: 150px;
+		}
+
+		.container > .row {
+			margin-bottom: 0;
+		}
+	}
+}
+
+@media #{$small-and-down} {
+	
+}
+@media #{$medium-and-up} {
+	
+}
+@media #{$medium-and-down} {
+	header .nav-wrapper,
+	#body,
+	footer {
+		margin-left: 0px;
+	}
+}
+@media #{$large-and-up} {
+	
+}

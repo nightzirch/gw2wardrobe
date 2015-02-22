@@ -7903,7 +7903,6 @@ ul.side-nav.fixed .collapsible-body li.active {
 header .nav-wrapper {
   margin-left: 240px; }
   header .nav-wrapper a.page-title {
-    padding-left: 40px;
     font-size: 32px; }
 header #slide-out {
   line-height: 42px; }
@@ -7928,13 +7927,33 @@ header #slide-out {
     background-color: transparent; }
 
 #body {
-  margin-left: 240px;
-  padding-left: 20px; }
-  #body .skinItem {
+  margin-left: 240px; }
+  #body .skin-item {
     margin: 0;
     padding: 0; }
-    #body .skinItem .skinItemImageContainer {
+    #body .skin-item .skin-item-image-container {
       height: 64px;
       width: 64px; }
+
+footer.page-footer {
+  margin-left: 240px;
+  padding-top: 0; }
+  footer.page-footer #footer-content-wrapper {
+    overflow: hidden; }
+  footer.page-footer .footer-copyright {
+    height: auto !important;
+    line-height: inherit !important;
+    padding: 15px 0;
+    font-size: 12px; }
+    footer.page-footer .footer-copyright .footer-logo {
+      width: 150px; }
+    footer.page-footer .footer-copyright .container > .row {
+      margin-bottom: 0; }
+
+@media only screen and (max-width: 992px) {
+  header .nav-wrapper,
+  #body,
+  footer {
+    margin-left: 0px; } }
 
 /*# sourceMappingURL=site.css.map */

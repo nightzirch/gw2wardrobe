@@ -1,6 +1,14 @@
 extends ../layouts/default
 
 block content
-	.row.categoryContainer
-		each skin in skins
-			+item(skin)
+	.row
+		.col.s12.m9.l10
+			.section.category-container
+				h4#title Title
+				.items-container
+					each skin in skins
+						if (skin.details.weight == key)
+							+item(skin)
+		.col.hide-on-small-only.m3.l2
+			ul.section.table-of-contents
+				li: a(href="#title") Title

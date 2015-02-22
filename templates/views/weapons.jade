@@ -4,9 +4,9 @@ block content
 	.row
 		.col.s12.m9.l10
 			each value, key in weaponTypes
-				.section.scrollspy.categoryContainer(id= key)
+				.section.scrollspy.category-container(id= key)
 					h4= value
-					.itemsContainer
+					.items-container
 						each skin in skins
 							if (skin.details.type == key)
 								+item(skin)

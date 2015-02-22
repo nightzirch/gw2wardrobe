@@ -3,6 +3,8 @@ $(document).ready(function() {
 	wardrobe.nav.makeCollapsible();
 	wardrobe.nav.scrollspy();
 	wardrobe.nav.pushpin();
+	wardrobe.footer.fixHeight();
+	wardrobe.footer.fixHeightListener();
 	//wardrobe.temp.hideEmpty();
 });
 
@@ -36,6 +38,24 @@ var wardrobe = {
 		// Activates Pushpin to make the Scrollspy section fixed on the site
 		pushpin: function() {
 			$('.table-of-contents').pushpin({ top: $('.table-of-contents').parent().offset().top });
+		}
+	},
+	
+	// Footer
+	footer: {
+		fixHeight: function() {
+			var wrapper = $("#footer-logo-wrapper");
+			if($(window).width() > 975) {
+				$(wrapper).height($("#footer-content-wrapper").height());
+			}
+			else {
+				$(wrapper).height("auto");
+			}
+		},
+		fixHeightListener: function() {
+			$(window).resize(function() {
+				wardrobe.footer.fixHeight();
+			});
 		}
 	},
 	
