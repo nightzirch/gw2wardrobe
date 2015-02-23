@@ -68,10 +68,11 @@ var wardrobe = {
 			var cssId = "styleHeight";
 			var css = $("#" + cssId);
 			
-			//
+			// Set negative margin on the page-wrapper
 			$(pageWrap).css("margin-bottom", $(footer).height() * -1);
 			
-			// Remove the CSS and re-make it
+			// Create a new style tag, then remove the old one.
+			// This is such a dirty way to do it, but we can't modify pseudo-elements with JavaScript yet, so this is the next best thing, I guess...
 			$('<style id="' + cssId + '">.page-wrap:after{height: ' + $(footer).height() + 'px}</style>').appendTo('head');
 			$(css).remove();
 		}

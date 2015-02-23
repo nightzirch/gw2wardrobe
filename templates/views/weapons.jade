@@ -2,11 +2,13 @@ extends ../layouts/default
 
 block content
 	.row
-		.col.s12.m9.l10
+		.col.s12.m9.l10.collapsible(data-collapsible="")
 			each value, key in weaponTypes
-				.section.scrollspy.category-container(id= key)
-					h4= value
-					.items-container
+				.section.scrollspy.category-container.active(id= key)
+					.collapsible-header
+						h4= value
+							i.mdi-navigation-expand-less
+					.items-container.collapsible-body(style="display: block;")
 						each skin in skins
 							if (skin.details.type == key)
 								+item(skin)

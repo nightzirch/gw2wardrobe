@@ -2,13 +2,26 @@ extends ../layouts/default
 
 block content
 	.row
-		.col.s12.m9.l10
-			.section.category-container
-				h4#title Title
-				.items-container
-					each skin in skins
-						if (skin.details.weight == key)
-							+item(skin)
+		.col.s12.m9.l10.collapsible(data-collapsible="")
+			each values, key in armorTypes
+				each value in values
+					.section.scrollspy.category-container.active(id= key + "-" + value.weight)
+						.collapsible-header
+							if(weight)
+								h4= value.name
+									i.mdi-navigation-expand-less
+							else
+								h4= value.name  + " (" + value.weight + ")"
+									i.mdi-navigation-expand-less
+						.items-container.collapsible-body(style="display: block;")
+							each skin in skins
+								if (skin.details.type == key && skin.details.weight_class == value.weight)
+									+item(skin)
 		.col.hide-on-small-only.m3.l2
 			ul.section.table-of-contents
-				li: a(href="#title") Title
+				each values, key in armorTypes
+					each value in values
+						if(weight)
+							li: a(href="#" + key + "-" + value.weight)= value.name
+						else
+							li: a(href="#" + key + "-" + value.weight)= value.name + " (" + value.weight + ")"

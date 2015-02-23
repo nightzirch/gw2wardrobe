@@ -11,6 +11,10 @@ html, body {
 	display: block;
 }
 
+.hidden {
+	display: none !important;
+}
+
 header {
 	.nav-wrapper {
 		margin-left: 240px;
@@ -62,13 +66,41 @@ header {
 	margin-left: 240px;
 	padding-bottom: 20px;
 	
-	.skin-item {
+	.container > .row > .collapsible {
+		border: none;
 		margin: 0;
-		padding: 0;
+		@include box-shadow(none);
 		
-		.skin-item-image-container {
-			height: 64px;
-			width: 64px;
+		.category-container {
+			padding: 0;
+			
+			.collapsible-header,
+			.collapsible-body {
+				margin-left: 0;
+				padding-left: 0;
+				border: none;
+			}
+			
+			.collapsible-header i {
+				float: none;
+				display: inline-block;
+				@include rotate(180deg);
+				@include transition-duration(.25s);
+			}
+		}
+		
+		.category-container.active .collapsible-header i {
+			@include rotate(0deg);
+		}
+		
+		.skin-item {
+			margin: 0;
+			padding: 0;
+
+			.skin-item-image-container {
+				height: 64px;
+				width: 64px;
+			}
 		}
 	}
 }

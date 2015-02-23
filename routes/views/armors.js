@@ -33,6 +33,64 @@ exports = module.exports = function(req, res) {
 	}
 	
 	
+	// Armor weights
+	if (req.params.weight) {
+		locals.armorTypes = {
+			"Headgear": [
+				{ name: "Helmet", weight: locals.weight }
+			],
+			"Shoulders": [
+				{ name: "Shoulders", weight: locals.weight }
+			],
+			"Chest": [
+				{ name: "Chest", weight: locals.weight }
+			],
+			"Gloves": [
+				{ name: "Gloves", weight: locals.weight }
+			],
+			"Leggings": [
+				{ name: "Leggings", weight: locals.weight }
+			],
+			"Boots": [
+				{ name: "Boots", weight: locals.weight }
+			]
+		};
+	} else {
+		locals.armorTypes = {
+			"Headgear": [
+				{ name: "Helmet", weight: "Light" },
+				{ name: "Helmet", weight: "Medium" },
+				{ name: "Helmet", weight: "Heavy" }
+			],
+			"Shoulders": [
+				{ name: "Shoulders", weight: "Light" },
+				{ name: "Shoulders", weight: "Medium" },
+				{ name: "Shoulders", weight: "Heavy" }
+			],
+			"Chest": [
+				{ name: "Chest", weight: "Light" },
+				{ name: "Chest", weight: "Medium" },
+				{ name: "Chest", weight: "Heavy" }
+			],
+			"Gloves": [
+				{ name: "Gloves", weight: "Light" },
+				{ name: "Gloves", weight: "Medium" },
+				{ name: "Gloves", weight: "Heavy" }
+			],
+			"Leggings": [
+				{ name: "Leggings", weight: "Light" },
+				{ name: "Leggings", weight: "Medium" },
+				{ name: "Leggings", weight: "Heavy" }
+			],
+			"Boots": [
+				{ name: "Boots", weight: "Light" },
+				{ name: "Boots", weight: "Medium" },
+				{ name: "Boots", weight: "Heavy" }
+			]
+		};
+	}
+	
+	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
