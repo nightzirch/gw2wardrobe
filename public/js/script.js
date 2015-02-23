@@ -3,8 +3,9 @@ $(document).ready(function() {
 	wardrobe.nav.makeCollapsible();
 	wardrobe.nav.scrollspy();
 	wardrobe.nav.pushpin();
+	wardrobe.footer.listener();
 	wardrobe.footer.fixHeight();
-	wardrobe.footer.fixHeightListener();
+	wardrobe.footer.makeSticky();
 	//wardrobe.temp.hideEmpty();
 });
 
@@ -37,12 +38,21 @@ var wardrobe = {
 		
 		// Activates Pushpin to make the Scrollspy section fixed on the site
 		pushpin: function() {
-			$('.table-of-contents').pushpin({ top: $('.table-of-contents').parent().offset().top });
+			var toc = $('.table-of-contents');
+			if($(toc).length > 0) {
+				$(toc).pushpin({ top: $('.table-of-contents').parent().offset().top });
+			}
 		}
 	},
 	
 	// Footer
 	footer: {
+		listener: function() {
+			$(window).resize(function() {
+					wardrobe.footer.fixHeight();
+					wardrobe.footer.makeSticky();
+			});
+		},
 		fixHeight: function() {
 			var wrapper = $("#footer-logo-wrapper");
 			if($(window).width() > 975) {
@@ -52,10 +62,18 @@ var wardrobe = {
 				$(wrapper).height("auto");
 			}
 		},
-		fixHeightListener: function() {
-			$(window).resize(function() {
-				wardrobe.footer.fixHeight();
-			});
+		makeSticky: function() {
+			var pageWrap = $(".page-wrap");
+			var footer = $("footer");
+			var cssId = "styleHeight";
+			var css = $("#" + cssId);
+			
+			//
+			$(pageWrap).css("margin-bottom", $(footer).height() * -1);
+			
+			// Remove the CSS and re-make it
+			$('<style id="' + cssId + '">.page-wrap:after{height: ' + $(footer).height() + 'px}</style>').appendTo('head');
+			$(css).remove();
 		}
 	},
 	

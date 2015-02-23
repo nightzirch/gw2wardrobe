@@ -618,7 +618,7 @@ ul.staggered-list li{-ms-filter:"progid:DXImageTransform@mixin Microsoft@mixin A
 @media only screen and (min-width:601px){.show-on-medium-and-up{display:initial!important}}
 @media only screen and (max-width:992px){.show-on-medium-and-down{display:initial!important}}
 @media only screen and (max-width:600px){.center-on-small-only{text-align:center}}
-footer.page-footer{margin-top:20px;background-color:#b71c1c}
+footer.page-footer{background-color:#b71c1c}
 footer.page-footer .footer-copyright{overflow:hidden;color:rgba(255,255,255,.8);background-color:rgba(51,51,51,.08)}
 table,td,th{border:none}
 table{width:100%;display:table}
@@ -2024,6 +2024,9 @@ to{opacity:0}}
 .picker--time .picker__frame{min-width:256px;max-width:320px}
 .picker--time .picker__box{font-size:1em;background:#f2f2f2;padding:0}
 @media (min-height:40.125em){.picker--time .picker__box{margin-bottom:5em}}
+body,html{height:100%}
+.page-wrap{min-height:100%}
+.page-wrap:after{content:"";display:block}
 header .nav-wrapper{margin-left:240px}
 header .nav-wrapper a.page-title{font-size:32px}
 header #slide-out{line-height:42px}
@@ -2035,12 +2038,12 @@ header #slide-out li{padding:0;margin:0}
 header #slide-out li a{padding:0 15px;margin:0}
 header #slide-out li .collapsible-body a{padding:0 40px}
 header #slide-out ul.collapsible>li.active{background-color:transparent}
-#body{margin-left:240px}
+#body{margin-left:240px;padding-bottom:20px}
 #body .skin-item{margin:0;padding:0}
 #body .skin-item .skin-item-image-container{height:64px;width:64px}
-footer.page-footer{margin-left:240px;padding-top:0}
+footer.page-footer{margin-left:240px;padding-top:0;margin-top:0}
 footer.page-footer #footer-content-wrapper{overflow:hidden}
 footer.page-footer .footer-copyright{height:auto!important;line-height:inherit!important;padding:15px 0;font-size:12px}
 footer.page-footer .footer-copyright .footer-logo{width:150px}
 footer.page-footer .footer-copyright .container>.row{margin-bottom:0}
-@media only screen and (max-width:992px){#body,footer,header .nav-wrapper{margin-left:0}}
+@media only screen and (max-width:992px){#body,footer.page-footer,header .nav-wrapper{margin-left:0}}

@@ -1,3 +1,16 @@
+html, body {
+	height: 100%;
+}
+
+.page-wrap {
+	min-height: 100%;
+}
+
+.page-wrap:after {
+	content: "";
+	display: block;
+}
+
 header {
 	.nav-wrapper {
 		margin-left: 240px;
@@ -47,6 +60,7 @@ header {
 
 #body {
 	margin-left: 240px;
+	padding-bottom: 20px;
 	
 	.skin-item {
 		margin: 0;
@@ -62,6 +76,7 @@ header {
 footer.page-footer {
 	margin-left: 240px;
 	padding-top: 0;
+	margin-top: 0;
 	
 	
 	
@@ -94,7 +109,7 @@ footer.page-footer {
 @media #{$medium-and-down} {
 	header .nav-wrapper,
 	#body,
-	footer {
+	footer.page-footer {
 		margin-left: 0px;
 	}
 }
