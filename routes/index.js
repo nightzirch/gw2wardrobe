@@ -41,6 +41,7 @@ exports = module.exports = function(app) {
 	app.get('/armors/:weight', routes.views.armors);
 	app.get('/weapons', routes.views.weapons);
 	app.get('/weapons/:type', routes.views.weapons);
+	app.get('/favorites', routes.views.favorites);
 	
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
