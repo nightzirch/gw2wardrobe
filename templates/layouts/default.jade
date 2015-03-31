@@ -47,7 +47,7 @@ mixin itemcard(item)
 
 mixin item(item)
 	.skin-item.waves-effect.waves-light.z-depth-1
-		a(href='/#{item.typeUrl}/#{item.skinid}')
+		a(href='/skin/#{item.skinid}')
 			.skin-item-image-container
 				img(src= item.icon)
 
@@ -61,7 +61,7 @@ html
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		meta(http-equiv="X-UA-Compatible" content="IE=edge")
 
-		title= title || 'Guild Wars 2 Wardrobe'
+		title= title
 		
 		//- Favicons
 		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
@@ -119,7 +119,7 @@ html
 					.nav-wrapper
 						a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")
 							i.mdi-navigation-menu
-						a.page-title= title
+						a.page-title= (headerTitle) ? headerTitle : title
 						//form.right
 							.input-field.hide-on-small-only.m4.l3
 								input#search(type="text")

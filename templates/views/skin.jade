@@ -1,0 +1,35 @@
+extends ../layouts/default
+
+block content
+	- var noImages = (skin.images.length == 0);
+	if(!noImages)
+		.row.images-container: .col
+			each image in skin.images
+				.image-container
+					img(src= image)
+			each image in skin.images
+				.image-container
+					img(src= image)
+			each image in skin.images
+				.image-container
+					img(src= image)
+			each image in skin.images
+				.image-container
+					img(src= image)
+	.row.links-container(class=noImages ? "negative-margin-top" : ""): .col
+		a#linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-id= skin.skinid, data-type="item")
+			i.mdi-communication-chat.left
+			| Copy chat code
+		a#linkFavorite.waves-effect.waves-light.btn.grey
+			i.mdi-action-favorite-outline.left
+			| Add to favorites
+		a.waves-effect.waves-light.btn.grey(href= skin.wikiUrl)
+			i.mdi-action-info-outline.left
+			| Wiki
+			
+	.row: .col
+		p= skin.description
+		.divider
+		
+block js
+	script(src="/js/chatcode.js")

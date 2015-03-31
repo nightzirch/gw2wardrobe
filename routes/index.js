@@ -42,6 +42,7 @@ exports = module.exports = function(app) {
 	app.get('/weapons', routes.views.weapons);
 	app.get('/weapons/:type', routes.views.weapons);
 	app.get('/favorites', routes.views.favorites);
+	app.get('/skin/:skinid', routes.views.skin);
 	
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

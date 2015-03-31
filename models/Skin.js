@@ -19,6 +19,8 @@ Skin.add({
 	},
 	type: { type: String },
 	typeUrl: { type: String },
+	wikiUrl: { type: String },
+	acquisition: { type: String },
 	flags: {
 		ShowInWardrobe: { type: Types.Boolean },
 		NoCost: { type: Types.Boolean },
@@ -31,41 +33,57 @@ Skin.add({
 		weapon_category: { type: String },
 		weight_class: { type: String },
 		damage_type: { type: String }
-	}	
+	}
 });
 
 Skin.schema.add({
-	restrictions: { type: [String] }
+	restrictions: { type: [String] },
+	images: { type: [String] }
 });
 
-
-/**
- * Weapon type
- */
-
 Skin.schema.pre('save', function(next) {
-	// Weapon Category
-	var weaponTypes = [
-		["Greatsword", "Hammer", "LongBow", "Rifle", "ShortBow", "Staff"],
-		["Axe", "Dagger", "Mace", "Pistol", "Scepter", "Sword"],
-		["Focus", "Shield", "Torch", "Warhorn"],
-		["Harpoon", "Speargun", "Trident"]
-	];
-	var weaponTypesNames = ["twohanded", "onehanded", "offhand", "aquatic"];
-	var weaponType = null;
-	
-	for (var i = 0; i < weaponTypes.length; i++) {
-		for (var y = 0; y < weaponTypes[i].length; y++) {
-			if (this.details.type == weaponTypes[i][y]) {
-				weaponType = weaponTypesNames[i];
+	/**
+	* Weapon type
+	*/
+	if(this.type && this.type == "Weapon") {
+		// Weapon Category
+		var weaponTypes = [
+			["Greatsword", "Hammer", "LongBow", "Rifle", "ShortBow", "Staff"],
+			["Axe", "Dagger", "Mace", "Pistol", "Scepter", "Sword"],
+			["Focus", "Shield", "Torch", "Warhorn"],
+			["Harpoon", "Speargun", "Trident"]
+		];
+		var weaponTypesNames = ["twohanded", "onehanded", "offhand", "aquatic"];
+		var weaponType = null;
+
+		for (var i = 0; i < weaponTypes.length; i++) {
+			for (var y = 0; y < weaponTypes[i].length; y++) {
+				if (this.details.type == weaponTypes[i][y]) {
+					weaponType = weaponTypesNames[i];
+				}
 			}
 		}
+
+		this.details.weapon_category = weaponType;
+
+		// Type URL
+		this.typeUrl = this.type.toLowerCase() + "s";
 	}
 	
-	this.details.weapon_category = weaponType;
+	/**
+	* Armor type
+	*/
+	if(this.type && this.type == "Armor") {
+		// Type URL
+		this.typeUrl = this.type.toLowerCase() + "s";
+	}
 	
-	// Type URL
-	this.typeUrl = this.type.toLowerCase() + "s";
+	/**
+	* Wiki url
+	*/
+	if(!this.wikiUrl) {
+		this.wikiUrl = "http://wiki.guildwars2.com/wiki/" + this.name;
+	}
 	
 	// Save it and continue
 	next();
