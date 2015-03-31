@@ -27,9 +27,26 @@ block content
 			i.mdi-action-info-outline.left
 			| Wiki
 			
-	.row: .col
-		p= skin.description
-		.divider
+	.row
+		.col.s12.m8.l9
+			h5 Description
+			p= skin.description
+
+			.divider
+			
+			h5 Acquisition
+			p This is how you acquire this skin.
+		.col.s12.m4.l3
+			h5 Items with this skin
+			table.hoverable
+				//thead: tr
+					th Icon
+					th Name
+				tbody
+					each item in items
+						tr
+							td: img(src= item.icon)
+							td= item.name
 		
 block js
 	script(src="/js/chatcode.js")
