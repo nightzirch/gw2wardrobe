@@ -5,8 +5,10 @@ $(document).ready(function() {
 	wardrobe.nav.pushpin();
 	//wardrobe.footer.listener();
 	//wardrobe.footer.fixHeight();
-	//wardrobe.footer.makeSticky();
 	//wardrobe.temp.hideEmpty();
+	setTimeout(function() {
+		wardrobe.footer.makeSticky();
+	}, 300);
 });
 
 var wardrobe = {
