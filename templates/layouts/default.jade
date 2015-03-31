@@ -90,7 +90,7 @@ html
 		
 
 		//- Customise the stylesheet for your site by editing /public/styles/site.sass
-		link(href="/styles/site.min.css", rel="stylesheet")
+		link(href="/styles/site.css", rel="stylesheet")
 
 		//- This file provides the default styling for the KeystoneJS Content Editor
 		if user && user.canAccessKeystone
@@ -117,21 +117,21 @@ html
 			header
 				nav(role="navigation")
 					.nav-wrapper
-						.container
-							a.page-title= title
-							form.right
-								.input-field.col.hide-on-small-only.m4.l3
-									input#search(type="text")
-									label(for="search")
-										i.mdi-action-search
+						a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")
+							i.mdi-navigation-menu
+						a.page-title= title
+						//form.right
+							.input-field.hide-on-small-only.m4.l3
+								input#search(type="text")
+								label(for="search")
+									i.mdi-action-search
 					ul#slide-out.side-nav.fixed
 						+menuitems
-					a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")
-						i.mdi-navigation-menu
+					
 
 
 			//- BODY
-			#body: .container
+			#body
 
 				//- NOTE:
 				//- There is no .container wrapping class around body blocks to allow more flexibility in design.
@@ -150,26 +150,24 @@ html
 
 		//- FOOTER
 		footer.page-footer
-			//.container
-				.row
-					.col.l6.s12
-						h5.white-text Footer Content
-						p.grey-text.text-lighten-4 You can use rows and columns here to organize your footer content.
-					.col.l4.offset-l2.s12
-						h5.white-text Links
-						ul
-							li: a.grey-text.text-lighten-3(href="#") Link
-							li: a.grey-text.text-lighten-3(href="#") Link
-							li: a.grey-text.text-lighten-3(href="#") Link
+			.row
+				.col.l6.s12
+					h5.white-text Footer Content
+					p.grey-text.text-lighten-4 You can use rows and columns here to organize your footer content.
+				.col.l4.offset-l2.s12
+					h5.white-text Links
+					ul
+						li: a.grey-text.text-lighten-3(href="#") Link
+						li: a.grey-text.text-lighten-3(href="#") Link
+						li: a.grey-text.text-lighten-3(href="#") Link
 			.footer-copyright
-				.container
-					.row
-						#footer-logo-wrapper.valign-wrapper.col.s12.m12.l3
-							img.valign.footer-logo(src="/images/logo-white.png")
-						#footer-content-wrapper.col.s12.m12.l9
-							p Guild Wars 2 Wardrobe is a non-profit fan-made site for Guild Wars 2. Our aim is to create the best resource of information for skins in the game. Guild Wars 2 Wardrobe is in no way associated with ArenaNet, NCSOFT Corporation or the Guild Wars 2 trademark.
-							p ©2015 Christian Grimsgaard
-							p ©2010–2015 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
+				.row
+					#footer-logo-wrapper.valign-wrapper.col.s12.m12.l3
+						img.valign.footer-logo(src="/images/logo-white.png")
+					#footer-content-wrapper.col.s12.m12.l9
+						p Guild Wars 2 Wardrobe is a non-profit fan-made site for Guild Wars 2. Our aim is to create the best resource of information for skins in the game. Guild Wars 2 Wardrobe is in no way associated with ArenaNet, NCSOFT Corporation or the Guild Wars 2 trademark.
+						p ©2010–2015 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
+						p ©2015 Christian Grimsgaard
 
 			
 

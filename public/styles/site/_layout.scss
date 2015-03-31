@@ -18,12 +18,16 @@ html, body {
 header {
 	.nav-wrapper {
 		margin-left: 240px;
+		padding-left: 30px;
 		
 		a.page-title {
 			font-size: 32px;
 		}
 	}
 	
+	#sidenav-collapse {
+		padding-right: 20px;
+	}
 	
 	#slide-out {
 		line-height: 42px;
@@ -65,8 +69,18 @@ header {
 #body {
 	margin-left: 240px;
 	padding-bottom: 20px;
+	padding-left: 20px;
 	
-	.container > .row > .collapsible {
+	ul {
+		padding: inherit;
+	}
+	
+	ul li {
+		padding: inherit;
+		margin-left: 8px;
+	}
+	
+	.row > .collapsible {
 		border: none;
 		margin: 0;
 		@include box-shadow(none);
@@ -110,7 +124,10 @@ footer.page-footer {
 	padding-top: 0;
 	margin-top: 0;
 	
-	
+	.row {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 	
 	#footer-content-wrapper {
 		overflow: hidden;

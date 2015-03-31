@@ -3,9 +3,9 @@ $(document).ready(function() {
 	wardrobe.nav.makeCollapsible();
 	wardrobe.nav.scrollspy();
 	wardrobe.nav.pushpin();
-	wardrobe.footer.listener();
-	wardrobe.footer.fixHeight();
-	wardrobe.footer.makeSticky();
+	//wardrobe.footer.listener();
+	//wardrobe.footer.fixHeight();
+	//wardrobe.footer.makeSticky();
 	//wardrobe.temp.hideEmpty();
 });
 

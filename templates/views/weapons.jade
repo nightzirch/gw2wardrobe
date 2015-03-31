@@ -2,7 +2,7 @@ extends ../layouts/default
 
 block content
 	.row
-		.col.s12.m9.l10.collapsible(data-collapsible="")
+		.col.s12.m8.l9.collapsible(data-collapsible="")
 			each value, key in weaponTypes
 				.section.scrollspy.category-container.active(id= key)
 					.collapsible-header
@@ -12,7 +12,7 @@ block content
 						each skin in skins
 							if (skin.details.type == key)
 								+item(skin)
-		.col.hide-on-small-only.m3.l2
+		.col.hide-on-small-only.m4.l3
 			ul.section.table-of-contents
 				each value, key in weaponTypes
 					li: a(href="#" + key)= value
