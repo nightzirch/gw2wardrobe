@@ -29,24 +29,25 @@ block content
 			
 	.row
 		.col.s12.m8.l9
-			h5 Description
-			p= skin.description
+			if(skin.description)
+				h5 Description
+				p= skin.description
 
-			.divider
+			if(skin.description && skin.acquisition)
+				.divider
 			
-			h5 Acquisition
-			p This is how you acquire this skin.
+			if(skin.acquisition)
+				h5 Acquisition
+				p= skin.acquisition
 		.col.s12.m4.l3
-			h5 Items with this skin
-			table.hoverable
-				//thead: tr
-					th Icon
-					th Name
-				tbody
-					each item in items
-						tr
-							td: img(src= item.icon)
-							td= item.name
-		
+			h5 Items using this skin
+			ul.list-with-items
+				each item in items
+					a(href="/skin/#{item.skinid}")
+						li
+							.valign-wrapper.left-align
+								img(src= item.icon)
+								span.valign= item.name
+								
 block js
 	script(src="/js/chatcode.js")

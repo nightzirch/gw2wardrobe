@@ -113,21 +113,48 @@ header {
 		background-color: color("grey", "lighten-2");
 		
 		a {
-			margin-left: 10px;
+			margin-right: 10px;
+			margin-bottom: 5px;
 		}
 		
-		a:first-child {
-			margin-left: 0;
+		a:last-child {
+			margin-right: 0;
 		}
 		
 		.col {
 			margin-top: 10px;
-			margin-bottom: -10px;
 		}
 	}
 	
 	.links-container.negative-margin-top {
 		margin-top: -20px;
+	}
+	
+	ul.list-with-items {
+		padding: 0;
+		
+		a {
+			display: block;
+			
+			li {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin-left: 0;
+				
+				.valign-wrapper {
+					justify-content: flex-start;
+					
+					img {
+						height: 40px;
+						padding: 0 10px;
+					}
+				}
+			}
+		}
+		
+		a:hover {
+			background-color: color("grey", "lighten-3");
+		}
 	}
 	
 	.row > .collapsible {
