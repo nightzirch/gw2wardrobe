@@ -13,6 +13,13 @@ block content
 				.col.s12.m8.l9
 					h5= name
 					p Member since #{user.registered}.
+			.row: .col.s12
+				.divider
+				h5 About
+				if (user.about)
+					p= user.about
+				else
+					p.grey-text You have not yet added any information about yourself.
 			
 		.col.s12.m4.l3
 			h5 Your outfits

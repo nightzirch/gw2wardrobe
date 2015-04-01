@@ -32,7 +32,8 @@ exports = module.exports = function(req, res) {
 		},
 		email: req.body.email,
 		password: req.body.password,
-		password2: req.body.password2
+		password2: req.body.password2,
+		about: req.body.about
 	}
 	
 	var q = keystone.list('User').model.update({
@@ -40,7 +41,8 @@ exports = module.exports = function(req, res) {
 	}, {
 		$set: {
 			name: locals.form.name,
-			email: locals.form.email
+			email: locals.form.email,
+			about: locals.form.about
 		}
 	});
 	

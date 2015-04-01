@@ -21,12 +21,15 @@ block content
 				input#email.validate(type="email", name="email", value= user.email)
 				label(for="email") Email
 			.input-field.col.s12
-				input#password.validate(type="password", name="password")
+				input#password.validate(type="password", name="password", disabled)
 				label(for="password") New password
 			.input-field.col.s12
-				input#password2.validate(type="password", name="password2")
+				input#password2.validate(type="password", name="password2", disabled)
 				label(for="password2") Repeat password
-			.input-field.col.s12.hidden
+			.input-field.col.s12
+				textarea#about.materialize-textarea(name="about")= user.about
+				label(for="about") About yourself
+			.input-field.col.s12
 				input#submit.btn.green.darken-2(type="submit", value="Save changes")
 				
 block js
