@@ -148,8 +148,17 @@ header {
 						height: 40px;
 						padding: 0 10px;
 					}
+					
+					i {
+						padding: 0 10px;
+						margin-right: 0;
+					}
 				}
 			}
+		}
+		
+		a.empty-link {
+			cursor: default;
 		}
 		
 		a:hover {

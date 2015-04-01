@@ -1,0 +1,32 @@
+extends ../layouts/default
+
+block content
+	.row.links-container.negative-margin-top: .col
+		a#profile-save.waves-effect.waves-light.btn.red.darken-4(href="/profile/edit")
+			i.mdi-editor-mode-edit.left
+			| Edit profile
+			
+	.row
+		.col.s12.m8.l9
+			.row
+				.col.s12.m4.l3
+				.col.s12.m8.l9
+					h5= name
+					p Member since #{user.registered}.
+			
+		.col.s12.m4.l3
+			h5 Your outfits
+			ul.list-with-items
+				if outfits
+					//-each outfit in outfits
+						a(href="#")
+							li
+								.valign-wrapper.left-align
+									img(src= outfit.icon)
+									span.valign= outfit.name
+				else
+					a(href="#")
+						li
+							.valign-wrapper.left-align
+								i.mdi-content-add.left
+								span.valign Create outfit

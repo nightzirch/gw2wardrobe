@@ -3,6 +3,9 @@ $(document).ready(function() {
 	wardrobe.nav.makeCollapsible();
 	wardrobe.nav.scrollspy();
 	wardrobe.nav.pushpin();
+	
+	wardrobe.tooltip.init();
+	
 	//wardrobe.footer.listener();
 	//wardrobe.footer.fixHeight();
 	//wardrobe.temp.hideEmpty();
@@ -44,6 +47,12 @@ var wardrobe = {
 			if($(toc).length > 0) {
 				$(toc).pushpin({ top: $('.table-of-contents').parent().offset().top });
 			}
+		}
+	},
+	
+	tooltip: {
+		init: function() {
+			$('.tooltipped').tooltip();
 		}
 	},
 	

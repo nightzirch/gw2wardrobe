@@ -25,9 +25,12 @@ mixin menuitems
 	li.divider
 	
 	if user
-		if user.canAccessKeystone
-			li: a.waves-effect.waves-red(href='/keystone') Admin
+		li: a(href='/profile') Your profile
 		li: a(href='/keystone/signout') Sign Out
+		
+		if user.canAccessKeystone
+			li.divider
+			li: a.waves-effect.waves-red(href='/keystone') Admin
 	else
 		li: a.waves-effect.waves-red(href='/keystone/signin') Admin
 
