@@ -1,43 +1,47 @@
 extends ../layouts/default
 
 block content
-	.row.links-container.negative-margin-top: .col
-		a#profile-save.waves-effect.waves-light.btn.red.darken-4(href="/profile/edit")
-			i.mdi-editor-mode-edit.left
-			| Edit profile
-			
-	.row
-		.col.s12.m8.l9
-			.row.first-profile-row
-				.col.s12.m4.l3: .section
-					img.profile-image(src= user.image)
-				.col.s12.m8.l9: .section
-					h5= user.username
-					p Member since #{user.registered}.
-			
-			.divider
-			
-			.row
-				.col.s12: .section
-					h5 About
-					if (user.about)
-						p= user.about
+	if user
+		.row.links-container.negative-margin-top: .col
+			a#profile-save.waves-effect.waves-light.btn.red.darken-4(href="/profile/edit")
+				i.mdi-editor-mode-edit.left
+				| Edit profile
+
+		.row
+			.col.s12.m8.l9
+				.row.first-profile-row
+					.col.s12.m4.l3: .section
+						img.profile-image(src= user.image)
+					.col.s12.m8.l9: .section
+						h5= user.username
+						p Member since #{user.registered}.
+
+				.divider
+
+				.row
+					.col.s12: .section
+						h5 About
+						if (user.about)
+							p= user.about
+						else
+							p.grey-text You have not yet added any information about yourself.
+
+			.col.s12.m4.l3
+				h5 Your outfits
+				ul.list-with-items
+					if outfits
+						//-each outfit in outfits
+							a(href="#")
+								li
+									.valign-wrapper.left-align
+										img(src= outfit.icon)
+										span.valign= outfit.name
 					else
-						p.grey-text You have not yet added any information about yourself.
-			
-		.col.s12.m4.l3
-			h5 Your outfits
-			ul.list-with-items
-				if outfits
-					//-each outfit in outfits
 						a(href="#")
 							li
 								.valign-wrapper.left-align
-									img(src= outfit.icon)
-									span.valign= outfit.name
-				else
-					a(href="#")
-						li
-							.valign-wrapper.left-align
-								i.mdi-content-add.left
-								span.valign Create outfit
+									i.mdi-content-add.left
+									span.valign Create outfit
+	else
+		.row: .col.s12
+			p You need to have a user and to be logged in to see your profile.

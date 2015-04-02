@@ -25,6 +25,8 @@ mixin menuitems
 	li.divider
 	
 	if user
+		li(class=(section == "favorites" ? 'active' : null))
+			a(href='/favorites') Favorites
 		li(class=(section == "profile" ? 'active' : null))
 			a(href='/profile') Your profile
 		li: a(href='/keystone/signout') Sign Out
@@ -33,7 +35,7 @@ mixin menuitems
 			li.divider
 			li: a.waves-effect.waves-red(href='/keystone') Admin
 	else
-		li: a.waves-effect.waves-red(href='/keystone/signin') Admin
+		li: a.waves-effect.waves-red(href='/keystone/signin') Sign in
 
 mixin itemcard(item)
 	.col.s2

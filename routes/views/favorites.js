@@ -9,6 +9,10 @@ exports = module.exports = function(req, res) {
 	locals.user = req.user;
 	locals.title = "Favorites";
 	locals.section = "favorites";
+	locals.types = {
+		"Armor": "Armors",
+		"Weapon": "Weapons"
+	}
 	
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
