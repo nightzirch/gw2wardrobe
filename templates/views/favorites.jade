@@ -1,4 +1,9 @@
 extends ../layouts/default
 
 block content
-	
+	.row
+		.col.s12
+			.items-container(style="display: block;")
+				each skin in skins
+					if (user.favorites.indexOf(skin.skinid) > -1)
+						+item(skin)

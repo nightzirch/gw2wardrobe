@@ -6,28 +6,29 @@ exports = module.exports = function(req, res) {
 		locals = res.locals;
 	
 	locals.user = req.user;
-	locals.section = "profile";
-	locals.title = locals.user.username;
+	locals.favoriteArr = locals.user.favorites;
 	locals.filters = {
 		id: locals.user._id
 	}
-	locals.form = {
-		username: req.body.username,
-		email: req.body.email,
-		image: req.body.image,
-		password: req.body.password,
-		password2: req.body.password2,
-		about: req.body.about
+	locals.data = {
+		skinid: req.params.skinid,
+		favorite: req.param('favorite')
 	}
+	
+	// Let's add!
+	if(locals.data.favorite == "true") {
+		locals.favoriteArr.push(locals.data.skinid);
+	} else {
+		var index = locals.favoriteArr.indexOf(locals.data.skinid)
+		locals.favoriteArr.splice(index, 1);
+	}
+	
 	
 	var q = keystone.list('User').model.update({
 		_id: locals.filters.id
 	}, {
 		$set: {
-			username: locals.form.username,
-			email: locals.form.email,
-			image: locals.form.image,
-			about: locals.form.about
+			favorites: locals.favoriteArr
 		}
 	});
 	
@@ -36,8 +37,7 @@ exports = module.exports = function(req, res) {
 			req.flash('error', "No armors were found in the database.");
 		}
 		else {
-			res.location("/profile");
-			res.redirect("/profile");
+			
 		}
 	});
 };

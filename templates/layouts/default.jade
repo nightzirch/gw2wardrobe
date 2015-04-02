@@ -25,7 +25,8 @@ mixin menuitems
 	li.divider
 	
 	if user
-		li: a(href='/profile') Your profile
+		li(class=(section == "profile" ? 'active' : null))
+			a(href='/profile') Your profile
 		li: a(href='/keystone/signout') Sign Out
 		
 		if user.canAccessKeystone

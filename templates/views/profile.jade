@@ -8,18 +8,22 @@ block content
 			
 	.row
 		.col.s12.m8.l9
-			.row
-				.col.s12.m4.l3
-				.col.s12.m8.l9
-					h5= name
+			.row.first-profile-row
+				.col.s12.m4.l3: .section
+					img.profile-image(src= user.image)
+				.col.s12.m8.l9: .section
+					h5= user.username
 					p Member since #{user.registered}.
-			.row: .col.s12
-				.divider
-				h5 About
-				if (user.about)
-					p= user.about
-				else
-					p.grey-text You have not yet added any information about yourself.
+			
+			.divider
+			
+			.row
+				.col.s12: .section
+					h5 About
+					if (user.about)
+						p= user.about
+					else
+						p.grey-text You have not yet added any information about yourself.
 			
 		.col.s12.m4.l3
 			h5 Your outfits

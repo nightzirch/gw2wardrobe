@@ -124,6 +124,24 @@ header {
 		.col {
 			margin-top: 10px;
 		}
+		
+		#linkFavorite {
+			.favoriteFalse {
+				display: block;
+			}
+			.favoriteTrue {
+				display: none;
+			}
+		}
+		
+		#linkFavorite.favoritted {
+			.favoriteFalse {
+				display: none;
+			}
+			.favoriteTrue {
+				display: block;
+			}
+		}
 	}
 	
 	.links-container.negative-margin-top {
@@ -163,6 +181,14 @@ header {
 		
 		a:hover {
 			background-color: color("grey", "lighten-3");
+		}
+	}
+	
+	.first-profile-row {
+		margin-bottom: 10px;
+		
+		img.profile-image {
+			width: 100%;
 		}
 	}
 	

@@ -7966,6 +7966,14 @@ header #slide-out {
       margin-right: 0; }
     #body .links-container .col {
       margin-top: 10px; }
+    #body .links-container #linkFavorite .favoriteFalse {
+      display: block; }
+    #body .links-container #linkFavorite .favoriteTrue {
+      display: none; }
+    #body .links-container #linkFavorite.favoritted .favoriteFalse {
+      display: none; }
+    #body .links-container #linkFavorite.favoritted .favoriteTrue {
+      display: block; }
   #body .links-container.negative-margin-top {
     margin-top: -20px; }
   #body ul.list-with-items {
@@ -7988,6 +7996,10 @@ header #slide-out {
       cursor: default; }
     #body ul.list-with-items a:hover {
       background-color: #eeeeee; }
+  #body .first-profile-row {
+    margin-bottom: 10px; }
+    #body .first-profile-row img.profile-image {
+      width: 100%; }
   #body .row > .collapsible {
     border: none;
     margin: 0;

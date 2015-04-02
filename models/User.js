@@ -9,13 +9,18 @@ var keystone = require('keystone'),
 var User = new keystone.List('User');
 
 User.add({
-	name: { type: Types.Name, required: true, index: true },
+	username: { type: String, initial: true, required: true, index: true },
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
 	registered: { type: Types.Datetime, required: true, default: Date.now},
-	about: { type: Types.Textarea }
+	about: { type: Types.Textarea },
+	image: { type: Types.Url, default: "http://placehold.it/128" }
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
+});
+
+User.schema.add({
+	favorites: { type: [Number] },
 });
 
 // Provide access to Keystone
@@ -28,5 +33,5 @@ User.schema.virtual('canAccessKeystone').get(function() {
  * Registration
  */
 
-User.defaultColumns = 'name, email, isAdmin';
+User.defaultColumns = 'username, email, isAdmin';
 User.register();

@@ -20,9 +20,18 @@ block content
 		a#linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-id= skin.skinid, data-type="item")
 			i.mdi-communication-chat.left
 			| Copy chat code
-		a#linkFavorite.waves-effect.waves-light.btn.grey
-			i.mdi-action-favorite-outline.left
-			| Add to favorites
+		
+		- for(var i = 0; i < user.favorites.length; i++) {
+		- 	var favoritted = (user.favorites.indexOf(skin.skinid) > -1) ? true : false;
+		- }
+		a#linkFavorite.waves-effect.waves-light.btn.grey(class=favoritted ? "favoritted" : "")
+			.favoriteFalse
+				i.mdi-action-favorite-outline.left
+				| Add to favorites
+			.favoriteTrue
+				i.mdi-action-favorite.left
+				| Remove from favorites
+				
 		a.waves-effect.waves-light.btn.grey(href= skin.wikiUrl)
 			i.mdi-action-info-outline.left
 			| Wiki
@@ -30,15 +39,25 @@ block content
 	.row
 		.col.s12.m8.l9
 			if(skin.description)
-				h5 Description
-				p= skin.description
+				.section
+					h5 Description
+					p= skin.description
 
 			if(skin.description && skin.acquisition)
 				.divider
 			
 			if(skin.acquisition)
-				h5 Acquisition
-				p= skin.acquisition
+				.section
+					h5 Acquisition
+					p= skin.acquisition
+			
+			if(skin.description || skin.acquisition)
+				.divider
+			
+			.section
+				h5 Popular outfits using #{skin.name}
+			
+			
 		.col.s12.m4.l3
 			h5 Items using this skin
 			ul.list-with-items
@@ -51,3 +70,4 @@ block content
 								
 block js
 	script(src="/js/chatcode.js")
+	script(src="/js/favorite.js")

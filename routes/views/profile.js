@@ -8,21 +8,7 @@ exports = module.exports = function(req, res) {
 	
 	locals.user = req.user;
 	locals.section = "profile";
-	
-	if(locals.user.name.first && locals.user.name.last) {
-		locals.name = locals.user.name.first + " " + locals.user.name.last;
-	}
-	else if(locals.user.name.first) {
-		locals.name = locals.user.name.first;
-	}
-	else if(locals.user.name.last) {
-		locals.name = locals.user.name.last;
-	}
-	else {
-		locals.name = "Profile"
-	}
-	
-	locals.title = locals.name;
+	locals.title = locals.user.username;
 	locals.filters = {
 		id: locals.user._id
 	}
