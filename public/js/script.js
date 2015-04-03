@@ -6,6 +6,8 @@ $(document).ready(function() {
 	
 	wardrobe.tooltip.init();
 	
+	wardrobe.search.listener();
+	
 	//wardrobe.footer.listener();
 	//wardrobe.footer.fixHeight();
 	//wardrobe.temp.hideEmpty();
@@ -47,6 +49,21 @@ var wardrobe = {
 			if($(toc).length > 0) {
 				$(toc).pushpin({ top: $('.table-of-contents').parent().offset().top });
 			}
+		}
+	},
+	
+	search: {
+		init: function() {
+			var search = $("#search").val();
+			console.log(search);
+			location.pathname = "/search/" + search;
+			
+			return false;
+		},
+		listener: function() {
+			$("#searchForm").on("submit", function() {
+				return false;
+			});
 		}
 	},
 	

@@ -18,6 +18,9 @@ mixin menuitems
 								each subitem in link.subitems
 									li(class=(section == subitem.key ? 'active' : null))
 										a(href=subitem.href)= subitem.label
+											if link.badge
+												span.badge(id= link.badge.id, class=link.badge.new ? "new" : "")= link.badge.content
+										
 		else
 			li(class=(section == link.key ? 'active' : null))
 				a.waves-effect.waves-red(href=link.href)= link.label
@@ -25,10 +28,23 @@ mixin menuitems
 	li.divider
 	
 	if user
-		li(class=(section == "favorites" ? 'active' : null))
-			a(href='/favorites') Favorites
-		li(class=(section == "profile" ? 'active' : null))
-			a(href='/profile') Your profile
+		each link in userLinks
+			if link.subitems
+				li
+					ul.collapsible.collapsible-accordion
+						li
+							a.collapsible-header.waves-effect.waves-red= link.label
+							div.collapsible-body
+								ul
+									each subitem in link.subitems
+										li(class=(section == subitem.key ? 'active' : null))
+											a(href=subitem.href)= subitem.label
+			else
+				li(class=(section == link.key ? 'active' : null))
+					a.waves-effect.waves-red(href=link.href)= link.label
+						if link.badge
+							span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= link.badge.content
+					
 		li: a(href='/keystone/signout') Sign Out
 		
 		if user.canAccessKeystone
@@ -125,9 +141,9 @@ html
 					.nav-wrapper
 						a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")
 							i.mdi-navigation-menu
-						a.page-title= (headerTitle) ? headerTitle : title
-						//form.right
-							.input-field.hide-on-small-only.m4.l3
+						a.left.page-title= (headerTitle) ? headerTitle : title
+						form#searchForm.right(onsubmit="wardrobe.search.init()")
+							.input-field.hide-on-small-only
 								input#search(type="text")
 								label(for="search")
 									i.mdi-action-search

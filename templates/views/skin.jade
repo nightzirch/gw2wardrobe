@@ -1,73 +1,80 @@
 extends ../layouts/default
 
 block content
-	- var noImages = (skin.images.length == 0);
-	if(!noImages)
-		.row.images-container: .col
-			each image in skin.images
-				.image-container
-					img(src= image)
-			each image in skin.images
-				.image-container
-					img(src= image)
-			each image in skin.images
-				.image-container
-					img(src= image)
-			each image in skin.images
-				.image-container
-					img(src= image)
-	.row.links-container(class=noImages ? "negative-margin-top" : ""): .col
-		a#linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-id= skin.skinid, data-type="item")
-			i.mdi-communication-chat.left
-			| Copy chat code
-		
-		if user
-			- for(var i = 0; i < user.favorites.length; i++) {
-			- 	var favoritted = (user.favorites.indexOf(skin.skinid) > -1) ? true : false;
-			- }
-			a#linkFavorite.waves-effect.waves-light.btn.grey(class=favoritted ? "favoritted" : "")
-				.favoriteFalse
-					i.mdi-action-favorite-outline.left
-					| Add to favorites
-				.favoriteTrue
-					i.mdi-action-favorite.left
-					| Remove from favorites
-				
-		a.waves-effect.waves-light.btn.grey(href= skin.wikiUrl)
-			i.mdi-action-info-outline.left
-			| Wiki
-			
-	.row
-		.col.s12.m8.l9
-			if(skin.description)
-				.section
-					h5 Description
-					p= skin.description
+	if(skin)
+		- var noImages = (skin.images.length == 0);
+		if(!noImages)
+			.row.images-container: .col
+				each image in skin.images
+					.image-container
+						img(src= image)
+				each image in skin.images
+					.image-container
+						img(src= image)
+				each image in skin.images
+					.image-container
+						img(src= image)
+				each image in skin.images
+					.image-container
+						img(src= image)
+		.row.links-container(class=noImages ? "negative-margin-top" : ""): .col
+			a#linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-id= skin.skinid, data-type="item")
+				i.mdi-communication-chat.left
+				| Copy chat code
 
-			if(skin.description && skin.acquisition)
-				.divider
+			if user
+				- for(var i = 0; i < user.favorites.length; i++) {
+				- 	var favoritted = (user.favorites.indexOf(skin.skinid) > -1) ? true : false;
+				- }
+				a#linkFavorite.waves-effect.waves-light.btn.grey(class=favoritted ? "favoritted" : "")
+					.favoriteFalse
+						i.mdi-action-favorite-outline.left
+						| Add to favorites
+					.favoriteTrue
+						i.mdi-action-favorite.left
+						| Remove from favorites
+
+			if skin.wikiUrl
+				a.waves-effect.waves-light.btn.grey(href= skin.wikiUrl)
+					i.mdi-action-info-outline.left
+					| Wiki
 			
-			if(skin.acquisition)
+		.row
+			.col.s12.m8.l9
+				if(skin.description)
+					.section
+						h5 Description
+						p= skin.description
+
+				if(skin.description && skin.acquisition)
+					.divider
+
+				if(skin.acquisition)
+					.section
+						h5 Acquisition
+						p= skin.acquisition
+
+				if(skin.description || skin.acquisition)
+					.divider
+
 				.section
-					h5 Acquisition
-					p= skin.acquisition
-			
-			if(skin.description || skin.acquisition)
-				.divider
-			
-			.section
-				h5 Popular outfits using #{skin.name}
-			
-			
-		.col.s12.m4.l3
-			h5 Items using this skin
-			ul.list-with-items
-				each item in items
-					a(href="/skin/#{item.skinid}")
-						li
-							.valign-wrapper.left-align
-								img(src= item.icon)
-								span.valign= item.name
+					h5 Popular outfits using #{skin.name}
+
+
+			.col.s12.m4.l3
+				h5 Items using this skin
+				ul.list-with-items
+					each item in items
+						a(href= skin.wikiUrl)
+							li
+								.valign-wrapper.left-align
+									img(src= item.icon)
+									span.valign= item.name
+	else
+		.row
+			.col.s12
+				.section
+					p No skins found with this ID.	
 								
 block js
 	script(src="/js/chatcode.js")

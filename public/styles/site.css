@@ -8034,7 +8034,7 @@ header #slide-out {
     #body .row > .collapsible .skin-item {
       margin: 0;
       padding: 0; }
-      #body .row > .collapsible .skin-item .skin-item-image-container {
+      #body .row > .collapsible .skin-item .skin-item-image-container, #body .row > .collapsible .skin-item .skin-item-image-container img {
         height: 64px;
         width: 64px; }
 

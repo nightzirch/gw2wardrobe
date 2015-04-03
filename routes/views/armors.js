@@ -36,13 +36,13 @@ exports = module.exports = function(req, res) {
 	// Armor weights
 	if (req.params.weight) {
 		locals.armorTypes = {
-			"Headgear": [
+			"Helm": [
 				{ name: "Helmet", weight: locals.weight }
 			],
 			"Shoulders": [
 				{ name: "Shoulders", weight: locals.weight }
 			],
-			"Chest": [
+			"Coat": [
 				{ name: "Chest", weight: locals.weight }
 			],
 			"Gloves": [
@@ -57,7 +57,7 @@ exports = module.exports = function(req, res) {
 		};
 	} else {
 		locals.armorTypes = {
-			"Headgear": [
+			"Helm": [
 				{ name: "Helmet", weight: "Light" },
 				{ name: "Helmet", weight: "Medium" },
 				{ name: "Helmet", weight: "Heavy" }
@@ -67,7 +67,7 @@ exports = module.exports = function(req, res) {
 				{ name: "Shoulders", weight: "Medium" },
 				{ name: "Shoulders", weight: "Heavy" }
 			],
-			"Chest": [
+			"Coat": [
 				{ name: "Chest", weight: "Light" },
 				{ name: "Chest", weight: "Medium" },
 				{ name: "Chest", weight: "Heavy" }
