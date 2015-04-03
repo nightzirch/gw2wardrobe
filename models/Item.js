@@ -20,6 +20,7 @@ Item.add({
 	icon: { type: String, required: true, default: "http://placehold.it/64" },
 	description: { type: String },
 	type: { type: String },
+	wikiUrl: { type: String },
 	rarity: { type: String },
 	level: { type: Number },
 	vendor_value: { type: Number },
@@ -76,7 +77,7 @@ Item.add({
 		damage_type: { type: String },
 		min_power: { type: Number },
 		max_power: { type: Number }
-	}	
+	}
 });
 
 Item.schema.add({
