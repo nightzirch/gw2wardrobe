@@ -37,6 +37,8 @@ exports = module.exports = function(app) {
 	// Views
 	app.get('/', routes.views.index);
 	
+	app.get('/search/:query', routes.views.search);
+	
 	app.get('/armors', routes.views.armors);
 	app.get('/armors/:weight', routes.views.armors);
 	app.get('/weapons', routes.views.weapons);
@@ -51,7 +53,6 @@ exports = module.exports = function(app) {
 	app.get('/profile', routes.views.profile);
 	app.get('/profile/edit', routes.views.profileEdit);
 	app.post('/profile/update', routes.views.profileUpdate);
-	
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
