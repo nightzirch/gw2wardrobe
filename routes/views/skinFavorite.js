@@ -30,7 +30,7 @@ exports = module.exports = function(req, res) {
 		$set: {
 			favorites: locals.favoriteArr
 		}
-	});
+	}).sort("name");
 	
 	q.exec(function(err, result) {
 		if(err) {

@@ -18,7 +18,7 @@ exports = module.exports = function(req, res) {
 	
 	q2 = keystone.list('Item').model.find({
 		default_skin: locals.skinid
-	});
+	}).sort("name");
 	
 	// Get the projects
 	view.on('init', function(next) {

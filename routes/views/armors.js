@@ -21,7 +21,7 @@ exports = module.exports = function(req, res) {
 		q = keystone.list('Skin').model.find({
 			type: 'Armor',
 			"details.weight_class": locals.filters.weight
-		});
+		}).sort("name");
 	}
 	else {
 		locals.section = 'armors';
@@ -29,7 +29,7 @@ exports = module.exports = function(req, res) {
 		
 		q = keystone.list('Skin').model.find({
 			type: 'Armor'
-		});
+		}).sort("name");
 	}
 	
 	

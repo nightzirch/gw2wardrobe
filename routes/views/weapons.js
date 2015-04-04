@@ -21,7 +21,7 @@ exports = module.exports = function(req, res) {
 		q = keystone.list('Skin').model.find({
 			type: 'Weapon',
 			"details.weapon_category": req.params.type
-		});
+		}).sort("name");
 	}
 	else {
 		locals.section = 'weapons';
@@ -29,7 +29,7 @@ exports = module.exports = function(req, res) {
 		
 		q = keystone.list('Skin').model.find({
 			type: 'Weapon'
-		});
+		}).sort("name");
 	}
 	
 	// Weapon Types

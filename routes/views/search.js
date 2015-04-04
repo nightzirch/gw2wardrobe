@@ -52,13 +52,13 @@ exports = module.exports = function(req, res) {
 		name: {
 			$regex: locals.regex
 		}
-	});
+	}).sort("name");
 	
 	q2 = keystone.list('Item').model.find({
 		name: {
 			$regex: locals.regex
 		}
-	});
+	}).sort("name");
 	
 	// Get the projects
 	view.on('init', function(next) {

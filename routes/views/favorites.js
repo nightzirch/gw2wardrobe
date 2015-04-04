@@ -17,7 +17,7 @@ exports = module.exports = function(req, res) {
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
 
-	var q = keystone.list('Skin').model.find();
+	var q = keystone.list('Skin').model.find().sort("name");
 	
 	// Get the projects
 	view.on('init', function(next) {
