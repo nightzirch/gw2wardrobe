@@ -47,6 +47,7 @@ exports = module.exports = function(app) {
 	
 	app.get('/skin/:skinid', routes.views.skin);
 	app.post('/skin/:skinid/favorite', routes.views.skinFavorite);
+	app.post('/skin/:skinid/owned', routes.views.skinOwned);
 	
 	app.get('/about', routes.views.about);
 	

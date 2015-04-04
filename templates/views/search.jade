@@ -67,3 +67,8 @@ block content
 			ul.section.table-of-contents
 				each category in categories
 					li: a(href="#" + category.key)= category.value
+
+block js
+	script(src="/js/chatcode.js")
+	script(src="/js/favorite.js")
+	script(src="/js/addToWardrobe.js")

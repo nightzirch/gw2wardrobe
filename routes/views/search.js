@@ -60,20 +60,28 @@ exports = module.exports = function(req, res) {
 		}
 	}).sort("name");
 	
+	q3 = keystone.list('Skin').model.find().sort("name");
+	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
 			q2.exec(function(err2, result2) {
-				console.log(result);
-				
-				if(result) {
-					locals.skins = result;
-				}
-				if(result2) {
-					locals.items = result2;
-				}
-				
-				next(err);
+				q3.exec(function(err3, result3) {
+					console.log(result);
+
+					if(result) {
+						locals.skins = result;
+					}
+					if(result2) {
+						locals.items = result2;
+					}
+					if(result3) {
+						locals.allSkins = result3;
+					}
+					
+
+					next(err);
+				});
 			});
 		});
 	});

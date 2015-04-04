@@ -16,3 +16,8 @@ block content
 			ul.section.table-of-contents
 				each value, key in weaponTypes
 					li: a(href="#" + key)= value
+
+block js
+	script(src="/js/chatcode.js")
+	script(src="/js/favorite.js")
+	script(src="/js/addToWardrobe.js")

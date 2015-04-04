@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	$("#linkFavorite").on("click", function() {
+	$(".linkFavorite").on("click", function(e) {
+		e.preventDefault();
 		favoriteClick(this);
 	});
 });
@@ -8,8 +9,7 @@ function favoriteClick(el) {
 	var favoriteClass = "favoritted";
 	var favoritted = $(el).hasClass(favoriteClass);
 	
-	var pathArr = location.pathname.split("/");
-	var skinid = parseInt(pathArr[pathArr.length-1]);
+	var skinid = $(el).data("skinid");
 	
 	if(!favoritted) {
 		// Let's add current skin to favorites.
@@ -45,7 +45,7 @@ function updateClass(el, makeFavorite, favoriteClass) {
 function ajaxCall(skinid, val) {
 	$.ajax({
 		type: "POST",
-		url: "./" + skinid + "/favorite",
+		url: "/skin/" + skinid + "/favorite",
 		data: {
 			"skinid": skinid,
 			"favorite": val

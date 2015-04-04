@@ -88,18 +88,22 @@ exports = module.exports = function(req, res) {
 		};
 	}
 	
+	q2 = keystone.list('Skin').model.find().sort("name");
 	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
-			locals.skins = result;
+			q2.exec(function(err2, result2) {
+				locals.skins = result;
+				locals.allSkins = result2;
 
-			// If there are no results
-			if(!result) {
-				req.flash('error', "No weapons were found in the database.");
-			}
+				// If there are no results
+				if(!result) {
+					req.flash('error', "No weapons were found in the database.");
+				}
 
-			next(err);
+				next(err);
+			});
 		});
 	});
 	

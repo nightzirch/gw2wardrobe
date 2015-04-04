@@ -10,6 +10,21 @@ exports = module.exports = function(req, res) {
 	locals.section = 'home';
 	locals.title = 'Guild Wars 2 Wardrobe';
 	
+	q = keystone.list('Skin').model.find().sort("name");
+	
+	view.on('init', function(next) {
+		q.exec(function(err, result) {
+			locals.allSkins = result;
+
+			// If there are no results
+			if(!result) {
+				req.flash('error', "No skins were found in the database.");
+			}
+
+			next(err);
+		});
+	});
+	
 	// Render the view
 	view.render('index');
 	

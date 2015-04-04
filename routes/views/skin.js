@@ -20,24 +20,29 @@ exports = module.exports = function(req, res) {
 		default_skin: locals.skinid
 	}).sort("name");
 	
+	q3 = keystone.list('Skin').model.find().sort("name");
+	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
 			q2.exec(function(err2, result2) {
-				if(result) {
-					locals.title = result.name;
-					locals.skin = result;
-					locals.items = result2;
+				q3.exec(function(err3, result3) {
+					if(result) {
+						locals.title = result.name;
+						locals.skin = result;
+						locals.items = result2;
+						locals.allSkins = result3;
 
-					// If there are no results
-					if(!result2) {
-						req.flash('error', "No skins were found in the database.");
+						// If there are no results
+						if(!result2) {
+							req.flash('error', "No skins were found in the database.");
+						}
+					} else {
+						locals.title = "Guild Wars 2 Wardrobe";
 					}
-				} else {
-					locals.title = "Guild Wars 2 Wardrobe";
-				}
-				
-				next(err);
+
+					next(err);
+				});
 			});
 		});
 	});

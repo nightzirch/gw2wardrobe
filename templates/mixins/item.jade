@@ -1,0 +1,19 @@
+mixin item(item)
+	.skin-item
+		.waves-effect.waves-light.z-depth-1
+			a(href='/skin/#{item.skinid}')
+				.skin-item-image-container
+					img(src= item.icon)
+		.skin-item-toolbar
+			a.linkFavorite(href="#", class=(user.favorites.indexOf(item.skinid) > -1) ? "favoritted" : "", data-skinid= item.skinid)
+				.favoriteFalse
+					i.mdi-action-favorite-outline
+				.favoriteTrue
+					i.mdi-action-favorite
+			a.linkChatCode(href="#", data-id= item.skinid, data-type="item")
+				i.mdi-communication-chat
+			a.linkAddToWardrobe(href="#", class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid)
+				.ownedFalse
+					i.i.mdi-content-add-circle-outline
+				.ownedTrue
+					i.i.mdi-content-remove-circle-outline

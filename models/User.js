@@ -21,6 +21,7 @@ User.add({
 
 User.schema.add({
 	favorites: { type: [Number] },
+	wardrobe: { type: [Number] },
 });
 
 // Provide access to Keystone

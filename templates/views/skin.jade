@@ -18,7 +18,7 @@ block content
 					.image-container
 						img(src= image)
 		.row.links-container(class=noImages ? "negative-margin-top" : ""): .col
-			a#linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-id= skin.skinid, data-type="item")
+			a.linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-id= skin.skinid, data-type="item")
 				i.mdi-communication-chat.left
 				| Copy chat code
 
@@ -26,7 +26,7 @@ block content
 				- for(var i = 0; i < user.favorites.length; i++) {
 				- 	var favoritted = (user.favorites.indexOf(skin.skinid) > -1) ? true : false;
 				- }
-				a#linkFavorite.waves-effect.waves-light.btn.grey(class=favoritted ? "favoritted" : "")
+				a.linkFavorite.waves-effect.waves-light.btn.grey(href="#", class=favoritted ? "favoritted" : "", data-skinid= skin.skinid)
 					.favoriteFalse
 						i.mdi-action-favorite-outline.left
 						| Add to favorites

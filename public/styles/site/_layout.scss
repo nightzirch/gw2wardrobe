@@ -125,7 +125,7 @@ header {
 			margin-top: 10px;
 		}
 		
-		#linkFavorite {
+		.linkFavorite {
 			.favoriteFalse {
 				display: block;
 			}
@@ -134,7 +134,7 @@ header {
 			}
 		}
 		
-		#linkFavorite.favoritted {
+		.linkFavorite.favoritted {
 			.favoriteFalse {
 				display: none;
 			}
@@ -222,11 +222,76 @@ header {
 		.skin-item {
 			margin: 0;
 			padding: 0;
+			display: inline-block;
 
 			.skin-item-image-container, .skin-item-image-container img {
 				height: 64px;
 				width: 64px;
 			}
+			
+			.skin-item-toolbar {
+				width: 64px;
+				margin-top: -36px;
+				background-color: rgba(0,0,0,.8);
+				display: none;
+				position: absolute;
+				z-index: 999;
+				
+				a {
+					color: #fff;
+					
+					i {
+						width: 20px;
+						height: 20px;
+						font-size: 20px;
+						margin-left: 1px;
+					}
+				}
+				
+				a.linkFavorite {
+					display: inline-block;
+					
+					.favoriteFalse {
+						display: block;
+					}
+					.favoriteTrue {
+						display: none;
+					}
+				}
+
+				a.linkFavorite.favoritted {
+					.favoriteFalse {
+						display: none;
+					}
+					.favoriteTrue {
+						display: block;
+					}
+				}
+				
+				a.linkAddToWardrobe {
+					display: inline-block;
+					
+					.ownedFalse {
+						display: block;
+					}
+					.ownedTrue {
+						display: none;
+					}
+				}
+
+				a.linkAddToWardrobe.owned {
+					.ownedFalse {
+						display: none;
+					}
+					.ownedTrue {
+						display: block;
+					}
+				}
+			}
+		}
+		
+		.skin-item:hover .skin-item-toolbar {
+			display: block;
 		}
 	}
 }

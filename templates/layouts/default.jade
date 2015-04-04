@@ -1,57 +1,6 @@
 include ../mixins/flash-messages
-
-mixin menuitems
-	li.logo
-		a#logo-container(href="/")
-			img(src="/images/logo.png")
-	
-	li.divider
-	
-	each link in navLinks
-		if link.subitems
-			li
-				ul.collapsible.collapsible-accordion
-					li
-						a.collapsible-header.waves-effect.waves-red= link.label
-						div.collapsible-body
-							ul
-								each subitem in link.subitems
-									li(class=(section == subitem.key ? 'active' : null))
-										a(href=subitem.href)= subitem.label
-											if link.badge
-												span.badge(id= link.badge.id, class=link.badge.new ? "new" : "")= link.badge.content
-										
-		else
-			li(class=(section == link.key ? 'active' : null))
-				a.waves-effect.waves-red(href=link.href)= link.label
-	
-	li.divider
-	
-	if user
-		each link in userLinks
-			if link.subitems
-				li
-					ul.collapsible.collapsible-accordion
-						li
-							a.collapsible-header.waves-effect.waves-red= link.label
-							div.collapsible-body
-								ul
-									each subitem in link.subitems
-										li(class=(section == subitem.key ? 'active' : null))
-											a(href=subitem.href)= subitem.label
-			else
-				li(class=(section == link.key ? 'active' : null))
-					a.waves-effect.waves-red(href=link.href)= link.label
-						if link.badge
-							span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= link.badge.content
-					
-		li: a(href='/keystone/signout') Sign Out
-		
-		if user.canAccessKeystone
-			li.divider
-			li: a.waves-effect.waves-red(href='/keystone') Admin
-	else
-		li: a.waves-effect.waves-red(href='/keystone/signin') Sign in
+include ../mixins/menu-items
+include ../mixins/item
 
 mixin itemcard(item)
 	.col.s2
@@ -67,11 +16,7 @@ mixin itemcard(item)
 					i.mdi-navigation-close.right
 				p Here is some more information about this product that is only revealed once clicked on.
 
-mixin item(item)
-	.skin-item.waves-effect.waves-light.z-depth-1
-		a(href='/skin/#{item.skinid}')
-			.skin-item-image-container
-				img(src= item.icon)
+
 
 
 doctype html
@@ -148,7 +93,7 @@ html
 								label(for="search")
 									i.mdi-action-search
 					ul#slide-out.side-nav.fixed
-						+menuitems
+						+menu-items
 					
 
 

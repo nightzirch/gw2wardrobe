@@ -22,31 +22,39 @@ exports = module.exports = function(req, res) {
 		var q = keystone.list('User').model.find();
 	}
 	
+	q2 = keystone.list('Skin').model.find().sort("name");
+	
 	locals.section = "profile";
 	
 	// Get the projects
 	view.on('init', function(next) {
-		if(req.user) {
-			q.exec(function(err, result) {
-				locals.user = result;
+		q2.exec(function(err2, result2) {
+			if(req.user) {
+				q.exec(function(err, result) {
+					locals.user = result;
+					locals.allSkins = result2;
 
-				// If there are no results
-				if(!result) {
-					req.flash('error', "No armors were found in the database.");
-				}
+					// If there are no results
+					if(!result) {
+						req.flash('error', "No armors were found in the database.");
+					}
 
-				next(err);
-			});
-		} else {
-			q.exec(function(err, result) {
-				// If there are no results
-				if(!result) {
-					req.flash('error', "No armors were found in the database.");
-				}
+					next(err);
+				});
+			} else {
+				q.exec(function(err, result) {
+					locals.allSkins = result2;
+					
+					// If there are no results
+					if(!result) {
+						req.flash('error', "No armors were found in the database.");
+					}
 
-				next(err);
-			});
-		}
+					next(err);
+				});
+			}
+		});
+		
 	});
 	
 	// Render the view

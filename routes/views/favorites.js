@@ -23,6 +23,7 @@ exports = module.exports = function(req, res) {
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
 			locals.skins = result;
+			locals.allSkins = result;
 
 			// If there are no results
 			if(!result) {

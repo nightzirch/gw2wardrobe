@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	$("#linkChatCode").on("click", function() {
+	$(".linkChatCode").on("click", function(e) {
+		e.preventDefault();
 		chatcode(this);
 	});
 });

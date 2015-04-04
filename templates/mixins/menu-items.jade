@@ -1,0 +1,55 @@
+mixin menu-items
+	li.logo
+		a#logo-container(href="/")
+			img(src="/images/logo.png")
+	
+	li.divider
+	
+	each link in navLinks
+		if link.subitems
+			li
+				ul.collapsible.collapsible-accordion
+					li
+						a.collapsible-header.waves-effect.waves-red= link.label
+						div.collapsible-body
+							ul
+								each subitem in link.subitems
+									li(class=(section == subitem.key ? 'active' : null))
+										a(href=subitem.href)= subitem.label
+											if link.badge
+												span.badge(id= link.badge.id, class=link.badge.new ? "new" : "")= link.badge.content
+										
+		else
+			li(class=(section == link.key ? 'active' : null))
+				a.waves-effect.waves-red(href=link.href)= link.label
+	
+	li.divider
+	
+	if user
+		each link in userLinks
+			if link.subitems
+				li
+					ul.collapsible.collapsible-accordion
+						li
+							a.collapsible-header.waves-effect.waves-red= link.label
+							div.collapsible-body
+								ul
+									each subitem in link.subitems
+										li(class=(section == subitem.key ? 'active' : null))
+											a(href=subitem.href)= subitem.label
+			else
+				li(class=(section == link.key ? 'active' : null))
+					a.waves-effect.waves-red(href=link.href)= link.label
+						if link.badge
+							if link.badge.id == "badge-completion"
+								span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= (((link.badge.content / allSkins.length) * 100)).toFixed(2) + "%"
+							else
+								span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= link.badge.content
+					
+		li: a(href='/keystone/signout') Sign Out
+		
+		if user.canAccessKeystone
+			li.divider
+			li: a.waves-effect.waves-red(href='/keystone') Admin
+	else
+		li: a.waves-effect.waves-red(href='/keystone/signin') Sign in

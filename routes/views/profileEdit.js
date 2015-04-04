@@ -13,22 +13,25 @@ exports = module.exports = function(req, res) {
 		id: locals.user._id
 	}
 	
-	
-	
 	var q = keystone.list('User').model.findOne({
 		_id: locals.filters.id
 	});
 	
+	q2 = keystone.list('Skin').model.find().sort("name");
+	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
-			locals.user = result;
-
-			// If there are no results
-			if(!result) {
-				req.flash('error', "No armors were found in the database.");
-			}
-
+			q2.exec(function(err2, result2) {
+				locals.user = result;
+				locals.allSkins = result2;
+				
+				// If there are no results
+				if(!result) {
+					req.flash('error', "No armors were found in the database.");
+				}
+			});
+			
 			next(err);
 		});
 	});

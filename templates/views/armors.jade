@@ -25,3 +25,8 @@ block content
 							li: a(href="#" + key + "-" + value.weight)= value.name
 						else
 							li: a(href="#" + key + "-" + value.weight)= value.name + " (" + value.weight + ")"
+
+block js
+	script(src="/js/chatcode.js")
+	script(src="/js/favorite.js")
+	script(src="/js/addToWardrobe.js")
