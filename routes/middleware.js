@@ -40,14 +40,16 @@ exports.initLocals = function(req, res, next) {
 		{ label: 'About',		key: 'about',		href: '/about' }
 	];
 	
-	locals.userLinks = [
-		{ label: 'Favorites',		key: 'favorites',		href: '/favorites',		badge:
-			{ id: "badge-favorites", content: req.user.favorites.length, new: false }
-		},
-		{ label: 'Profile',		key: 'profile',		href: '/profile',	badge:
-		 	{ id: "badge-completion", content: req.user.wardrobe.length, new: false }
-		}
-	];
+	if(req.user) {
+		locals.userLinks = [
+			{ label: 'Favorites',		key: 'favorites',		href: '/favorites',		badge:
+				{ id: "badge-favorites", content: req.user.favorites.length, new: false }
+			},
+			{ label: 'Profile',		key: 'profile',		href: '/profile',	badge:
+				{ id: "badge-completion", content: req.user.wardrobe.length, new: false }
+			}
+		];
+	}
 	
 	locals.user = req.user;
 	
