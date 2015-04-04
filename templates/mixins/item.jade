@@ -1,7 +1,10 @@
 mixin item(item)
-	.skin-item
+	.skin-item(class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid)
 		.waves-effect.waves-light.z-depth-1
 			a(href='/skin/#{item.skinid}')
+				.skin-item-owned
+					i.mdi-action-done
+					.skin-item-owned-background
 				.skin-item-image-container
 					img(src= item.icon)
 		.skin-item-toolbar

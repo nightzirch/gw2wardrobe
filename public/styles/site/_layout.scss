@@ -219,10 +219,38 @@ header {
 			@include rotate(0deg);
 		}
 		
+		.skin-item.owned .skin-item-owned {
+			display: block;
+		}
+		
 		.skin-item {
 			margin: 0;
 			padding: 0;
 			display: inline-block;
+			overflow: hidden;
+			
+			.skin-item-owned {
+				display: none;
+				color: #fff;
+				margin-left: 40px;
+				margin-top: -24px;
+				margin-bottom: -24px;
+				margin-right: -24px;
+				
+				i {
+					position: absolute;
+					z-index: 1000;
+					margin-top: 24px;
+					margin-left: 6px;
+				}
+				
+				.skin-item-owned-background {
+					width: 48px;
+					height: 48px;
+					background-color: color("orange", "base");
+					@include rotate(45deg);
+				}
+			}
 
 			.skin-item-image-container, .skin-item-image-container img {
 				height: 64px;

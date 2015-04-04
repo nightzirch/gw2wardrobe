@@ -15,7 +15,7 @@ function addClick(el) {
 	if(!owned) {
 		// Let's add current skin to user wardrobe.
 		// First update the class
-		updateClass(el, true, ownedClass);
+		updateClass(el, true, ownedClass, skinid);
 		
 		// Show toast
 		wardrobe.toast(skinname + " added to wardrobe.");
@@ -25,7 +25,7 @@ function addClick(el) {
 	} else {
 		// Let's remove current skin from favorites.
 		// First update the class
-		updateClass(el, false, ownedClass);
+		updateClass(el, false, ownedClass, skinid);
 		
 		// Show toast
 		wardrobe.toast(skinname + " removed from wardrobe.");
@@ -35,11 +35,14 @@ function addClick(el) {
 	}
 }
 
-function updateClass(el, owned, ownedClass) {
+function updateClass(el, owned, ownedClass, skinid) {
 	if(owned) {
 		$(el).addClass(ownedClass);
+		$("div[data-skinid=" + skinid + "]").addClass(ownedClass);
+		console.log($("div[data-skinid=" +  + "]"));
 	} else {
 		$(el).removeClass(ownedClass);
+		$("div[data-skinid=" + skinid + "]").removeClass(ownedClass);
 	}
 }
 
