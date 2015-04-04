@@ -73,12 +73,17 @@ var wardrobe = {
 		}
 	},
 	
+	toast: function(message, duration) {
+		var dur = (duration) ? duration : 2000;
+		toast(message, dur);
+	},
+	
 	// Footer
 	footer: {
 		listener: function() {
 			$(window).resize(function() {
-					wardrobe.footer.fixHeight();
-					wardrobe.footer.makeSticky();
+				wardrobe.footer.fixHeight();
+				wardrobe.footer.makeSticky();
 			});
 		},
 		fixHeight: function() {

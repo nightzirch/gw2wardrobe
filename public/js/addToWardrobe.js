@@ -10,11 +10,15 @@ function addClick(el) {
 	var owned = $(el).hasClass(ownedClass);
 	
 	var skinid = $(el).data("skinid");
+	var skinname = $(el).data("skinname");
 	
 	if(!owned) {
 		// Let's add current skin to user wardrobe.
 		// First update the class
 		updateClass(el, true, ownedClass);
+		
+		// Show toast
+		wardrobe.toast(skinname + " added to wardrobe.");
 		
 		// Then, let's update the database
 		ajaxCall(skinid, true);
@@ -22,6 +26,9 @@ function addClick(el) {
 		// Let's remove current skin from favorites.
 		// First update the class
 		updateClass(el, false, ownedClass);
+		
+		// Show toast
+		wardrobe.toast(skinname + " removed from wardrobe.");
 		
 		// Then, let's update the database
 		ajaxCall(skinid, false);

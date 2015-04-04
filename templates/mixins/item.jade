@@ -5,14 +5,14 @@ mixin item(item)
 				.skin-item-image-container
 					img(src= item.icon)
 		.skin-item-toolbar
-			a.linkFavorite(href="#", class=(user.favorites.indexOf(item.skinid) > -1) ? "favoritted" : "", data-skinid= item.skinid)
+			a.linkFavorite(href="#", class=(user.favorites.indexOf(item.skinid) > -1) ? "favoritted" : "", data-skinid= item.skinid, data-skinname= item.name)
 				.favoriteFalse
 					i.mdi-action-favorite-outline
 				.favoriteTrue
 					i.mdi-action-favorite
 			a.linkChatCode(href="#", data-id= item.skinid, data-type="item")
 				i.mdi-communication-chat
-			a.linkAddToWardrobe(href="#", class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid)
+			a.linkAddToWardrobe(href="#", class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid, data-skinname= item.name)
 				.ownedFalse
 					i.i.mdi-content-add-circle-outline
 				.ownedTrue

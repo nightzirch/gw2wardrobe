@@ -10,6 +10,7 @@ function favoriteClick(el) {
 	var favoritted = $(el).hasClass(favoriteClass);
 	
 	var skinid = $(el).data("skinid");
+	var skinname = $(el).data("skinname");
 	
 	if(!favoritted) {
 		// Let's add current skin to favorites.
@@ -18,6 +19,9 @@ function favoriteClick(el) {
 		
 		// Then, lets update the badge number
 		updateBadge(true);
+		
+		// Show toast
+		wardrobe.toast(skinname + " added to favorites.");
 		
 		// Then, let's update the database
 		ajaxCall(skinid, true);
@@ -28,6 +32,9 @@ function favoriteClick(el) {
 		
 		// Then, lets update the badge number
 		updateBadge(false);
+		
+		// Show toast
+		wardrobe.toast(skinname + " removed from favorites.");
 		
 		// Then, let's update the database
 		ajaxCall(skinid, false);
