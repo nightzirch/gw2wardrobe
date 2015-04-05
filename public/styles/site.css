@@ -3873,11 +3873,18 @@ header #slide-out ul.collapsible > li.active { background-color: transparent; }
 #body .row > .collapsible .category-container .collapsible-header i { float: none; display: inline-block; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg); -webkit-transition-duration: 0.25s; -moz-transition-duration: 0.25s; -o-transition-duration: 0.25s; -ms-transition-duration: 0.25s; transition-duration: 0.25s; }
 #body .row > .collapsible .category-container.active .collapsible-header i { -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); -ms-transform: rotate(0deg); -o-transform: rotate(0deg); transform: rotate(0deg); }
 #body .row > .collapsible .skin-item.owned .skin-item-owned { display: block; }
+#body .row > .collapsible .skin-item.owned .skin-item-image-container img, #body .row > .collapsible .skin-item:hover .skin-item-image-container img { opacity: 1; }
+#body .row > .collapsible .skin-item.favoritted .skin-item-favoritted { display: inline-block; }
+#body .row > .collapsible .skin-item.favoritted:hover .skin-item-favoritted { display: none; }
 #body .row > .collapsible .skin-item { margin: 0; padding: 0; display: inline-block; overflow: hidden; }
+#body .row > .collapsible .skin-item .skin-item-favoritted { display: none; color: #fff; font-size: 20px; position: absolute; margin-top: -30px; margin-left: 1px; }
+#body .row > .collapsible .skin-item .skin-item-favoritted i { position: absolute; z-index: 999; }
+#body .row > .collapsible .skin-item .skin-item-favoritted .skin-item-favoritted-background { width: 60px; height: 60px; background-color: rgba(0, 0, 0, 0.8); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg); margin-left: -32px; }
 #body .row > .collapsible .skin-item .skin-item-owned { display: none; color: #fff; margin-left: 40px; margin-top: -24px; margin-bottom: -24px; margin-right: -24px; }
 #body .row > .collapsible .skin-item .skin-item-owned i { position: absolute; z-index: 1000; margin-top: 24px; margin-left: 6px; }
 #body .row > .collapsible .skin-item .skin-item-owned .skin-item-owned-background { width: 48px; height: 48px; background-color: #ff9800; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg); }
 #body .row > .collapsible .skin-item .skin-item-image-container, #body .row > .collapsible .skin-item .skin-item-image-container img { height: 64px; width: 64px; }
+#body .row > .collapsible .skin-item img { opacity: .75; }
 #body .row > .collapsible .skin-item .skin-item-toolbar { width: 64px; margin-top: -36px; background-color: rgba(0, 0, 0, 0.8); display: none; position: absolute; z-index: 999; }
 #body .row > .collapsible .skin-item .skin-item-toolbar a { color: #fff; }
 #body .row > .collapsible .skin-item .skin-item-toolbar a i { width: 20px; height: 20px; font-size: 20px; margin-left: 1px; }

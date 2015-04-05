@@ -1,5 +1,5 @@
 mixin item(item)
-	.skin-item(class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid)
+	.skin-item(class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid, class=(user.favorites.indexOf(item.skinid) > -1) ? "favoritted" : "")
 		.waves-effect.waves-light.z-depth-1
 			a(href='/skin/#{item.skinid}')
 				.skin-item-owned
@@ -7,6 +7,9 @@ mixin item(item)
 					.skin-item-owned-background
 				.skin-item-image-container
 					img(src= item.icon)
+				.skin-item-favoritted
+					i.mdi-action-favorite
+					.skin-item-favoritted-background
 		.skin-item-toolbar
 			a.linkFavorite(href="#", class=(user.favorites.indexOf(item.skinid) > -1) ? "favoritted" : "", data-skinid= item.skinid, data-skinname= item.name)
 				.favoriteFalse

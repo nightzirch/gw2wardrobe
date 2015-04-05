@@ -39,7 +39,6 @@ function updateClass(el, owned, ownedClass, skinid) {
 	if(owned) {
 		$(el).addClass(ownedClass);
 		$("div[data-skinid=" + skinid + "]").addClass(ownedClass);
-		console.log($("div[data-skinid=" +  + "]"));
 	} else {
 		$(el).removeClass(ownedClass);
 		$("div[data-skinid=" + skinid + "]").removeClass(ownedClass);

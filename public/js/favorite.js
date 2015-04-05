@@ -15,7 +15,7 @@ function favoriteClick(el) {
 	if(!favoritted) {
 		// Let's add current skin to favorites.
 		// First update the class
-		updateClass(el, true, favoriteClass);
+		updateClass(el, true, favoriteClass, skinid);
 		
 		// Then, lets update the badge number
 		updateBadge(true);
@@ -28,7 +28,7 @@ function favoriteClick(el) {
 	} else {
 		// Let's remove current skin from favorites.
 		// First update the class
-		updateClass(el, false, favoriteClass);
+		updateClass(el, false, favoriteClass, skinid);
 		
 		// Then, lets update the badge number
 		updateBadge(false);
@@ -41,11 +41,13 @@ function favoriteClick(el) {
 	}
 }
 
-function updateClass(el, makeFavorite, favoriteClass) {
+function updateClass(el, makeFavorite, favoriteClass, skinid) {
 	if(makeFavorite) {
 		$(el).addClass(favoriteClass);
+		$("div[data-skinid=" + skinid + "]").addClass(favoriteClass);
 	} else {
 		$(el).removeClass(favoriteClass);
+		$("div[data-skinid=" + skinid + "]").removeClass(favoriteClass);
 	}
 }
 
