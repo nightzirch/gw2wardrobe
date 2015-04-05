@@ -17,7 +17,24 @@ block content
 						p Member since #{user.registered}.
 
 				.divider
-
+				
+				.row
+					.col.s12: .section
+						- var progressionPercentage = ((user.wardrobe.length / allSkins.length) * 100).toFixed(1) + "%";
+						
+						h5 Wardrobe Progression (#{progressionPercentage})
+						
+						.progress
+							.determinate(style={width: progressionPercentage})
+						
+						p You have 
+							strong #{user.wardrobe.length} 
+							| skins in your wardrobe, leaving you with 
+							strong #{allSkins.length - user.wardrobe.length} 
+							| more skins to collect!
+				
+				.divider
+				
 				.row
 					.col.s12: .section
 						h5 About
