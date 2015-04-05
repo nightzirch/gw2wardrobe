@@ -1,5 +1,9 @@
 mixin item(item)
-	.skin-item(class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid, class=(user.favorites.indexOf(item.skinid) > -1) ? "favoritted" : "")
+	- var classes = new Array();
+	- if(user.wardrobe.indexOf(item.skinid) > -1) {classes.push("owned")}
+	- if(user.favorites.indexOf(item.skinid) > -1) {classes.push("favoritted")}
+	
+	.skin-item(data-skinid= item.skinid, class=classes)
 		.waves-effect.waves-light.z-depth-1
 			a(href='/skin/#{item.skinid}')
 				.skin-item-owned
@@ -11,14 +15,14 @@ mixin item(item)
 					i.mdi-action-favorite
 					.skin-item-favoritted-background
 		.skin-item-toolbar
-			a.linkFavorite(href="#", class=(user.favorites.indexOf(item.skinid) > -1) ? "favoritted" : "", data-skinid= item.skinid, data-skinname= item.name)
+			a.linkFavorite(href="#", class={favoritted: (user.favorites.indexOf(item.skinid) > -1)}, data-skinid= item.skinid, data-skinname= item.name)
 				.favoriteFalse
 					i.mdi-action-favorite-outline
 				.favoriteTrue
 					i.mdi-action-favorite
 			a.linkChatCode(href="#", data-id= item.skinid, data-type="item")
 				i.mdi-communication-chat
-			a.linkAddToWardrobe(href="#", class=(user.wardrobe.indexOf(item.skinid) > -1) ? "owned" : "", data-skinid= item.skinid, data-skinname= item.name)
+			a.linkAddToWardrobe(href="#", class={owned: (user.wardrobe.indexOf(item.skinid) > -1)}, data-skinid= item.skinid, data-skinname= item.name)
 				.ownedFalse
 					i.i.mdi-content-add-circle-outline
 				.ownedTrue

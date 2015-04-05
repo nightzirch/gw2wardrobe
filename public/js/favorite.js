@@ -24,7 +24,7 @@ function favoriteClick(el) {
 		wardrobe.toast(skinname + " added to favorites.");
 		
 		// Then, let's update the database
-		ajaxCall(skinid, true);
+		ajaxCallFavorite(skinid, true);
 	} else {
 		// Let's remove current skin from favorites.
 		// First update the class
@@ -37,7 +37,7 @@ function favoriteClick(el) {
 		wardrobe.toast(skinname + " removed from favorites.");
 		
 		// Then, let's update the database
-		ajaxCall(skinid, false);
+		ajaxCallFavorite(skinid, false);
 	}
 }
 
@@ -51,7 +51,7 @@ function updateClass(el, makeFavorite, favoriteClass, skinid) {
 	}
 }
 
-function ajaxCall(skinid, val) {
+function ajaxCallFavorite(skinid, val) {
 	$.ajax({
 		type: "POST",
 		url: "/skin/" + skinid + "/favorite",

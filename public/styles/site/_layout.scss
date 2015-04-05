@@ -223,7 +223,7 @@ header {
 			display: block;
 		}
 		
-		.skin-item.owned .skin-item-image-container img, .skin-item:hover .skin-item-image-container img {
+		.skin-item.owned .skin-item-image-container img, .skin-item.favoritted .skin-item-image-container img, .skin-item:hover .skin-item-image-container img {
 			opacity: 1;
 		}
 		
