@@ -69,7 +69,7 @@ var wardrobe = {
 	
 	tooltip: {
 		init: function() {
-			$('.tooltipped').tooltip();
+			$('.tooltipped').tooltip({delay: 0});
 		}
 	},
 	
