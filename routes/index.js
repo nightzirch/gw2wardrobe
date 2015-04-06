@@ -45,9 +45,14 @@ exports = module.exports = function(app) {
 	app.get('/weapons/:type', routes.views.weapons);
 	app.get('/favorites', routes.views.favorites);
 	
+	app.get('/outfits', routes.views.outfits);
+	
 	app.get('/skin/:skinid', routes.views.skin);
 	app.post('/skin/:skinid/favorite', routes.views.skinFavorite);
 	app.post('/skin/:skinid/owned', routes.views.skinOwned);
+	
+	app.get('/users', routes.views.users);
+//	app.get('/user/:username', routes.views.user);
 	
 	app.get('/about', routes.views.about);
 	

@@ -1,0 +1,24 @@
+extends ../layouts/default
+
+block content
+	if !user
+		.row.links-container.negative-margin-top: .col
+			a#profile-save.waves-effect.waves-light.btn.red.darken-4(href="#")
+				i.mdi-editor-mode-edit.left
+				| Sign up
+
+	.row
+		.col.s12
+			table.hoverable
+				thead
+					tr
+						th Username
+						th Wardrobe Progression
+				tbody
+					each profile in users
+						tr
+							td= profile.username
+							if profile.wardrobe.length > 0
+								td #{((profile.wardrobe.length / allSkins.length) * 100).toFixed(1)}%
+							else
+								td 0%
