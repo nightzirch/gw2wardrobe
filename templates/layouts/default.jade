@@ -1,5 +1,6 @@
 include ../mixins/flash-messages
 include ../mixins/menu-items
+include ../mixins/skin
 include ../mixins/item
 
 mixin itemcard(item)
@@ -89,7 +90,7 @@ html
 						a.left.page-title= (headerTitle) ? headerTitle : title
 						form#searchForm.right(onsubmit="wardrobe.search.init()")
 							.input-field.hide-on-small-only
-								input#search(type="text")
+								input#search(type="text", value= query ? query: "")
 								label(for="search")
 									i.mdi-action-search
 					ul#slide-out.side-nav.fixed
@@ -113,7 +114,18 @@ html
 
 				//- The content block should contain the body of your template's content
 				block content
-
+				
+				#modal.modal
+					.modal-content
+						h4.modal-header
+						p.modal-text
+						
+						.row
+							.input-field.col.s12
+								input#modal-input.modal-input.validate(type="text", placeholder="")
+								label.modal-input-placeholder.green-text.text-darken-1(for="modal-input")
+					.modal-footer
+						a.btn.green.modal-action.modal-close.waves-effect.waves-light(href="#!") Got it!
 
 		//- FOOTER
 		footer.page-footer
@@ -158,6 +170,9 @@ html
 
 		//- Add scripts that are globally required by your site here.
 		script(src='/js/lib/materialize/materialize.min.js')
+		script(src='/js/lib/zeroclipboard/ZeroClipboard.min.js')
+		
+		//-	Custom script
 		script(src='/js/script.js')
 		
 		//- Include template-specific javascript files by extending the js block

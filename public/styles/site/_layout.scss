@@ -286,7 +286,8 @@ header {
 				}
 			}
 
-			.skin-item-image-container, .skin-item-image-container img {
+			.skin-item-image-container,
+			.skin-item-image-container img {
 				height: 64px;
 				width: 64px;
 			}
@@ -356,7 +357,8 @@ header {
 			}
 		}
 		
-		.skin-item:hover .skin-item-toolbar {
+		.skin-item:hover .skin-item-toolbar,
+		.skin-item.zeroclipboard-is-hover .skin-item-toolbar {
 			display: block;
 		}
 	}

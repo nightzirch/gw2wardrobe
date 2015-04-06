@@ -18,7 +18,7 @@ block content
 					.image-container
 						img(src= image)
 		.row.links-container(class=noImages ? "negative-margin-top" : ""): .col
-			a.linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-id= skin.skinid, data-type="item")
+			a.linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-itemid= skin.skinid, data-type="skin", data-itemname= skin.name)
 				i.mdi-communication-chat.left
 				| Copy chat code
 
@@ -40,7 +40,8 @@ block content
 					| Wiki
 			
 		.row
-			.col.s12.m8.l9
+			- var classes = (items.length > 0) ? ["s12", "m8", "l9"] : ["s12"];
+			.col(class= classes)
 				if(skin.description)
 					.section
 						h5 Description
@@ -60,16 +61,17 @@ block content
 				.section
 					h5 Popular outfits using #{skin.name}
 
-
-			.col.s12.m4.l3
-				h5 Items using this skin
-				ul.list-with-items
-					each item in items
-						a(href= skin.wikiUrl)
-							li
-								.valign-wrapper.left-align
-									img(src= item.icon)
-									span.valign= item.name
+			if (items.length > 0)
+				.col.s12.m4.l3
+					.section
+						h5 Items using this skin
+						ul.list-with-items
+							each item in items
+								a(href= skin.wikiUrl)
+									li
+										.valign-wrapper.left-align
+											img(src= item.icon)
+											span.valign= item.name
 	else
 		.row
 			.col.s12

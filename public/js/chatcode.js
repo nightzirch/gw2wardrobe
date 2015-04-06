@@ -1,16 +1,16 @@
 $(document).ready(function() {
 	$(".linkChatCode").on("click", function(e) {
 		e.preventDefault();
-		chatcode(this);
 	});
 });
 
 function chatcode(el) {
-	var id = $(el).data("id");
+	var id = $(el).data("itemid");
 	var type = $(el).data("type");
 	
 	var chatcode = encodeChatLink(type, id);
-	console.log(chatcode);
+	
+	return chatcode;
 }
 
 function encodeChatLink(type, id) {

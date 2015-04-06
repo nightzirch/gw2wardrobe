@@ -2094,7 +2094,7 @@ header #slide-out ul.collapsible>li.active{background-color:transparent}
 #body .row>.collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe{display:inline-block}
 #body .row>.collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe .ownedFalse{display:block}
 #body .row>.collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe .ownedTrue,#body .row>.collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe.owned .ownedFalse{display:none}
-#body .row>.collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe.owned .ownedTrue,#body .row>.collapsible .skin-item:hover .skin-item-toolbar{display:block}
+#body .row>.collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe.owned .ownedTrue,#body .row>.collapsible .skin-item.zeroclipboard-is-hover .skin-item-toolbar,#body .row>.collapsible .skin-item:hover .skin-item-toolbar{display:block}
 footer.page-footer{margin-left:240px;padding-top:0;margin-top:0}
 footer.page-footer .row{padding-left:20px;padding-right:20px}
 footer.page-footer #footer-content-wrapper{overflow:hidden}

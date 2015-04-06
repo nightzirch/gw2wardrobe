@@ -37,7 +37,7 @@ exports.initLocals = function(req, res, next) {
 		 	{ label: 'One-handed',		key: 'weapons-onehanded',		href: '/weapons/onehanded' },
 			{ label: 'Off hand',		key: 'weapons-offhand',			href: '/weapons/offhand' }
 		]},
-		{ label: 'Outfits',		key: 'outfits',		href: '/outfits' },
+		{ label: 'Outfits and tonics',		key: 'outfits-and-tonics',		href: '/outfits-and-tonics' },
 		{ label: 'Users',		key: 'users',		href: '/users' },
 		{ label: 'About',		key: 'about',		href: '/about' }
 	];

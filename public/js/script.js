@@ -6,6 +6,8 @@ $(document).ready(function() {
 	
 	wardrobe.tooltip.init();
 	
+	wardrobe.copy.init();
+	
 	wardrobe.search.listener();
 	
 	//wardrobe.footer.listener();
@@ -109,6 +111,67 @@ var wardrobe = {
 			$('<style id="' + cssId + '">.page-wrap:after{height: ' + $(footer).height() + 'px}</style>').appendTo('head');
 			$(css).remove();
 		}
+	},
+	
+	copy: {
+		activeId: 0,
+		init: function() {
+			wardrobe.copy.listener()
+//			wardrobe.copy.clipboard();
+//			wardrobe.copy.fixHover();
+		},
+		
+		listener: function() {
+			$(".linkChatCode").on("click", function(e) {
+				var code = chatcode(this);
+				var name = $(this).data("itemname");
+				var placeholder = "Chat code";
+				
+				wardrobe.modal({
+					title: name,
+					inputValue: code,
+					placeholder: placeholder
+				});
+				
+				$("#modal-input").blur();
+				$("#modal-input")[0].focus();
+				$("#modal-input")[0].select();
+			});
+		},
+		
+		clipboard: function() {
+			var client = new ZeroClipboard($(".linkChatCode"));
+
+			client.on("ready", function(readyEvent) {
+				client.on("copy", function(event) {
+					var code = chatcode(event.target);
+					event.clipboardData.setData("text/plain", code);
+				});
+			});
+		},
+		
+		fixHover: function() {
+			$(".skin-item").on("hover", function() {
+				wardrobe.copy.activeId = $(this).data("id");
+			});
+			
+			$("#global-zeroclipboard-html-bridge").hover(function() {
+				$('div[data-id="' + wardrobe.copy.activeId + '"]').addClass("zeroclipboard-is-hover");
+			}, function() {
+				$('div[data-id="' + wardrobe.copy.activeId + '"]').removeClass("zeroclipboard-is-hover");
+			});
+		}
+	},
+	
+	modal: function(options) {
+		var modal = $("#modal");
+		modal.find(".modal-header").html(options.title);
+		modal.find(".modal-text").html(options.message);
+		modal.find(".modal-input").attr("value", options.inputValue);
+		modal.find(".modal-input").attr("placeholder", options.placeholder);
+		modal.find(".modal-input-placeholder").html(options.placeholder);
+		
+		modal.openModal();
 	},
 	
 	// Temporary functions

@@ -1,0 +1,44 @@
+extends ../layouts/default
+
+block content
+	.row
+		.col.s12.m8.l9.collapsible(data-collapsible="")
+			.section.scrollspy.category-container.active(id="outfits")
+				.collapsible-header
+					h4 Outfits
+						i.mdi-navigation-expand-less
+				.items-container.collapsible-body(style="display: block;")
+					each outfit in outfits
+						+item(outfit)
+			
+			.section.scrollspy.category-container.active(id="tonics")
+				.collapsible-header
+					h4 Tonics
+						i.mdi-navigation-expand-less
+				.items-container.collapsible-body(style="display: block;")
+					each tonic in tonics
+						if (tonic.type == "Consumable")
+							+item(tonic)
+			
+			.section.scrollspy.category-container.active(id="endless-tonics")
+				.collapsible-header
+					h4 Endless tonics
+						i.mdi-navigation-expand-less
+				.items-container.collapsible-body(style="display: block;")
+					each tonic in tonics
+						if (tonic.type == "Gizmo")
+							+item(tonic)
+							
+							
+							
+
+		.col.hide-on-small-only.m4.l3
+			ul.section.table-of-contents
+				li: a(href="#outfits") Outfits
+				li: a(href="#tonics") Tonics
+				li: a(href="#endless-tonics") Endless tonics
+
+block js
+	script(src="/js/chatcode.js")
+	script(src="/js/favorite.js")
+	script(src="/js/addToWardrobe.js")

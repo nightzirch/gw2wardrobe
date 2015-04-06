@@ -1,0 +1,30 @@
+mixin skin(skin)
+	- var classes = new Array();
+	if user
+		- if(user.wardrobe.indexOf(skin.skinid) > -1) {classes.push("owned")}
+		- if(user.favorites.indexOf(skin.skinid) > -1) {classes.push("favoritted")}
+	
+	.skin-item.tooltipped(data-itemid= skin.skinid, class=classes, data-position="top", data-tooltip= skin.name, data-delay="0")
+		.waves-effect.waves-light.z-depth-1
+			a(href='/skin/#{skin.skinid}')
+				.skin-item-owned
+					i.mdi-action-done
+					.skin-item-owned-background
+				.skin-item-image-container
+					img(src= skin.icon)
+				.skin-item-favoritted
+					i.mdi-action-favorite
+					.skin-item-favoritted-background
+		.skin-item-toolbar
+			a.linkFavorite(href="#", class=(classes.indexOf("favoritted") > -1) ? "favoritted" : "", data-itemid= skin.skinid, data-itemname= skin.name)
+				.favoriteFalse
+					i.mdi-action-favorite-outline
+				.favoriteTrue
+					i.mdi-action-favorite
+			a.linkChatCode(href="#", data-itemid= skin.skinid, data-type="skin", data-itemname= skin.name)
+				i.mdi-communication-chat
+			a.linkAddToWardrobe(href="#", class=(classes.indexOf("owned") > -1) ? "owned" : "", data-itemid= skin.skinid, data-itemname= skin.name)
+				.ownedFalse
+					i.i.mdi-content-add-circle-outline
+				.ownedTrue
+					i.i.mdi-content-remove-circle-outline

@@ -9,8 +9,8 @@ function favoriteClick(el) {
 	var favoriteClass = "favoritted";
 	var favoritted = $(el).hasClass(favoriteClass);
 	
-	var skinid = $(el).data("skinid");
-	var skinname = $(el).data("skinname");
+	var skinid = $(el).data("itemid");
+	var skinname = $(el).data("itemname");
 	
 	if(!favoritted) {
 		// Let's add current skin to favorites.
@@ -44,10 +44,10 @@ function favoriteClick(el) {
 function updateClass(el, makeFavorite, favoriteClass, skinid) {
 	if(makeFavorite) {
 		$(el).addClass(favoriteClass);
-		$("div[data-skinid=" + skinid + "]").addClass(favoriteClass);
+		$("div[data-itemid=" + skinid + "]").addClass(favoriteClass);
 	} else {
 		$(el).removeClass(favoriteClass);
-		$("div[data-skinid=" + skinid + "]").removeClass(favoriteClass);
+		$("div[data-itemid=" + skinid + "]").removeClass(favoriteClass);
 	}
 }
 

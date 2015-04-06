@@ -26,7 +26,6 @@ exports = module.exports = function(req, res) {
 	
 	locals.section = "profile";
 	
-	// Get the projects
 	view.on('init', function(next) {
 		q2.exec(function(err2, result2) {
 			if(req.user) {

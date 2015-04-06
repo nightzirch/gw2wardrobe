@@ -16,7 +16,7 @@ block content
 						.items-container.collapsible-body(style="display: block;")
 							each skin in skins
 								if (skin.details.type == key && skin.details.weight_class == value.weight)
-									+item(skin)
+									+skin(skin)
 		.col.hide-on-small-only.m4.l3
 			ul.section.table-of-contents
 				each values, key in armorTypes

@@ -11,8 +11,8 @@ block content
 								i.mdi-navigation-expand-less
 						.items-container.collapsible-body(style="display: block;")
 							each skin in skins
-								if ((skin.type == key) && (user.favorites.indexOf(skin.skinid) > -1))
-									+item(skin)
+								if (skin.type == key)
+									+skin(skin)
 									
 			.col.hide-on-small-only.m4.l3
 				ul.section.table-of-contents

@@ -13,6 +13,14 @@ block content
 				- 	} else if(skin.type == "Weapon") {
 				-		weaponSkins.push(skin);
 				-	}
+			- var tonicsArr = new Array();
+			- var endlessTonicsArr = new Array();
+			- each tonic in tonics
+				-	if (tonic.type == "Consumable") {
+				- 		tonicsArr.push(tonic);
+				-	} else if(tonic.type == "Gizmo") {
+				-		endlessTonicsArr.push(tonic);
+				-	}
 			
 			if armorSkins.length > 0
 				.section
@@ -37,7 +45,7 @@ block content
 								.items-container.collapsible-body(style="display: block;")
 									each skin in skins
 										if (skin.details.type == key)
-											+item(skin)
+											+skin(skin)
 			
 			if weaponSkins.length > 0
 				.section
@@ -53,7 +61,7 @@ block content
 							- 	}
 						
 						if weapons.length > 0
-							- categories.push({value: key});
+							- categories.push({value: value, key: key});
 							
 							.section.scrollspy.category-container.active(id= key)
 								.collapsible-header
@@ -62,7 +70,47 @@ block content
 								.items-container.collapsible-body(style="display: block;")
 									each skin in skins
 										if (skin.details.type == key)
-											+item(skin)
+											+skin(skin)
+											
+			if (outfits.length > 0 || tonics.length > 0)
+				.section
+					h3 Outfits and tonics
+
+					.divider
+						
+					if outfits.length > 0
+						- categories.push({value: "Outfits", key: "outfits"});
+
+						.section.scrollspy.category-container.active(id="outfits")
+							.collapsible-header
+								h4 Outfits
+									i.mdi-navigation-expand-less
+							.items-container.collapsible-body(style="display: block;")
+								each outfit in outfits
+									+item(outfit)
+								
+					if tonicsArr.length > 0
+						- categories.push({value: "Tonics", key: "tonics"});
+
+						.section.scrollspy.category-container.active(id="tonics")
+							.collapsible-header
+								h4 Tonics
+									i.mdi-navigation-expand-less
+							.items-container.collapsible-body(style="display: block;")
+								each tonic in tonicsArr
+									+item(tonic)
+
+					if endlessTonicsArr.length > 0
+						- categories.push({value:"Endless tonics", key: "endless-tonics"});
+
+						.section.scrollspy.category-container.active(id="endless-tonics")
+							.collapsible-header
+								h4 Endless tonics
+									i.mdi-navigation-expand-less
+							.items-container.collapsible-body(style="display: block;")
+								each tonic in endlessTonicsArr
+									+item(tonic)
+											
 		.col.hide-on-small-only.m4.l3
 			ul.section.table-of-contents
 				each category in categories

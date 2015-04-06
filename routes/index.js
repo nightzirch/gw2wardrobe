@@ -45,7 +45,9 @@ exports = module.exports = function(app) {
 	app.get('/weapons/:type', routes.views.weapons);
 	app.get('/favorites', routes.views.favorites);
 	
-	app.get('/outfits', routes.views.outfits);
+	app.get('/outfits-and-tonics', routes.views.outfitsAndTonics);
+//	app.get('/outfit/:itemid', routes.views.outfit);
+//	app.get('/tonic/:itemid', routes.views.tonic);
 	
 	app.get('/skin/:skinid', routes.views.skin);
 	app.post('/skin/:skinid/favorite', routes.views.skinFavorite);
