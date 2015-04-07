@@ -44,7 +44,7 @@ exports = module.exports = function(req, res) {
 		66279,	// Ancestral Outfit
 		68577,	// Arcane Outfit
 		67868,	// Arctic Explorer Outfit
-//		0,		// Balthazar's Regalia
+		69607,	// Balthazar's Regalia Outfit
 		65195,	// Bloody Prince's Outfit
 		67040,	// Ceremonial Plated Outfit
 		64756,	// Cook's Outfit
@@ -103,11 +103,9 @@ exports = module.exports = function(req, res) {
 						
 						if(result) {
 							locals.skins = result;
-							console.log("Skins length: " + result.length);
 						}
 						if(result2) {
 							locals.outfits = result2;
-							console.log("Outfits length: " + result2.length);
 						}
 						if(result3) {
 							// Because I suck at combining two search words in one RegExp, I will have to do this shitty additional loop. Forgive me!
@@ -121,7 +119,6 @@ exports = module.exports = function(req, res) {
 							}
 							
 							locals.tonics = realResult3;
-							console.log("Tonics length: " + realResult3.length);
 						}
 						if(result4) {
 							locals.allSkins = result4;

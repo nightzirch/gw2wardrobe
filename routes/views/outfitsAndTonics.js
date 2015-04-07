@@ -13,7 +13,7 @@ exports = module.exports = function(req, res) {
 		66279,	// Ancestral Outfit
 		68577,	// Arcane Outfit
 		67868,	// Arctic Explorer Outfit
-//		0,		// Balthazar's Regalia
+		69607,	// Balthazar's Regalia Outfit
 		65195,	// Bloody Prince's Outfit
 		67040,	// Ceremonial Plated Outfit
 		64756,	// Cook's Outfit
