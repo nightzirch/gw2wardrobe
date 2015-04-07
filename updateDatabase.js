@@ -4,15 +4,11 @@ var keystone = require('keystone'),
 	db = monk('localhost:27017/guild-wars-2-wardrobe'),
 	async = require('async'),
 	request = require('request'),
-	n,
-	force = false;
+	n;
 
 process.argv.forEach(function(val, index, array) {
 	if(index == "n") {
 		n = val;
-	}
-	if(index == "f") {
-		force = true;
 	}
 });
 
@@ -68,7 +64,7 @@ function requestSkins() {
 		for(var i = 0; i < skinsListArr.length; i++){
 			// If not already in database
 			var id = skinsListArr[i];
-			if(skinsDbArr.indexOf(parseInt(id)) == -1 || force) {
+			if(skinsDbArr.indexOf(parseInt(id)) == -1) {
 				// Add to queue
 				skinQueue.push(id);
 			}
@@ -88,7 +84,7 @@ function requestItems() {
 		for(var i = 0; i < itemsListArr.length; i++){
 			// If not already in database
 			var id = itemsListArr[i];
-			if(itemsDbArr.indexOf(parseInt(id)) == -1 || force) {
+			if(itemsDbArr.indexOf(parseInt(id)) == -1) {
 				// Add to queue
 				itemQueue.push(id);
 			}
