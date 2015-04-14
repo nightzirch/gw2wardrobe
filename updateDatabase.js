@@ -4,6 +4,7 @@ var keystone = require('keystone'),
 	db = monk('localhost:27017/guild-wars-2-wardrobe'),
 	async = require('async'),
 	request = require('request'),
+	cheerio = require('cheerio'),
 	n;
 
 process.argv.forEach(function(val, index, array) {
@@ -18,6 +19,8 @@ if(n == undefined) {
 
 var baseUrlSkins = "https://api.guildwars2.com/v2/skins/",
 	baseUrlItems = "https://api.guildwars2.com/v2/items/",
+	baseUrlWiki = "http://wiki.guildwars2.com/wiki/",
+	baseUrlImages = "http://wiki.guildwars2.com",
 	skinsListArr,
 	skinsArr = new Array(),
 	skinsCollection = db.get("skins"),
@@ -106,10 +109,10 @@ var skinQueue = async.queue(function (doc, callback) {
 		// Adding skin to skinsArr
 		skinsArr.push(skin);
 		
-		// Adding skin to database
-		writeToDatabase(skin, "skin");
+		// Adding skin to wiki queue which later will add to database
+		wikiSkinQueue.push(skin);
 		
-		// Callback I have no idea is doing
+		// Callback which I have no idea what is doing
     	callback(error, skin);
     })
 },n);
@@ -134,7 +137,7 @@ var itemQueue = async.queue(function (doc, callback) {
 		// Adding skin to database
 		writeToDatabase(item, "item");
 		
-		// Callback I have no idea is doing
+		// Callback which I have no idea what is doing
     	callback(error, item);
     })
 },n);
@@ -142,6 +145,66 @@ var itemQueue = async.queue(function (doc, callback) {
 // On complete
 itemQueue.drain = function() {
     console.log('All items have been processed.');
+}
+
+var wikiSkinQueue = async.queue(function (doc, callback) {
+    request({
+		url: getWikiUrl(doc)
+	}, function(error, response, body){
+		var skin = doc;
+		var write = true;
+		
+		console.log("Wiki site fetched for skin with id: " + skin.id);
+		
+		// Load into cheerio
+		var $ = cheerio.load(body);
+		
+		// If wiki page has content
+		if($(".noarticletext").length == 0) {
+			var acquisition;
+			
+			// If there is a recipe section
+			
+			
+			// If there is an Acquisition section
+				// If there is a recipe inside Acquisition section
+			
+				// ul
+			
+				// table
+				
+			
+			// Fetch the big images
+			skin.images = getLargeImages($("img"));
+		}
+		
+		// If there is no content, we might just be looking at the wrong page
+		else {
+			// Just make sure this wont be an infinite loop.
+			// If the wikiUrl does not contain the word "Skin"
+			skin.wikiUrl = getWikiUrl(skin);
+			
+			if(skin.wikiUrl.indexOf("Skin") == -1 && skin.wikiUrl.indexOf("skin") == -1) {
+				skin.wikiUrl = skin.wikiUrl + " Skin";
+				wikiSkinQueue.push(skin);
+				
+				write = false;
+			}
+		}
+		
+		// Adding skin to database
+		if(write == true) {
+			writeToDatabase(skin, "skin");
+		}
+		
+		// Callback which I have no idea what is doing
+    	callback(error, skin);
+    })
+},n);
+
+// On complete
+wikiSkinQueue.drain = function() {
+    console.log('All wiki sites for skins have been processed.');
 }
 
 function writeToDatabase(item, type) {
@@ -164,7 +227,8 @@ function writeToDatabase(item, type) {
 				weight_class: (item.details && item.details.weight_class) ? item.details.weight_class : ""
 			},
 			typeUrl: getTypeUrl(item),
-			wikiUrl: getWikiUrl(item)
+			wikiUrl: getWikiUrl(item),
+			images: item.images ? item.images : []
 		}, function(err, doc) {
 			console.log("Skin added to database with id: " + doc.skinid);
 		});
@@ -283,9 +347,45 @@ function getTypeUrl(item) {
 function getWikiUrl(item) {
 	if(!item.wikiUrl && item.name) {
 		return "http://wiki.guildwars2.com/wiki/" + item.name;
-	} else {
-		return "";
+	} else if (item.wikiUrl){
+		return item.wikiUrl;
 	}
+}
+
+function getLargeImages(imgArr) {
+	var newImgArr = new Array();
+	var minSize = 50;
+	
+	console.log("Parsing wiki page with imgArr: " + imgArr.length);
+	
+	for(var i = 0; i < imgArr.length; i++) {
+		var img = imgArr[i];
+		
+		if(img.attribs.width > minSize && img.attribs.height > minSize) {
+			var thumbStr = "/thumb/";
+			var url = img.attribs.src;
+			var index = url.indexOf(thumbStr);
+			
+			// Is this a thumb sized image?
+			if(index > -1) {
+				// Lets get the big version
+				var url1 = url.substring(0, index);
+				var url2 = url.substring(index + thumbStr.length-1);
+				url = baseUrlImages + url1 + url2;
+				
+				var urlArr = url.split("/");
+				urlArr.pop();
+				
+				url = urlArr.join("/");
+			}
+			
+			newImgArr.push(url);
+			
+			console.log("Image URL: " + url);
+		}
+	}
+	
+	return newImgArr;
 }
 
 
