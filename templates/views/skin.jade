@@ -60,18 +60,28 @@ block content
 
 				.section
 					h5 Popular outfits using #{skin.name}
-
+            
 			if (items.length > 0)
 				.col.s12.m4.l3
 					.section
 						h5 Items using this skin
 						ul.list-with-items
+							- var itemCount = 0;
 							each item in items
-								a(href= skin.wikiUrl)
+								- itemCount++;
+								
+								if itemCount <= 5
+									a(href= skin.wikiUrl)
+										li
+											.valign-wrapper.left-align
+												img(src= item.icon)
+												span.valign= item.name
+												
+							if itemCount > 5
+								a.grey-text
 									li
-										.valign-wrapper.left-align
-											img(src= item.icon)
-											span.valign= item.name
+										.center-align
+											span And #{itemCount} more
 	else
 		.row
 			.col.s12
