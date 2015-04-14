@@ -1,0 +1,53 @@
+extends ../layouts/default
+
+block content
+	.row
+		.col.s12.m8.l9
+			.row.first-profile-row
+				.col.s12.m4.l3: .section
+					img.profile-image(src= profile.image)
+				.col.s12.m8.l9: .section
+					h5= profile.username
+					p Member since #{profile.registered}.
+
+			.divider
+
+			.row
+				.col.s12: .section
+					- var progressionPercentage = ((profile.wardrobe.length / allSkins.length) * 100).toFixed(1) + "%";
+
+					h5 Wardrobe Progression (#{progressionPercentage})
+
+					.progress.red.lighten-5
+						.determinate.red(style={width: progressionPercentage})
+
+					p #{profile.username} have 
+						strong #{profile.wardrobe.length} 
+						| skins in their wardrobe, leaving them with 
+						strong #{allSkins.length - profile.wardrobe.length} 
+						| more skins to collect!
+
+			.divider
+
+			.row
+				.col.s12: .section
+					h5 About
+					if (profile.about)
+						p= profile.about
+					else
+						p.grey-text #{profile.username} have not yet added any information about themselves.
+
+		.col.s12.m4.l3
+			h5 #{profile.username}'s outfits
+			ul.list-with-items
+				if outfits
+					//-each outfit in outfits
+						a(href="#")
+							li
+								.valign-wrapper.left-align
+									img(src= outfit.icon)
+									span.valign= outfit.name
+				else
+					li
+						.left-align
+							span No outfits

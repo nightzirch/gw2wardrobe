@@ -17,7 +17,8 @@ block content
 				tbody
 					each profile in users
 						tr
-							td= profile.username
+							td
+								a(href="/user/#{profile.username}")= profile.username
 							if profile.wardrobe.length > 0
 								td #{((profile.wardrobe.length / allSkins.length) * 100).toFixed(1)}%
 							else
