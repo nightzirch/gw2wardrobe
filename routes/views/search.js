@@ -6,9 +6,6 @@ exports = module.exports = function(req, res) {
 	var view = new keystone.View(req, res),
 		locals = res.locals;
 	
-	var q,
-		q2;
-	
 	locals.armorTypes = {
 		"Helm": "Helmet",
 		"Shoulders": "Shoulders",

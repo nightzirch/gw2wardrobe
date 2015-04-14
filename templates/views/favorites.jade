@@ -2,25 +2,119 @@ extends ../layouts/default
 
 block content
 	.row
-		if user
-			.col.s12.m8.l9.collapsible(data-collapsible="")
-				each value, key in types
-					.section.scrollspy.category-container.active(id= key)
-						.collapsible-header
-							h4= value
-								i.mdi-navigation-expand-less
-						.items-container.collapsible-body(style="display: block;")
-							each skin in skins
-								if (skin.type == key)
-									+skin(skin)
-									
-			.col.hide-on-small-only.m4.l3
-				ul.section.table-of-contents
-					each value, key in types
-						li: a(href="#" + key)= value
+		- var categories = new Array();
+		
+		.col.s12.m8.l9.collapsible(data-collapsible="")
+			- var armorSkins = new Array();
+			- var weaponSkins = new Array();
+			- each skin in skins 
+				- 	if(skin.type == "Armor") {
+				- 		armorSkins.push(skin);
+				- 	} else if(skin.type == "Weapon") {
+				-		weaponSkins.push(skin);
+				-	}
+			- var tonicsArr = new Array();
+			- var endlessTonicsArr = new Array();
+			- each tonic in tonics
+				-	if (tonic.type == "Consumable") {
+				- 		tonicsArr.push(tonic);
+				-	} else if(tonic.type == "Gizmo") {
+				-		endlessTonicsArr.push(tonic);
+				-	}
+			
+			if armorSkins.length > 0
+				.section
+					h3 Armor
+
+					.divider
+
+					each value, key in armorTypes
+						- var armors = new Array();
+						- each skin in skins
+							- if(skin.details.type == key) {
+							- 		armors.push(skin);
+							- 	}
 						
-		else
-			p You need to have a user and to be logged in to use the favorite feature.
+						if armors.length > 0
+							- categories.push({value: value, key: key});
+							
+							.section.scrollspy.category-container.active(id= key)
+								.collapsible-header
+									h4= value
+										i.mdi-navigation-expand-less
+								.items-container.collapsible-body(style="display: block;")
+									each skin in skins
+										if (skin.details.type == key)
+											+skin(skin)
+			
+			if weaponSkins.length > 0
+				.section
+					h3 Weapons
+
+					.divider
+
+					each value, key in weaponTypes
+						- var weapons = new Array();
+						- each skin in skins
+							- if(skin.details.type == key) {
+							- 		weapons.push(skin);
+							- 	}
+						
+						if weapons.length > 0
+							- categories.push({value: value, key: key});
+							
+							.section.scrollspy.category-container.active(id= key)
+								.collapsible-header
+									h4= value
+										i.mdi-navigation-expand-less
+								.items-container.collapsible-body(style="display: block;")
+									each skin in skins
+										if (skin.details.type == key)
+											+skin(skin)
+											
+			if (outfits.length > 0 || tonics.length > 0)
+				.section
+					h3 Outfits and tonics
+
+					.divider
+						
+					if outfits.length > 0
+						- categories.push({value: "Outfits", key: "outfits"});
+
+						.section.scrollspy.category-container.active(id="outfits")
+							.collapsible-header
+								h4 Outfits
+									i.mdi-navigation-expand-less
+							.items-container.collapsible-body(style="display: block;")
+								each outfit in outfits
+									+item(outfit)
+								
+					if tonicsArr.length > 0
+						- categories.push({value: "Tonics", key: "tonics"});
+
+						.section.scrollspy.category-container.active(id="tonics")
+							.collapsible-header
+								h4 Tonics
+									i.mdi-navigation-expand-less
+							.items-container.collapsible-body(style="display: block;")
+								each tonic in tonicsArr
+									+item(tonic)
+
+					if endlessTonicsArr.length > 0
+						- categories.push({value:"Endless tonics", key: "endless-tonics"});
+
+						.section.scrollspy.category-container.active(id="endless-tonics")
+							.collapsible-header
+								h4 Endless tonics
+									i.mdi-navigation-expand-less
+							.items-container.collapsible-body(style="display: block;")
+								each tonic in endlessTonicsArr
+									+item(tonic)
+											
+		.col.hide-on-small-only.m4.l3
+			ul.section.table-of-contents
+				each category in categories
+					li: a(href="#" + category.key)= category.value
 
 block js
 	script(src="/js/chatcode.js")

@@ -9,54 +9,54 @@ function favoriteClick(el) {
 	var favoriteClass = "favoritted";
 	var favoritted = $(el).hasClass(favoriteClass);
 	
-	var skinid = $(el).data("itemid");
-	var skinname = $(el).data("itemname");
+	var itemid = $(el).data("itemid");
+	var itemname = $(el).data("itemname");
 	
 	if(!favoritted) {
 		// Let's add current skin to favorites.
 		// First update the class
-		updateClass(el, true, favoriteClass, skinid);
+		updateClass(el, true, favoriteClass, itemid);
 		
 		// Then, lets update the badge number
 		updateBadge(true);
 		
 		// Show toast
-		wardrobe.toast(skinname + " added to favorites.");
+		wardrobe.toast(itemname + " added to favorites.");
 		
 		// Then, let's update the database
-		ajaxCallFavorite(skinid, true);
+		ajaxCallFavorite(itemid, true);
 	} else {
 		// Let's remove current skin from favorites.
 		// First update the class
-		updateClass(el, false, favoriteClass, skinid);
+		updateClass(el, false, favoriteClass, itemid);
 		
 		// Then, lets update the badge number
 		updateBadge(false);
 		
 		// Show toast
-		wardrobe.toast(skinname + " removed from favorites.");
+		wardrobe.toast(itemname + " removed from favorites.");
 		
 		// Then, let's update the database
-		ajaxCallFavorite(skinid, false);
+		ajaxCallFavorite(itemid, false);
 	}
 }
 
-function updateClass(el, makeFavorite, favoriteClass, skinid) {
+function updateClass(el, makeFavorite, favoriteClass, itemid) {
 	if(makeFavorite) {
 		$(el).addClass(favoriteClass);
-		$("div[data-itemid=" + skinid + "]").addClass(favoriteClass);
+		$("div[data-itemid=" + itemid + "]").addClass(favoriteClass);
 	} else {
 		$(el).removeClass(favoriteClass);
-		$("div[data-itemid=" + skinid + "]").removeClass(favoriteClass);
+		$("div[data-itemid=" + itemid + "]").removeClass(favoriteClass);
 	}
 }
 
-function ajaxCallFavorite(skinid, val) {
+function ajaxCallFavorite(itemid, val) {
 	$.ajax({
 		type: "POST",
-		url: "/skin/" + skinid + "/favorite",
+		url: "/skin/" + itemid + "/favorite",
 		data: {
-			"skinid": skinid,
+			"itemid": itemid,
 			"favorite": val
 		}
 	});

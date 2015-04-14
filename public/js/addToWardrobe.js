@@ -9,48 +9,48 @@ function addClick(el) {
 	var ownedClass = "owned";
 	var owned = $(el).hasClass(ownedClass);
 	
-	var skinid = $(el).data("skinid");
-	var skinname = $(el).data("skinname");
+	var itemid = $(el).data("itemid");
+	var itemname = $(el).data("itemname");
 	
 	if(!owned) {
 		// Let's add current skin to user wardrobe.
 		// First update the class
-		updateClass(el, true, ownedClass, skinid);
+		updateClass(el, true, ownedClass, itemid);
 		
 		// Show toast
-		wardrobe.toast(skinname + " added to wardrobe.");
+		wardrobe.toast(itemname + " added to wardrobe.");
 		
 		// Then, let's update the database
-		ajaxCallWardrobe(skinid, true);
+		ajaxCallWardrobe(itemid, true);
 	} else {
 		// Let's remove current skin from favorites.
 		// First update the class
-		updateClass(el, false, ownedClass, skinid);
+		updateClass(el, false, ownedClass, itemid);
 		
 		// Show toast
-		wardrobe.toast(skinname + " removed from wardrobe.");
+		wardrobe.toast(itemname + " removed from wardrobe.");
 		
 		// Then, let's update the database
-		ajaxCallWardrobe(skinid, false);
+		ajaxCallWardrobe(itemid, false);
 	}
 }
 
-function updateClass(el, owned, ownedClass, skinid) {
+function updateClass(el, owned, ownedClass, itemid) {
 	if(owned) {
 		$(el).addClass(ownedClass);
-		$("div[data-skinid=" + skinid + "]").addClass(ownedClass);
+		$("div[data-itemid=" + itemid + "]").addClass(ownedClass);
 	} else {
 		$(el).removeClass(ownedClass);
-		$("div[data-skinid=" + skinid + "]").removeClass(ownedClass);
+		$("div[data-itemid=" + itemid + "]").removeClass(ownedClass);
 	}
 }
 
-function ajaxCallWardrobe(skinid, val) {
+function ajaxCallWardrobe(itemid, val) {
 	$.ajax({
 		type: "POST",
-		url: "/skin/" + skinid + "/owned",
+		url: "/skin/" + itemid + "/owned",
 		data: {
-			"skinid": skinid,
+			"itemid": itemid,
 			"owned": val
 		}
 	});
