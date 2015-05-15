@@ -15,7 +15,7 @@ User.add({
 	registered: { type: Types.Datetime, required: true, default: Date.now},
 	about: { type: Types.Textarea },
 	image: { type: Types.Url, default: "http://placehold.it/128" },
-	apiKey: { type: String, initial: false, required: false }
+	token: { type: String, initial: false, required: false }
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
 });
