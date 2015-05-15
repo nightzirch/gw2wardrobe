@@ -46,8 +46,7 @@ exports = module.exports = function(app) {
 	app.get('/favorites', routes.views.favorites);
 	
 	app.get('/outfits-and-tonics', routes.views.outfitsAndTonics);
-//	app.get('/outfit/:itemid', routes.views.outfit);
-//	app.get('/tonic/:itemid', routes.views.tonic);
+	app.get('/item/:itemid', routes.views.item);
 	
 	app.get('/skin/:skinid', routes.views.skin);
 	app.post('/skin/:skinid/favorite', routes.views.skinFavorite);

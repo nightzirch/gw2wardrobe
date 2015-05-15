@@ -81,7 +81,8 @@ Item.add({
 });
 
 Item.schema.add({
-	restrictions: { type: [String] }
+	restrictions: { type: [String] },
+	images: { type: [String] }
 });
 
 /**

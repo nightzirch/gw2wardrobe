@@ -1,0 +1,61 @@
+extends ../layouts/default
+
+block content
+	if(item)
+		- var noImages = (item.images.length == 0);
+		if(!noImages)
+			.row.images-container: .col
+				each image in item.images
+					.image-container
+						a(href= image)
+							img(src= image)
+		.row.links-container(class=noImages ? "negative-margin-top" : ""): .col
+			a.linkChatCode.waves-effect.waves-light.btn.red.darken-4(data-itemid= item.itemid, data-type="item", data-itemname= item.name)
+				i.mdi-communication-chat.left
+				| Copy chat code
+
+			if user
+				- for(var i = 0; i < user.favorites.length; i++) {
+				- 	var favoritted = (user.favorites.indexOf(item.itemid) > -1) ? true : false;
+				- }
+				a.linkFavorite.waves-effect.waves-light.btn.grey(href="#", class=favoritted ? "favoritted" : "", data-itemid= item.itemid)
+					.favoriteFalse
+						i.mdi-action-favorite-outline.left
+						| Add to favorites
+					.favoriteTrue
+						i.mdi-action-favorite.left
+						| Remove from favorites
+
+			if item.wikiUrl
+				a.waves-effect.waves-light.btn.grey(href= item.wikiUrl)
+					i.mdi-action-info-outline.left
+					| Wiki
+			
+		.row
+			.col.s12.m8.l9
+				if(item.description)
+					.section
+						h5 Description
+						p= item.description
+
+				if(item.description && item.acquisition)
+					.divider
+
+				if(item.acquisition)
+					.section
+						h5 Acquisition
+						p= item.acquisition
+            
+			.col.s12.m4.l3
+				.section
+					h5 Details
+						
+	else
+		.row
+			.col.s12
+				.section
+					p No items found with this ID.	
+								
+block js
+	script(src="/js/chatcode.js")
+	script(src="/js/favorite.js")

@@ -44,21 +44,9 @@ block content
 							p.grey-text You have not yet added any information about yourself.
 
 			.col.s12.m4.l3
-				h5 Your outfits
-				ul.list-with-items
-					if outfits
-						//-each outfit in outfits
-							a(href="#")
-								li
-									.valign-wrapper.left-align
-										img(src= outfit.icon)
-										span.valign= outfit.name
-					else
-						a(href="#")
-							li
-								.valign-wrapper.left-align
-									i.mdi-content-add.left
-									span.valign Create outfit
+				h5 Empty sidebar
+				p For now...
+				
 	else
 		.row: .col.s12
 			p You need to have a user and to be logged in to see your profile.
