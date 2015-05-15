@@ -19,6 +19,7 @@ exports = module.exports = function(req, res) {
 		64756,	// Cook's Outfit
 		68684,	// Crystal Nomad Outfit
 		65194,	// Executioner's Outfit
+		69623,	// Exemplar Attire Outfit
 		65198,	// Fancy Winter Outfit
 		67374,	// Hexed Outfit
 		68654,	// Imperial Outfit
