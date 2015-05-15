@@ -14,7 +14,10 @@ mixin menu-items
 						div.collapsible-body
 							ul
 								each subitem in link.subitems
-									li(class=(section == subitem.key ? 'active' : null))
+									- var classes = new Array();
+									- if(section == subitem.key) {classes.push("active")}
+									- if(subitem.hideOnSmall) {classes.push("hide-on-small-only")}
+									li(class= classes)
 										a(href=subitem.href)= subitem.label
 											if link.badge
 												span.badge(id= link.badge.id, class=link.badge.new ? "new" : "")= link.badge.content
@@ -35,7 +38,10 @@ mixin menu-items
 							div.collapsible-body
 								ul
 									each subitem in link.subitems
-										li(class=(section == subitem.key ? 'active' : null))
+										- var classes = new Array();
+										- if(section == subitem.key) {classes.push("active")}
+										- if(subitem.hideOnSmall) {classes.push("hide-on-small-only")}
+										li(class= classes)
 											a(href=subitem.href)= subitem.label
 			else
 				li(class=(section == link.key ? 'active' : null))

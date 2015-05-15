@@ -26,13 +26,13 @@ exports.initLocals = function(req, res, next) {
 	locals.navLinks = [
 		{ label: 'Home',		key: 'home',		href: '/' },
 		{ label: 'Armors',		key: 'armors',		href: '#',	subitems: [
-			{ label: 'All weights',	key: 'armors',				href: '/armors' },
+			{ label: 'All weights',	key: 'armors',				href: '/armors',	hideOnSmall: true },
 			{ label: 'Light',		key: 'armors-light',		href: '/armors/light' },
 		 	{ label: 'Medium',		key: 'armors-medium',		href: '/armors/medium' },
 			{ label: 'Heavy',		key: 'armors-heavy',		href: '/armors/heavy' }
 		]},
 		{ label: 'Weapons',		key: 'weapons',		href: '#',	subitems: [
-			{ label: 'All weapons',		key: 'weapons',		href: '/weapons' },
+			{ label: 'All weapons',		key: 'weapons',					href: '/weapons',	hideOnSmall: true },
 			{ label: 'Two-handed',		key: 'weapons-twohanded',		href: '/weapons/twohanded' },
 		 	{ label: 'One-handed',		key: 'weapons-onehanded',		href: '/weapons/onehanded' },
 			{ label: 'Off hand',		key: 'weapons-offhand',			href: '/weapons/offhand' }
