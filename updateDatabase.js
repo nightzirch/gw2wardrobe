@@ -66,8 +66,8 @@ function requestSkins() {
 
 		for(var i = 0; i < skinsListArr.length; i++){
 			// If not already in database
-			var id = skinsListArr[i];
-			if(skinsDbArr.indexOf(parseInt(id)) == -1) {
+			var id = parseInt(skinsListArr[i]);
+			if(skinsDbArr.indexOf(id) == -1) {
 				// Add to queue
 				skinQueue.push(id);
 			}
@@ -86,8 +86,8 @@ function requestItems() {
 
 		for(var i = 0; i < itemsListArr.length; i++){
 			// If not already in database
-			var id = itemsListArr[i];
-			if(itemsDbArr.indexOf(parseInt(id)) == -1) {
+			var id = parseInt(itemsListArr[i]);
+			if(itemsDbArr.indexOf(id) == -1) {
 				// Add to queue
 				itemQueue.push(id);
 			}
@@ -100,7 +100,7 @@ function requestItems() {
 var skinQueue = async.queue(function (doc, callback) {
     request({
 		baseUrl: baseUrlSkins,
-		url: doc
+		url: doc.toString()
 	}, function(error, response, body){
 		// Skin fetched and parsed
 		var skin = JSON.parse(body);
@@ -125,7 +125,7 @@ skinQueue.drain = function() {
 var itemQueue = async.queue(function (doc, callback) {
     request({
 		baseUrl: baseUrlItems,
-		url: doc
+		url: doc.toString()
 	}, function(error, response, body){
 		// Skin fetched and parsed
 		var item = JSON.parse(body);
