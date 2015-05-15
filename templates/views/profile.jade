@@ -45,7 +45,19 @@ block content
 
 			.col.s12.m4.l3
 				h5 Response from v2/account
-				p= JSON.stringify(tokenResponse)
+				if tokenResponse
+					each val, key in tokenResponse
+						if typeof(val) == "object"
+							p: strong #{key}:
+							ul
+								each subval in val
+									li= subval
+						else
+							p
+								strong= key
+								| : #{val}
+				else
+					p No API Token added to profile
 				
 	else
 		.row: .col.s12

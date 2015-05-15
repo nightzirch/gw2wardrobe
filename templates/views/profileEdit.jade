@@ -21,6 +21,12 @@ block content
 				input#image.validate(type="text", name="image", value= user.image)
 				label(for="image") Profile Image (URL for now...)
 			.input-field.col.s12
+				input#token.validate(type="text", name="token", value= user.token)
+				label(for="token") API Token
+			
+				
+				
+			.input-field.col.s12
 				input#password.validate(type="password", name="password", disabled)
 				label(for="password") New password
 			.input-field.col.s12

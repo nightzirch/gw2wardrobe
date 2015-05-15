@@ -15,6 +15,7 @@ exports = module.exports = function(req, res) {
 		username: req.body.username,
 		email: req.body.email,
 		image: req.body.image,
+		token: req.body.token,
 		password: req.body.password,
 		password2: req.body.password2,
 		about: req.body.about
@@ -27,6 +28,7 @@ exports = module.exports = function(req, res) {
 			username: locals.form.username,
 			email: locals.form.email,
 			image: locals.form.image,
+			token: locals.form.token,
 			about: locals.form.about
 		}
 	});
