@@ -6,6 +6,9 @@ exports = module.exports = function(req, res) {
 	var view = new keystone.View(req, res),
 		locals = res.locals;
 	
+	var successfulRequests = 0;
+	var allRequests = 3;
+	
 	if(req.user) {
 		locals.user = req.user;
 		locals.title = locals.user.username;
@@ -13,6 +16,8 @@ exports = module.exports = function(req, res) {
 			id: locals.user._id
 		}
 		locals.tokenResponse = null;
+		locals.characters = null;
+		locals.transactions = null;
 		
 		var q = keystone.list('User').model.findOne({
 			_id: locals.filters.id
@@ -40,6 +45,49 @@ exports = module.exports = function(req, res) {
 				locals.tokenResponse = error;
 			} else {
 				locals.tokenResponse = JSON.parse(body);
+				console.log(locals.tokenResponse);
+			}
+			
+			requestCallback();
+		});
+	} else {
+		requestCallback();
+	}
+	
+	
+	// Lets fetch /v2/characters from the API
+	if(locals.user.token) {
+		request.get('https://api.guildwars2.com/v2/characters', {
+			'auth': {
+				'bearer': locals.user.token
+			}
+		}, function(error, response, body) {
+			if(error) {
+				locals.characters = error;
+			} else {
+				locals.characters = JSON.parse(body);
+				console.log(locals.characters);
+			}
+			
+			requestCallback();
+		});
+	} else {
+		requestCallback();
+	}
+	
+	
+	// Lets fetch /v2/commerce/transactions from the API
+	if(locals.user.token) {
+		request.get('https://api.guildwars2.com/v2/commerce/transactions', {
+			'auth': {
+				'bearer': locals.user.token
+			}
+		}, function(error, response, body) {
+			if(error) {
+				locals.transactions = error;
+			} else {
+				locals.transactions = JSON.parse(body);
+				console.log(locals.transactions);
 			}
 			
 			requestCallback();
@@ -49,37 +97,41 @@ exports = module.exports = function(req, res) {
 	}
 	
 	function requestCallback() {
-		view.on('init', function(next) {
-			q2.exec(function(err2, result2) {
-				if(req.user) {
-					q.exec(function(err, result) {
-						locals.user = result;
-						locals.allSkins = result2;
+		successfulRequests++;
+		
+		if(successfulRequests == allRequests) {
+			view.on('init', function(next) {
+				q2.exec(function(err2, result2) {
+					if(req.user) {
+						q.exec(function(err, result) {
+							locals.user = result;
+							locals.allSkins = result2;
 
-						// If there are no results
-						if(!result) {
-							req.flash('error', "No armors were found in the database.");
-						}
+							// If there are no results
+							if(!result) {
+								req.flash('error', "No armors were found in the database.");
+							}
 
-						next(err);
-					});
-				} else {
-					q.exec(function(err, result) {
-						locals.allSkins = result2;
+							next(err);
+						});
+					} else {
+						q.exec(function(err, result) {
+							locals.allSkins = result2;
 
-						// If there are no results
-						if(!result) {
-							req.flash('error', "No armors were found in the database.");
-						}
+							// If there are no results
+							if(!result) {
+								req.flash('error', "No armors were found in the database.");
+							}
 
-						next(err);
-					});
-				}
+							next(err);
+						});
+					}
+				});
 			});
-		});
 
-		// Render the view
-		view.render('profile');
+			// Render the view
+			view.render('profile');
+		}
 	}
 };
 
