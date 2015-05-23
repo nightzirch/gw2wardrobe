@@ -7,7 +7,7 @@ exports = module.exports = function(req, res) {
 		locals = res.locals;
 	
 	var successfulRequests = 0;
-	var allRequests = 3;
+	var allRequests = 2;
 	
 	if(req.user) {
 		locals.user = req.user;
@@ -17,7 +17,6 @@ exports = module.exports = function(req, res) {
 		}
 		locals.tokenResponse = null;
 		locals.characters = null;
-		locals.transactions = null;
 		
 		var q = keystone.list('User').model.findOne({
 			_id: locals.filters.id
@@ -57,7 +56,7 @@ exports = module.exports = function(req, res) {
 	
 	// Lets fetch /v2/characters from the API
 	if(locals.user.token) {
-		request.get('https://api.guildwars2.com/v2/characters', {
+		request.get('https://api.guildwars2.com/v2/characters?page=0&page_size=200', {
 			'auth': {
 				'bearer': locals.user.token
 			}
@@ -67,27 +66,6 @@ exports = module.exports = function(req, res) {
 			} else {
 				locals.characters = JSON.parse(body);
 				console.log(locals.characters);
-			}
-			
-			requestCallback();
-		});
-	} else {
-		requestCallback();
-	}
-	
-	
-	// Lets fetch /v2/commerce/transactions from the API
-	if(locals.user.token) {
-		request.get('https://api.guildwars2.com/v2/commerce/transactions', {
-			'auth': {
-				'bearer': locals.user.token
-			}
-		}, function(error, response, body) {
-			if(error) {
-				locals.transactions = error;
-			} else {
-				locals.transactions = JSON.parse(body);
-				console.log(locals.transactions);
 			}
 			
 			requestCallback();

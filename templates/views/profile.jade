@@ -45,53 +45,12 @@ block content
 
 			.col.s12.m4.l3
 				h5 Response from v2/account
-				if tokenResponse
-					each val, key in tokenResponse
-						if typeof(val) == "object"
-							p: strong #{key}:
-							ul
-								each subval in val
-									li= subval
-						else
-							p
-								strong= key
-								| : #{val}
-				else
-					p No API Token added to profile
+				+apiResponse(tokenResponse)
 				
 				.divider
 				
 				h5 Response from v2/characters
-				if characters
-					each val, key in characters
-						if typeof(val) == "object"
-							p: strong #{key}:
-							ul
-								each subval in val
-									li= subval
-						else
-							p
-								strong= key
-								| : #{val}
-				else
-					p No API Token added to profile
-				
-				.divider
-				
-				h5 Response from v2/commerce/transactions
-				if transactions
-					each val, key in transactions
-						if typeof(val) == "object"
-							p: strong #{key}:
-							ul
-								each subval in val
-									li= subval
-						else
-							p
-								strong= key
-								| : #{val}
-				else
-					p No API Token added to profile
+				+apiResponse(characters)
 				
 	else
 		.row: .col.s12

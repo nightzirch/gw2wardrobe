@@ -1,0 +1,16 @@
+mixin apiResponse(data)
+	if data
+		each val, key in data
+			if typeof(val) == "object"
+				p: strong #{key}:
+				ul
+					each subval, subkey in val
+						li
+							strong= subkey
+							| : #{subval}
+			else
+				p
+					strong= key
+					| : #{val}
+	else
+		p No API Token added to profile
