@@ -6,9 +6,18 @@ block content
 			.row.first-profile-row
 				.col.s12.m4.l3: .section
 					img.profile-image(src= profile.image)
+				
 				.col.s12.m8.l9: .section
 					h5= profile.username
 					p Member since #{profile.registered}.
+				
+				.col.s12.m8.l9: .section
+					h5 About
+					if (profile.about)
+						p= profile.about
+					else
+						p.grey-text #{profile.username} have not yet added any information about themselves.
+				
 				.col.s12.m8.l9
 					- var progressionPercentage = ((profile.wardrobe.length / allSkins.length) * 100).toFixed(1) + "%";
 
@@ -25,17 +34,7 @@ block content
 
 			.divider
 
-			.row
-				.col.s12: .section
-					h5 About
-					if (profile.about)
-						p= profile.about
-					else
-						p.grey-text #{profile.username} have not yet added any information about themselves.
-			
 			if profile.token && characters
-				.divider
-
 				.row
 					.col.s12: .section.character-section
 						h5 Characters

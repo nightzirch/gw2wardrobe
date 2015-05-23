@@ -2,8 +2,15 @@ mixin character(character)
 	.character
 		.waves-effect.waves-light.z-depth-1
 			a
+				.character-class-container
+					.character-class
+						- var image = character.profession.toLowerCase();
+						img(src="/images/classes/#{image}.png")
+					.character-class-grayscale
+						- var image = character.profession.toLowerCase() + "-grayscale";
+						img(src="/images/classes/#{image}.png")
 				.character-image-container
-					- var image = (character.race + "-" + character.gender).toLowerCase() + ".png";
-					img(src="/images/#{image}")
+					- var image = (character.race + "-" + character.gender).toLowerCase();
+					img(src="/images/portraits/#{image}.png")
 				.character-name-container
 					span= character.name

@@ -201,6 +201,24 @@ header {
 		.character {
 			display: inline-block;
 			
+			.character-class-container {
+				position: absolute;
+				top: 5px;
+				left: 5px;
+				
+				.character-class {
+					display: none;
+				}
+				
+				.character-class-grayscale {
+					display: block;
+				}
+			}
+			
+			.character-image-container img {
+				opacity: .75;
+			}
+			
 			.character-name-container {
 				position: absolute;
 				bottom: 0;
@@ -210,6 +228,22 @@ header {
 				padding: 5px 5px 0 5px;
 				background-color: rgba(0,0,0,.8);
 				color: #fff;
+			}
+		}
+		
+		.character:hover {
+			.character-class-container {
+				.character-class {
+					display: block;
+				}
+
+				.character-class-grayscale {
+					display: none;
+				}
+			}
+			
+			.character-image-container img {
+				opacity: 1;
 			}
 		}
 	}
