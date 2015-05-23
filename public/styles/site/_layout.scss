@@ -204,9 +204,12 @@ header {
 			.character-name-container {
 				position: absolute;
 				bottom: 0;
-				max-width: 160px;
+				width: 160px;
+				height: 65px;
 				font-size: 20px;
 				padding: 5px 5px 0 5px;
+				background-color: rgba(0,0,0,.8);
+				color: #fff;
 			}
 		}
 	}

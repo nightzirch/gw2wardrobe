@@ -6,6 +6,9 @@ block content
 			a#profile-save.waves-effect.waves-light.btn.red.darken-4(href="/profile/edit")
 				i.mdi-editor-mode-edit.left
 				| Edit profile
+			a#profile-profile.waves-effect.waves-light.btn.grey(href="/user/#{user.username}")
+				i.mdi-social-public.left
+				| Public profile
 
 		.row
 			.col.s12.m8.l9
@@ -15,11 +18,7 @@ block content
 					.col.s12.m8.l9: .section
 						h5= user.username
 						p Member since #{user.registered}.
-
-				.divider
-				
-				.row
-					.col.s12: .section
+					.col.s12.m8.l9
 						- var progressionPercentage = ((user.wardrobe.length / allSkins.length) * 100).toFixed(1) + "%";
 						
 						h5 Wardrobe Progression (#{progressionPercentage})
@@ -47,7 +46,7 @@ block content
 					.divider
 
 					.row
-						.col.s12: .section
+						.col.s12: .section.character-section
 							h5 Characters
 							each character in characters
 								+character(character)
