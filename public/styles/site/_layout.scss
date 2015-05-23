@@ -192,10 +192,29 @@ header {
 		}
 	}
 	
+	.character-section {
+		.character, .character > div {
+			width: 160px;
+			height: 160px;
+		}
+		
+		.character {
+			display: inline-block;
+			
+			.character-name-container {
+				position: absolute;
+				bottom: 0;
+				max-width: 160px;
+				font-size: 20px;
+				padding: 5px 5px 0 5px;
+			}
+		}
+	}
+	
 	.row > .collapsible {
 		border: none;
 		margin: 0;
-		@include box-shadow(none);
+		box-shadow: none;
 		
 		.category-container {
 			padding: 0;

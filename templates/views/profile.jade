@@ -42,6 +42,16 @@ block content
 							p= user.about
 						else
 							p.grey-text You have not yet added any information about yourself.
+				
+				if user.token && characters
+					.divider
+
+					.row
+						.col.s12: .section
+							h5 Characters
+							each character in characters
+								+character(character)
+						
 
 			.col.s12.m4.l3
 				if user.token
