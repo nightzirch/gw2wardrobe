@@ -2,18 +2,14 @@ extends ../layouts/default
 
 block content
 	.row
-		.col.s12.m8.l9
+		.col.s12
 			.row.first-profile-row
 				.col.s12.m4.l3: .section
 					img.profile-image(src= profile.image)
 				.col.s12.m8.l9: .section
 					h5= profile.username
 					p Member since #{profile.registered}.
-
-			.divider
-
-			.row
-				.col.s12: .section
+				.col.s12.m8.l9
 					- var progressionPercentage = ((profile.wardrobe.length / allSkins.length) * 100).toFixed(1) + "%";
 
 					h5 Wardrobe Progression (#{progressionPercentage})
@@ -36,18 +32,12 @@ block content
 						p= profile.about
 					else
 						p.grey-text #{profile.username} have not yet added any information about themselves.
+			
+			if user.token && characters
+				.divider
 
-		.col.s12.m4.l3
-			h5 #{profile.username}'s outfits
-			ul.list-with-items
-				if outfits
-					//-each outfit in outfits
-						a(href="#")
-							li
-								.valign-wrapper.left-align
-									img(src= outfit.icon)
-									span.valign= outfit.name
-				else
-					li
-						.left-align
-							span No outfits
+				.row
+					.col.s12: .section.character-section
+						h5 Characters
+						each character in characters
+							+character(character)
