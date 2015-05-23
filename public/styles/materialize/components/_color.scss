@@ -332,9 +332,8 @@ $grey: (
 );
 
 $shades: (
-  "black":        #000000,
-  "white":        #FFFFFF,
-  "transparent":  transparent
+  "black":      #000000,
+  "white":      #FFFFFF
 );
 
 $colors: (
@@ -377,7 +376,7 @@ $colors: (
     @else {
       .#{$color_name}.#{$color_type} {
         background-color: $color_value !important;
-      }
+      }      
       .#{$color_name}-text.text-#{$color_type} {
         color: $color_value !important;
       }

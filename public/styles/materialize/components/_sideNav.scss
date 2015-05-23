@@ -1,4 +1,4 @@
-.side-nav {
+ul.side-nav {
   position: fixed;
   width: 240px;
   left: -105%;
@@ -6,11 +6,9 @@
   margin: 0;
   height: 100%;
   height: calc(100% + 60px);
-  height: -moz-calc(100%); //Temporary Firefox Fix
   padding-bottom: 60px;
-  background-color: $sidenav-bg-color;
+  background-color: #FFF;
   z-index: 999;
-  overflow-y: auto;
 
   @extend .z-depth-1;
   will-change: left;
@@ -29,16 +27,11 @@
 
   li {
     float: none;
-    padding: 0 $sidenav-padding-right;
+    padding: 0 15px;
     &:hover, &.active { background-color: #ddd; }
   }
   a {
     color: #444;
-    display: block;
-    font-size: 1rem;
-    height: 64px;
-    line-height: 64px;
-    padding: 0 $sidenav-padding-right;
   }
 }
 
@@ -54,17 +47,17 @@
 
 
 // Hidden side-nav for all sizes
-.side-nav.fixed {
+ul.side-nav.fixed {
   a {
     display: block;
-    padding: 0 $sidenav-padding-right;
+    padding: 0 15px;
     color: #444;
   }
 }
 
 
 // Fixed side-nav shown
-.side-nav.fixed {
+ul.side-nav.fixed {
   left: 0;
   position: fixed;
 
@@ -77,7 +70,7 @@
 
 // Fixed sideNav hide on smaller
 @media #{$medium-and-down} {
-  .side-nav.fixed {
+  ul.side-nav.fixed {
     left: -105%;
 
     &.right-aligned {
@@ -88,20 +81,20 @@
 }
 
 
-.side-nav .collapsible-body li.active,
-.side-nav.fixed .collapsible-body li.active {
+ul.side-nav .collapsible-body li.active,
+ul.side-nav.fixed .collapsible-body li.active {
   background-color: $primary-color;
   a {
-    color: $sidenav-bg-color;
+    color: #fff;
   }
 }
 
 
 #sidenav-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
 
   height: 120vh;
   background-color: rgba(0,0,0,.5);
