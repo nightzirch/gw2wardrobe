@@ -44,13 +44,17 @@ block content
 							p.grey-text You have not yet added any information about yourself.
 
 			.col.s12.m4.l3
-				h5 Response from v2/account
-				+apiResponse(tokenResponse)
-				
-				.divider
-				
-				h5 Response from v2/characters
-				+apiResponse(characters)
+				if user.token
+					h5 Response from v2/account
+					+apiResponse(tokenResponse)
+
+					.divider
+
+					h5 Response from v2/characters
+					+apiResponse(characters)
+				else
+					h5 Reponse from API v2
+					p No API Token added to profile
 				
 	else
 		.row: .col.s12
