@@ -9,6 +9,17 @@ mixin character(character)
 					.character-class-grayscale
 						- var image = character.profession.toLowerCase() + "-grayscale";
 						img(src="/images/classes/#{image}.png")
+				.character-race-container
+					.character-race
+						- var image = character.race.toLowerCase();
+						img(src="/images/races/#{image}.png")
+					.character-race-grayscale
+						- var image = character.race.toLowerCase() + "-grayscale";
+						img(src="/images/races/#{image}.png")
+				.character-level-container
+					.character-level-background
+					.character-level
+						span= character.level
 				.character-image-container
 					- var image = (character.race + "-" + character.gender).toLowerCase();
 					img(src="/images/portraits/#{image}.png")

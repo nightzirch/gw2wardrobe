@@ -201,9 +201,14 @@ header {
 		.character {
 			display: inline-block;
 			
-			.character-class-container {
+			.character-class-container, .character-race-container {
 				position: absolute;
 				top: 5px;
+				z-index: 999;
+				opacity: .75;
+			}
+			
+			.character-class-container {
 				left: 5px;
 				
 				.character-class {
@@ -212,6 +217,41 @@ header {
 				
 				.character-class-grayscale {
 					display: block;
+				}
+			}
+			
+			.character-race-container {
+				left: 30px;
+				
+				.character-race {
+					display: none;
+				}
+				
+				.character-race-grayscale {
+					display: block;
+				}
+			}
+			
+			.character-level-container {
+				position: absolute;
+				z-index: 999;
+				top: 0;
+				right: 0;
+				
+				.character-level {
+					position: absolute;
+					top: 0;
+					right: 0;
+					margin: 7px;
+					color: #fff;
+				}
+				
+				.character-level-background {
+					height: 80px;
+					width: 80px;
+					@include rotate(45deg);
+					background: color("red", "darken-4");
+					margin: -40px -40px 0 0;
 				}
 			}
 			
@@ -233,11 +273,25 @@ header {
 		
 		.character:hover {
 			.character-class-container {
+				opacity: 1;
+				
 				.character-class {
 					display: block;
 				}
 
 				.character-class-grayscale {
+					display: none;
+				}
+			}
+			
+			.character-race-container {
+				opacity: 1;
+				
+				.character-race {
+					display: block;
+				}
+
+				.character-race-grayscale {
 					display: none;
 				}
 			}
