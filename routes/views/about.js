@@ -10,21 +10,6 @@ exports = module.exports = function(req, res) {
 	locals.section = 'about';
 	locals.title = 'About';
 	
-	q = keystone.list('Skin').model.find().sort("name");
-	
-	view.on('init', function(next) {
-		q.exec(function(err, result) {
-			locals.allSkins = result;
-
-			// If there are no results
-			if(!result) {
-				req.flash('error', "No armors were found in the database.");
-			}
-
-			next(err);
-		});
-	});
-	
 	// Render the view
 	view.render('about');
 	

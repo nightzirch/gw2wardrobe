@@ -86,30 +86,22 @@ exports = module.exports = function(req, res) {
 		}
 	}).where("itemid").in(locals.user.favorites).sort("name");
 	
-	// allSkins
-	q4 = keystone.list('Skin').model.find();
-	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
 			q2.exec(function(err2, result2) {
 				q3.exec(function(err3, result3) {
-					q4.exec(function(err4, result4) {
-						if(result) {
-							locals.skins = result;
-						}
-						if(result2) {
-							locals.outfits = result2;
-						}
-						if(result3) {
-							locals.tonics = result3;
-						}
-						if(result4) {
-							locals.allSkins = result4;
-						}
+					if(result) {
+						locals.skins = result;
+					}
+					if(result2) {
+						locals.outfits = result2;
+					}
+					if(result3) {
+						locals.tonics = result3;
+					}
 
-						next(err);
-					});
+					next(err);
 				});
 			});
 		});

@@ -32,9 +32,6 @@ exports = module.exports = function(req, res) {
 		}).sort("name");
 	}
 	
-	q2 = keystone.list('Skin').model.find().sort("name");
-	
-	
 	// Armor weights
 	if (req.params.weight) {
 		locals.armorTypes = {
@@ -96,17 +93,14 @@ exports = module.exports = function(req, res) {
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
-			q2.exec(function(err2, result2) {
-				locals.skins = result;
-				locals.allSkins = result2;
+			locals.skins = result;
 
-				// If there are no results
-				if(!result) {
-					req.flash('error', "No armors were found in the database.");
-				}
+			// If there are no results
+			if(!result) {
+				req.flash('error', "No armors were found in the database.");
+			}
 
-				next(err);	
-			});
+			next(err);
 		});
 	});
 	

@@ -17,26 +17,12 @@ exports = module.exports = function(req, res) {
 		_id: locals.filters.id
 	});
 	
-	q2 = keystone.list('Skin').model.find().sort("name");
-	
 	view.on('init', function(next) {
 		q2.exec(function(err2, result2) {
 			if(req.user) {
 				q.exec(function(err, result) {
 					locals.user = result;
-					locals.allSkins = result2;
 
-					// If there are no results
-					if(!result) {
-						req.flash('error', "No armors were found in the database.");
-					}
-
-					next(err);
-				});
-			} else {
-				q.exec(function(err, result) {
-					locals.allSkins = result2;
-					
 					// If there are no results
 					if(!result) {
 						req.flash('error', "No armors were found in the database.");

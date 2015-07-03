@@ -47,18 +47,13 @@ exports = module.exports = function(req, res) {
 		}
 	}).sort("name");
 	
-	var q3 = keystone.list('Skin').model.find();
-	
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
 			q2.exec(function(err2, result2) {
-				q3.exec(function(err3, result3) {
-					locals.outfits = result;
-					locals.tonics = result2;
-					locals.allSkins = result3;
+				locals.outfits = result;
+				locals.tonics = result2;
 
-					next(err);
-				});
+				next(err);
 			});
 		});
 	});

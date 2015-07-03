@@ -16,8 +16,6 @@ exports = module.exports = function(req, res) {
 		itemid: locals.itemid
 	});
 	
-	q2 = keystone.list('Skin').model.find().sort("name");
-	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
@@ -25,7 +23,6 @@ exports = module.exports = function(req, res) {
 				if(result) {
 					locals.title = result.name;
 					locals.item = result;
-					locals.allSkins = result2;
 
 					// If there are no results
 					if(!result2) {

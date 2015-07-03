@@ -9,17 +9,13 @@ exports = module.exports = function(req, res) {
 	locals.section = "users";
 	
 	q = keystone.list('User').model.find().sort("name");
-	q2 = keystone.list('Skin').model.find().sort("name");
 	
 	// Get the projects
 	view.on('init', function(next) {
 		q2.exec(function(err2, result2) {
-			q.exec(function(err, result) {
-				locals.users = result;
-				locals.allSkins = result2;
+			locals.users = result;
 
-				next(err);
-			});
+			next(err);
 		});
 		
 	});

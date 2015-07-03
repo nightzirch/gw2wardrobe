@@ -38,7 +38,7 @@ exports.initLocals = function(req, res, next) {
 			{ label: 'Off hand',		key: 'weapons-offhand',			href: '/weapons/offhand' }
 		]},
 		{ label: 'Outfits and tonics',		key: 'outfits-and-tonics',		href: '/outfits-and-tonics' },
-		{ label: 'Users',		key: 'users',		href: '/users' },
+//		{ label: 'Users',		key: 'users',		href: '/users' },
 		{ label: 'About',		key: 'about',		href: '/about' }
 	];
 	
@@ -47,8 +47,8 @@ exports.initLocals = function(req, res, next) {
 			{ label: 'Favorites',		key: 'favorites',		href: '/favorites',		badge:
 				{ id: "badge-favorites", content: req.user.favorites.length, new: false }
 			},
-			{ label: 'Profile',		key: 'profile',		href: '/profile',	badge:
-				{ id: "badge-completion", content: req.user.wardrobe.length, new: false }
+			{ label: 'Profile',		key: 'profile',		href: '/profile'//,	badge:
+//				{ id: "badge-completion", content: req.user.wardrobe.length, new: false }
 			}
 		];
 	}

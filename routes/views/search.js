@@ -88,42 +88,34 @@ exports = module.exports = function(req, res) {
 		}
 	}).where("type").in(["Consumable", "Gizmo"]).sort("name");
 	
-	// allSkins
-	q4 = keystone.list('Skin').model.find().sort("name");
-	
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
 			q2.exec(function(err2, result2) {
 				q3.exec(function(err3, result3) {
-					q4.exec(function(err4, result4) {
-						console.log(locals.tonicRegex);
-						
-						if(result) {
-							locals.skins = result;
-						}
-						if(result2) {
-							locals.outfits = result2;
-						}
-						if(result3) {
-							// Because I suck at combining two search words in one RegExp, I will have to do this shitty additional loop. Forgive me!
-							var realResult3 = new Array();
-							
-							for(var i = 0; i < result3.length; i++) {
-								var regexp = new RegExp(locals.query, "i");
-								if(result3[i].name.match(regexp)) {
-									realResult3.push(result3[i]);
-								}
+					console.log(locals.tonicRegex);
+
+					if(result) {
+						locals.skins = result;
+					}
+					if(result2) {
+						locals.outfits = result2;
+					}
+					if(result3) {
+						// Because I suck at combining two search words in one RegExp, I will have to do this shitty additional loop. Forgive me!
+						var realResult3 = new Array();
+
+						for(var i = 0; i < result3.length; i++) {
+							var regexp = new RegExp(locals.query, "i");
+							if(result3[i].name.match(regexp)) {
+								realResult3.push(result3[i]);
 							}
-							
-							locals.tonics = realResult3;
-						}
-						if(result4) {
-							locals.allSkins = result4;
 						}
 
-						next(err);
-					});
+						locals.tonics = realResult3;
+					}
+
+					next(err);
 				});
 			});
 		});

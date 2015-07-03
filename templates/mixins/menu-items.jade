@@ -47,9 +47,11 @@ mixin menu-items
 				li(class=(section == link.key ? 'active' : null))
 					a.waves-effect.waves-red(href=link.href)= link.label
 						if link.badge
-							if link.badge.id == "badge-completion"
+							span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= link.badge.content
+							
+							//if link.badge.id == "badge-completion"
 								span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= ((link.badge.content / allSkins.length) * 100).toFixed(1) + "%"
-							else
+							//else
 								span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= link.badge.content
 					
 		li: a(href='/keystone/signout') Sign Out
