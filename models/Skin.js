@@ -14,8 +14,8 @@ Skin.add({
 	skinid: { type: Number, required: true, index: true, default: 0 },
 	name: { type: String, required: true, index: true },
 	added: {
-		datetime: { type: Types.Datetime, required: true, default: Date.now},
-		build: { type: Number, required: true, default: 0},
+		datetime: { type: Types.Datetime},
+		build: { type: Number},
 	},
 	type: { type: String },
 	typeUrl: { type: String },

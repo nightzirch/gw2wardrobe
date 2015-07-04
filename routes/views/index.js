@@ -10,7 +10,7 @@ exports = module.exports = function(req, res) {
 	locals.section = 'home';
 	locals.title = 'Guild Wars 2 Wardrobe';
 	
-	q = keystone.list('Skin').model.find().sort("name");
+	q = keystone.list('Skin').model.find().sort("name").limit(20);
 	
 	view.on('init', function(next) {
 		q.exec(function(err, result) {

@@ -17,6 +17,7 @@ block content
 				| , if you find any bugs or have any suggestions as to how this site could be improved.
 				
 	.row
-		.col.s12
+		.col.s12.collapsible
 			h1 Newest skins
-			p Here will be a list of the skins added in the latest patch.
+			each skin in skins
+				+skin(skin)
