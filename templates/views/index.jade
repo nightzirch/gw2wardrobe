@@ -1,16 +1,13 @@
 extends ../layouts/default
 
 block content
-	.row
-		.col.s12
-			h3 Search skins
-			
-			form.col.s12
-				.row
-					.input-field.col.s6
-						i.material-icons.prefix account_circle
-						input#search-big(type="text")
-						label(for="search-big") Search skins
+	.row.container#search-big-container
+		form.col.s12#searchBigForm(onsubmit="wardrobe.search.init(this)")
+			.row
+				.input-field.col.s12
+					i.mdi-action-search.prefix
+					input#search-big(type="text")
+					label(for="search-big") Search skins
 	.row
 		.col.s12.collapsible
 			h3 Newest skins

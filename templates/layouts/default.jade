@@ -90,7 +90,7 @@ html
 						a#sidenav-collapse.hide-on-large-only(href="#", data-activates="slide-out")
 							i.mdi-navigation-menu
 						a.left.page-title= (headerTitle) ? headerTitle : title
-						form#searchForm.right(onsubmit="wardrobe.search.init()")
+						form#searchForm.right(onsubmit="wardrobe.search.init(this)")
 							.input-field.hide-on-small-only
 								input#search(type="text", value= query ? query: "")
 								label(for="search")

@@ -55,15 +55,24 @@ var wardrobe = {
 	},
 	
 	search: {
-		init: function() {
-			var search = $("#search").val();
+		init: function(self) {
+			var searchID = self.getAttribute("id");
+			var searches = [["searchForm", "#search"], ["searchBigForm", "#search-big"]];
+			var search = "";
+			
+			for(var i = 0; i < searches.length; i++) {
+				if(searches[i][0] == searchID) {
+					search = $(searches[i][1]).val();
+				}
+			}
+			
 			console.log(search);
 			location.pathname = "/search/" + search;
 			
 			return false;
 		},
 		listener: function() {
-			$("#searchForm").on("submit", function() {
+			$("#searchForm, #searchBigForm").on("submit", function() {
 				return false;
 			});
 		}
