@@ -1,6 +1,6 @@
 mixin flash-messages(messages)
 	if messages
-		#flash-messages.container
+		#flash-messages
 			each message in messages.info
 				+flash-message(message, 'info')
 			each message in messages.success
@@ -10,7 +10,7 @@ mixin flash-messages(messages)
 			each message in messages.error
 				+flash-message(message, 'danger')
 				
-mixin flash-message(message, type)
+//mixin flash-message(message, type)
 	div(class='alert alert-' + type)
 		if utils.isObject(message)
 			if message.title
@@ -23,3 +23,29 @@ mixin flash-message(message, type)
 						li= item
 		else
 			= message
+
+mixin flash-message(message, type)
+	.row.flash-message
+		.col.s12.z-depth-1
+			if utils.isObject(message)
+				if message.title
+					- var type = type ? type : "";
+					- var bgClass;
+					case type
+						when "info"
+							- bgClass = ["light-blue", "accent-3", "white-text"];
+						when "success"
+							- bgClass = ["light-green", "white-text"];
+						when "warning"
+							- bgClass = ["amber", "darken-1", "white-text"];
+						when "danger"
+							- bgClass = ["red", "darken-4", "white-text"];
+						default
+							- bgClass = "";
+					
+					.flash-message-title(class= bgClass)
+						h5!= message.title
+				if message.detail
+					.flash-message-detail!= message.detail
+			else
+				.flash-message-detail= message
