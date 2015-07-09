@@ -114,6 +114,13 @@ exports = module.exports = function(req, res) {
 
 						locals.tonics = realResult3;
 					}
+					
+					if((locals.skins.length == locals.outfits.length) && (locals.outfits.length == locals.tonics.length) && (locals.tonics.length == 0)) {
+						req.flash('error', {
+							title: "No matches",
+							detail: '<p>The search for "' + locals.query + '" returned no matches.</p>'
+						});
+					}
 
 					next(err);
 				});

@@ -19,21 +19,14 @@ exports = module.exports = function(req, res) {
 	// Get the projects
 	view.on('init', function(next) {
 		q.exec(function(err, result) {
-			q2.exec(function(err2, result2) {
-				if(result) {
-					locals.title = result.name;
-					locals.item = result;
+			if(result) {
+				locals.title = result.name;
+				locals.item = result;
+			} else {
+				locals.title = "Guild Wars 2 Wardrobe";
+			}
 
-					// If there are no results
-					if(!result2) {
-						req.flash('error', "No skins were found in the database.");
-					}
-				} else {
-					locals.title = "Guild Wars 2 Wardrobe";
-				}
-
-				next(err);
-			});
+			next(err);
 		});
 	});
 	
