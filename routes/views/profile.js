@@ -84,7 +84,7 @@ exports = module.exports = function(req, res) {
 						q.exec(function(err, result) {
 							locals.user = result;
 							locals.allSkins = result2;
-
+							
 							// If there are no results
 							if(!result) {
 								req.flash('error', "No armors were found in the database.");

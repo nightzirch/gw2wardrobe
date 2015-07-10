@@ -48,6 +48,13 @@ block content
 				if user.token && characters
 					.row
 						.col.s12: .section.character-section
+							.row.flash-message
+								.col.s12.z-depth-1
+									.flash-message-title.amber.darken-1.white-text
+										h5 Character details disabled
+									.flash-message-detail
+										p Details about characters will be disabled until new features go live. Stay tuned!
+							
 							h5 Characters
 							each character in characters
 								+character(character)
