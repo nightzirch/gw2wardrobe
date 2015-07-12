@@ -133,14 +133,29 @@ html
 		footer.page-footer
 			.row
 				.col.l6.s12
-					h5.white-text Footer Content
-					p.grey-text.text-lighten-4 You can use rows and columns here to organize your footer content.
+					h5.white-text Log in
+					form#loginForm.grey-text.text-lighten-4
+						.input-field.col.s5
+							input#loginUsername(type="text", name="loginUsername")
+							label(for="loginUsername") Username
+						.input-field.col.s5
+							input#loginPassword(type="password", name="loginPassword")
+							label(for="loginPassword") Password
+						.input-field.col.s2
+							button.btn.waves-effect.waves-light(type="submit") Log in
+					
 				.col.l4.offset-l2.s12
 					h5.white-text Links
 					ul
-						li: a.grey-text.text-lighten-3(href="#") Link
-						li: a.grey-text.text-lighten-3(href="#") Link
-						li: a.grey-text.text-lighten-3(href="#") Link
+						li: a.grey-text.text-lighten-3(href="mailto:mail (at) christiangrimsgaard.net?subject=gw2wardrobe: Bug report")
+							img.bug-report-icon(src="/images/icons/bug-report.svg")
+							|  Report a bug
+						li: a.grey-text.text-lighten-3(href="mailto:mail (at) christiangrimsgaard.net?subject=gw2wardrobe: Improvement suggestion")
+							i.mdi-action-thumb-up
+							|  Suggest an improvement
+						li: a.grey-text.text-lighten-3(href="#")
+							span.glyphicon.glyphicon-gift
+							|  Donate to support hosting cost
 			.footer-copyright
 				.row
 					#footer-logo-wrapper.valign-wrapper.col.s12.m12.l3
