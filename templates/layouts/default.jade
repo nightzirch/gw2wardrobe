@@ -132,27 +132,53 @@ html
 		//- FOOTER
 		footer.page-footer
 			.row
-				.col.l6.s12
-					h5.white-text Log in
-					form#loginForm.grey-text.text-lighten-4
-						.input-field.col.s5
-							input#loginUsername(type="text", name="loginUsername")
-							label(for="loginUsername") Username
-						.input-field.col.s5
-							input#loginPassword(type="password", name="loginPassword")
-							label(for="loginPassword") Password
-						.input-field.col.s2
-							button.btn.waves-effect.waves-light(type="submit") Log in
+				.col.m12.l8
+					if user
+						h5.white-text Hello #{user.username}!
+					else
+						.row
+							.col.l12
+								h5.white-text Things for cool people
+								form#loginForm.grey-text.text-lighten-4
+									.input-field.col.s5
+										input#loginUsername(type="text", name="loginUsername")
+										label(for="loginUsername") Username
+									.input-field.col.s5
+										input#loginPassword(type="password", name="loginPassword")
+										label(for="loginPassword") Password
+									.input-field.col
+										button.btn.waves-effect.grey.waves-light(type="submit", title="Sign in")
+											i.mdi-communication-vpn-key
+						.row
+							.col.l12
+								h5.white-text Not cool yet?
+								p.white-text Don't worry, there's still hope for you! By registering you get access to more awesome features, such as
+								ul
+									li.white-text
+										span.glyphicon.glyphicon-star
+										|  See which skins your account has unlocked and which you have not!
+									li.white-text
+										span.glyphicon.glyphicon-star
+										|  Favorite list! Discover skins and add them to your bucket list.
+									li.white-text
+										span.glyphicon.glyphicon-star
+										|  It's free! Where you really expecting to pay?
+									li.white-text
+										span.glyphicon.glyphicon-star
+										|  More features will come in the future!
+								p.white-text If you still have questions, check out the F.A.Q. or contact us. 
+									strong So what are you waiting for?
+								a.btn.waves-effect.waves-white Register
 					
-				.col.l4.offset-l2.s12
-					h5.white-text Links
+				.col.m12.l4
+					h5.white-text Clicky things
 					ul
 						li: a.grey-text.text-lighten-3(href="mailto:mail (at) christiangrimsgaard.net?subject=gw2wardrobe: Bug report")
 							img.bug-report-icon(src="/images/icons/bug-report.svg")
-							|  Report a bug
+							|  Squish a bug
 						li: a.grey-text.text-lighten-3(href="mailto:mail (at) christiangrimsgaard.net?subject=gw2wardrobe: Improvement suggestion")
 							i.mdi-action-thumb-up
-							|  Suggest an improvement
+							|  Suggest cool improvements
 						li: a.grey-text.text-lighten-3(href="#")
 							span.glyphicon.glyphicon-gift
 							|  Donate to support hosting cost
