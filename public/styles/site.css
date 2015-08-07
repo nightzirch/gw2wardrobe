@@ -8662,14 +8662,23 @@ header #slide-out {
       display: block; }
 
 footer.page-footer {
-  margin-left: 240px;
-  padding-top: 0;
-  margin-top: 0; }
+  margin-left: 240px; }
   footer.page-footer .bug-report-icon {
     height: 15px; }
   footer.page-footer .row {
     padding-left: 20px;
     padding-right: 20px; }
+  footer.page-footer #loginForm {
+    overflow: hidden; }
+    footer.page-footer #loginForm .input-field:first-child {
+      padding-left: 0; }
+    footer.page-footer #loginForm input[type=text],
+    footer.page-footer #loginForm input[type=password] {
+      margin-top: 5px;
+      padding: 0 5px; }
+    footer.page-footer #loginForm button[type=submit] {
+      margin-top: 5px;
+      height: 45px; }
   footer.page-footer #footer-content-wrapper {
     overflow: hidden; }
   footer.page-footer .footer-copyright {

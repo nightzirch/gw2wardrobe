@@ -5,17 +5,26 @@ var keystone = require('keystone'),
 	async = require('async'),
 	request = require('request'),
 	cheerio = require('cheerio'),
-	n;
+	program = require('commander'),
+	amount;
 
-process.argv.forEach(function(val, index, array) {
-	if(index == "n") {
-		n = val;
-	}
-});
+program
+	.version('0.0.1')
+	.option('-s, --skins', 'Update skins')
+	.option('-i, --items', 'Update items')
+	.option('-f, --force', 'Force overwrite')
+	.option('-n <n>', 'Amount of simultaneous requests', parseInt)
+	.action(function(n) {
+		if(!n || n = "") {
+			amount = 1; // Default value
+		} else {
+			amount = n;
+		}
+		
+		console.log('Amount of simultaneous requests: ' + n);
+	});
 
-if(n == undefined) {
-	n = 10;
-}
+program.parse(process.argv);
 
 var baseUrlSkins = "https://api.guildwars2.com/v2/skins/",
 	baseUrlItems = "https://api.guildwars2.com/v2/items/",
@@ -67,7 +76,7 @@ function requestSkins() {
 		for(var i = 0; i < skinsListArr.length; i++){
 			// If not already in database
 			var id = parseInt(skinsListArr[i]);
-			if(skinsDbArr.indexOf(id) == -1) {
+			if(skinsDbArr.indexOf(id) == -1 || program.force) {
 				// Add to queue
 				skinQueue.push(id);
 			}
@@ -87,7 +96,7 @@ function requestItems() {
 		for(var i = 0; i < itemsListArr.length; i++){
 			// If not already in database
 			var id = parseInt(itemsListArr[i]);
-			if(itemsDbArr.indexOf(id) == -1) {
+			if(itemsDbArr.indexOf(id) == -1 || program.force) {
 				// Add to queue
 				itemQueue.push(id);
 			}
@@ -115,7 +124,7 @@ var skinQueue = async.queue(function (doc, callback) {
 		// Callback which I have no idea what is doing
     	callback(error, skin);
     })
-},n);
+}, amount);
 
 // On complete
 skinQueue.drain = function() {
@@ -140,7 +149,7 @@ var itemQueue = async.queue(function (doc, callback) {
 		// Callback which I have no idea what is doing
     	callback(error, item);
     })
-},n);
+}, amount);
 
 // On complete
 itemQueue.drain = function() {
@@ -200,7 +209,7 @@ var wikiSkinQueue = async.queue(function (doc, callback) {
 		// Callback which I have no idea what is doing
     	callback(error, skin);
     })
-},n);
+}, amount);
 
 // On complete
 wikiSkinQueue.drain = function() {
@@ -390,5 +399,14 @@ function getLargeImages(imgArr) {
 
 
 // Start this shit!
-requestSkins();
-requestItems();
+if (program.skins) {
+	requestSkins();
+}
+
+if (program.items) {
+	requestItems();
+}
+
+if (!program.skins && !program.items) {
+	console.log('Neither skins nor items was updated. Type "-s" or "--skins" to update skins, and "-i" or "--items" to update items.');
+}

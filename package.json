@@ -12,7 +12,8 @@
 		"node-sass": "*",
 		"node-sass-middleware": "*", 
 		"dotenv": "~0.4.0",
-		"cheerio": "*"
+		"cheerio": "*",
+		"commander": "*"
 	},
 	"engines": {
 		"node": ">=0.10.22",
