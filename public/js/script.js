@@ -3,13 +3,13 @@ $(document).ready(function() {
 	wardrobe.nav.makeCollapsible();
 	wardrobe.nav.scrollspy();
 	wardrobe.nav.pushpin();
-	
+
 	wardrobe.tooltip.init();
-	
+
 	wardrobe.copy.init();
-	
+
 	wardrobe.search.listener();
-	
+
 	//wardrobe.footer.listener();
 	//wardrobe.footer.fixHeight();
 	//wardrobe.temp.hideEmpty();
@@ -25,7 +25,7 @@ var wardrobe = {
 		makeSlideable: function() {
 			$("#sidenav-collapse").sideNav();
 		},
-		
+
 		// Make Armors and Weapons in the navigation collapsible
 		makeCollapsible: function() {
 			var collapsibles = $("ul.collapsible");
@@ -39,12 +39,12 @@ var wardrobe = {
 				}
 			}
 		},
-		
+
 		// Activate Scrollspy
 		scrollspy: function() {
     		$('.scrollspy').scrollSpy();
 		},
-		
+
 		// Activates Pushpin to make the Scrollspy section fixed on the site
 		pushpin: function() {
 			var toc = $('.table-of-contents');
@@ -53,22 +53,22 @@ var wardrobe = {
 			}
 		}
 	},
-	
+
 	search: {
 		init: function(self) {
 			var searchID = self.getAttribute("id");
 			var searches = [["searchForm", "#search"], ["searchBigForm", "#search-big"]];
 			var search = "";
-			
+
 			for(var i = 0; i < searches.length; i++) {
 				if(searches[i][0] == searchID) {
 					search = $(searches[i][1]).val();
 				}
 			}
-			
+
 			console.log(search);
 			location.pathname = "/search/" + search;
-			
+
 			return false;
 		},
 		listener: function() {
@@ -77,18 +77,18 @@ var wardrobe = {
 			});
 		}
 	},
-	
+
 	tooltip: {
 		init: function() {
 			$('.tooltipped').tooltip({delay: 0});
 		}
 	},
-	
+
 	toast: function(message, duration) {
 		var dur = (duration) ? duration : 2000;
 		toast(message, dur);
 	},
-	
+
 	// Footer
 	footer: {
 		listener: function() {
@@ -111,17 +111,17 @@ var wardrobe = {
 			var footer = $("footer");
 			var cssId = "styleHeight";
 			var css = $("#" + cssId);
-			
+
 			// Set negative margin on the page-wrapper
 			$(pageWrap).css("margin-bottom", $(footer).height() * -1);
-			
+
 			// Create a new style tag, then remove the old one.
 			// This is such a dirty way to do it, but we can't modify pseudo-elements with JavaScript yet, so this is the next best thing, I guess...
 			$('<style id="' + cssId + '">.page-wrap:after{height: ' + $(footer).height() + 'px}</style>').appendTo('head');
 			$(css).remove();
 		}
 	},
-	
+
 	copy: {
 		activeId: 0,
 		init: function() {
@@ -129,25 +129,25 @@ var wardrobe = {
 //			wardrobe.copy.clipboard();
 //			wardrobe.copy.fixHover();
 		},
-		
+
 		listener: function() {
 			$(".linkChatCode").on("click", function(e) {
 				var code = chatcode(this);
 				var name = $(this).data("itemname");
 				var placeholder = "Chat code";
-				
+
 				wardrobe.modal({
 					title: name,
 					inputValue: code,
 					placeholder: placeholder
 				});
-				
+
 				$("#modal-input").blur();
 				$("#modal-input")[0].focus();
 				$("#modal-input")[0].select();
 			});
 		},
-		
+
 		clipboard: function() {
 			var client = new ZeroClipboard($(".linkChatCode"));
 
@@ -158,12 +158,12 @@ var wardrobe = {
 				});
 			});
 		},
-		
+
 		fixHover: function() {
 			$(".skin-item").on("hover", function() {
 				wardrobe.copy.activeId = $(this).data("id");
 			});
-			
+
 			$("#global-zeroclipboard-html-bridge").hover(function() {
 				$('div[data-id="' + wardrobe.copy.activeId + '"]').addClass("zeroclipboard-is-hover");
 			}, function() {
@@ -171,7 +171,7 @@ var wardrobe = {
 			});
 		}
 	},
-	
+
 	modal: function(options) {
 		var modal = $("#modal");
 		modal.find(".modal-header").html(options.title);
@@ -179,22 +179,22 @@ var wardrobe = {
 		modal.find(".modal-input").attr("value", options.inputValue);
 		modal.find(".modal-input").attr("placeholder", options.placeholder);
 		modal.find(".modal-input-placeholder").html(options.placeholder);
-		
+
 		modal.openModal();
 	},
-	
+
 	// Temporary functions
 	temp: {
 		hideEmpty: function() {
 			var itemsContainers = $(".categoryContainer .itemsContainer");
-			
+
 			for (var i = 0; i < itemsContainers.length; i++) {
 				var items = $(itemsContainers[i]).find(".skinItem");
-				
+
 				if ($(items).length <= 0) {
 					// Category section
 					$(itemsContainers[i]).parent().hide();
-					
+
 					// ScrollSpy item
 					$('.table-of-contents li a[href="#' + $(itemsContainers[i]).parent().attr("id") + '"]').parent().hide();
 				}

@@ -10,10 +10,11 @@
 		"request": "*",
 		"underscore": "~1.7.0",
 		"node-sass": "*",
-		"node-sass-middleware": "*", 
+		"node-sass-middleware": "*",
 		"dotenv": "~0.4.0",
 		"cheerio": "*",
-		"commander": "*"
+		"commander": "*",
+		"bcrypt-nodejs": "~0.0.3"
 	},
 	"engines": {
 		"node": ">=0.10.22",

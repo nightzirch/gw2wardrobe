@@ -13,13 +13,13 @@ keystone.init({
 
 	'name': 'Guild Wars 2 Wardrobe',
 	'brand': 'Guild Wars 2 Wardrobe',
-	
+
 	'sass': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	'view engine': 'jade',
-	
+
 	'auto update': true,
 	'session': true,
 	'auth': true,

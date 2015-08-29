@@ -15,12 +15,12 @@ program
 	.option('-f, --force', 'Force overwrite')
 	.option('-n <n>', 'Amount of simultaneous requests', parseInt)
 	.action(function(n) {
-		if(!n || n = "") {
+		if(n == null || n == "") {
 			amount = 1; // Default value
 		} else {
 			amount = n;
 		}
-		
+
 		console.log('Amount of simultaneous requests: ' + n);
 	});
 
@@ -42,26 +42,26 @@ var baseUrlSkins = "https://api.guildwars2.com/v2/skins/",
 // Find existing skins in database
 skinsCollection.find({}, function(err, docs) {
 	console.log("Fetching skin collection from database.");
-	
+
 	var skinsDbArrTemp = docs;
-	
+
 	for(var i = 0; i < skinsDbArrTemp.length; i++) {
 		skinsDbArr.push(skinsDbArrTemp[i].skinid);
 	}
-	
+
 	console.log("Done fetching skin collection. Length of array: " + skinsDbArrTemp.length);
 });
 
 // Find existing items in database
 itemsCollection.find({}, function(err, docs) {
 	console.log("Fetching items collection from database.");
-	
+
 	var itemsDbArrTemp = docs;
-	
+
 	for(var i = 0; i < itemsDbArrTemp.length; i++) {
 		itemsDbArr.push(itemsDbArrTemp[i].itemid);
 	}
-	
+
 	console.log("Done fetching items collection. Length of array: " + itemsDbArrTemp.length);
 });
 
@@ -114,13 +114,13 @@ var skinQueue = async.queue(function (doc, callback) {
 		// Skin fetched and parsed
 		var skin = JSON.parse(body);
 		console.log("Skin fetched with id: " + skin.id);
-		
+
 		// Adding skin to skinsArr
 		skinsArr.push(skin);
-		
+
 		// Adding skin to wiki queue which later will add to database
 		wikiSkinQueue.push(skin);
-		
+
 		// Callback which I have no idea what is doing
     	callback(error, skin);
     })
@@ -139,13 +139,13 @@ var itemQueue = async.queue(function (doc, callback) {
 		// Skin fetched and parsed
 		var item = JSON.parse(body);
 		console.log("Item fetched with id: " + item.id);
-		
+
 		// Adding skin to skinsArr
 		itemsArr.push(item);
-		
+
 		// Adding skin to database
 		writeToDatabase(item, "item");
-		
+
 		// Callback which I have no idea what is doing
     	callback(error, item);
     })
@@ -162,50 +162,50 @@ var wikiSkinQueue = async.queue(function (doc, callback) {
 	}, function(error, response, body){
 		var skin = doc;
 		var write = true;
-		
+
 		console.log("Wiki site fetched for skin with id: " + skin.id);
-		
+
 		// Load into cheerio
 		var $ = cheerio.load(body);
-		
+
 		// If wiki page has content
 		if($(".noarticletext").length == 0) {
 			var acquisition;
-			
+
 			// If there is a recipe section
-			
-			
+
+
 			// If there is an Acquisition section
 				// If there is a recipe inside Acquisition section
-			
+
 				// ul
-			
+
 				// table
-				
-			
+
+
 			// Fetch the big images
 			skin.images = getLargeImages($("img"));
 		}
-		
+
 		// If there is no content, we might just be looking at the wrong page
 		else {
 			// Just make sure this wont be an infinite loop.
 			// If the wikiUrl does not contain the word "Skin"
 			skin.wikiUrl = getWikiUrl(skin);
-			
+
 			if(skin.wikiUrl.indexOf("Skin") == -1 && skin.wikiUrl.indexOf("skin") == -1) {
 				skin.wikiUrl = skin.wikiUrl + " Skin";
 				wikiSkinQueue.push(skin);
-				
+
 				write = false;
 			}
 		}
-		
+
 		// Adding skin to database
 		if(write == true) {
 			writeToDatabase(skin, "skin");
 		}
-		
+
 		// Callback which I have no idea what is doing
     	callback(error, skin);
     })
@@ -258,7 +258,7 @@ function writeToDatabase(item, type) {
 				ShowInWardrobe: (item.flags.indexOf("ShowInWardrobe") == -1) ? true : false,
 				NoCost: (item.flags.indexOf("NoCost") == -1) ? true : false,
 				HideIfLocked: (item.flags.indexOf("HideIfLocked") == -1) ? true : false,
-				
+
 				AccountBindOnUse: (item.flags.indexOf("AccountBindOnUse") == -1) ? true : false,
 				AccountBound: (item.flags.indexOf("AccountBound") == -1) ? true : false,
 				HideSuffix: (item.flags.indexOf("HideSuffix") == -1) ? true : false,
@@ -316,7 +316,7 @@ function writeToDatabase(item, type) {
 			console.log("Item added to database with id: " + doc.itemid);
 		});
 	}
-	
+
 }
 
 function getWeaponCategory(item) {
@@ -364,36 +364,36 @@ function getWikiUrl(item) {
 function getLargeImages(imgArr) {
 	var newImgArr = new Array();
 	var minSize = 50;
-	
+
 	console.log("Parsing wiki page with imgArr: " + imgArr.length);
-	
+
 	for(var i = 0; i < imgArr.length; i++) {
 		var img = imgArr[i];
-		
+
 		if(img.attribs.width > minSize && img.attribs.height > minSize) {
 			var thumbStr = "/thumb/";
 			var url = img.attribs.src;
 			var index = url.indexOf(thumbStr);
-			
+
 			// Is this a thumb sized image?
 			if(index > -1) {
 				// Lets get the big version
 				var url1 = url.substring(0, index);
 				var url2 = url.substring(index + thumbStr.length-1);
 				url = baseUrlImages + url1 + url2;
-				
+
 				var urlArr = url.split("/");
 				urlArr.pop();
-				
+
 				url = urlArr.join("/");
 			}
-			
+
 			newImgArr.push(url);
-			
+
 			console.log("Image URL: " + url);
 		}
 	}
-	
+
 	return newImgArr;
 }
 

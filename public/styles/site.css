@@ -8362,6 +8362,8 @@ header .nav-wrapper {
   padding-left: 30px; }
   header .nav-wrapper a.page-title {
     font-size: 32px; }
+  header .nav-wrapper label[for=search] {
+    margin-left: -30px; }
 
 header #sidenav-collapse {
   padding-right: 20px; }
@@ -8396,6 +8398,8 @@ header #slide-out {
   #body ul li {
     padding: inherit;
     margin-left: 8px; }
+  #body ul.featuresList li {
+    list-style: initial; }
   #body .flash-message .flash-message-title {
     margin: 0 -11px;
     padding: 1px 0 1px 11px; }
@@ -8468,7 +8472,8 @@ header #slide-out {
     width: 160px;
     height: 160px; }
   #body .character-section .character {
-    display: inline-block; }
+    display: inline-block;
+    margin-bottom: 4px; }
     #body .character-section .character .character-class-container, #body .character-section .character .character-race-container {
       position: absolute;
       top: 5px;
@@ -8622,10 +8627,10 @@ header #slide-out {
         height: 64px;
         width: 64px; }
       #body .row > .collapsible .skin-item img {
-        opacity: .75; }
+        opacity: .5; }
       #body .row > .collapsible .skin-item .skin-item-toolbar {
         width: 64px;
-        margin-top: -36px;
+        margin-top: -30px;
         background-color: rgba(0, 0, 0, 0.8);
         display: none;
         position: absolute;
@@ -8647,6 +8652,8 @@ header #slide-out {
           display: none; }
         #body .row > .collapsible .skin-item .skin-item-toolbar a.linkFavorite.favoritted .favoriteTrue {
           display: block; }
+        #body .row > .collapsible .skin-item .skin-item-toolbar a.linkChatCode {
+          margin-left: 20px; }
         #body .row > .collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe {
           display: inline-block; }
           #body .row > .collapsible .skin-item .skin-item-toolbar a.linkAddToWardrobe .ownedFalse {
@@ -8660,6 +8667,8 @@ header #slide-out {
     #body .row > .collapsible .skin-item:hover .skin-item-toolbar,
     #body .row > .collapsible .skin-item.zeroclipboard-is-hover .skin-item-toolbar {
       display: block; }
+  #body #modal {
+    z-index: 999; }
 
 footer.page-footer {
   margin-left: 240px; }

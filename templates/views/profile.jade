@@ -9,58 +9,62 @@ block content
 			//a#profile-profile.waves-effect.waves-light.btn.grey(href="/user/#{user.username}")
 				i.mdi-social-public.left
 				| Public profile
+			a#profile-update.waves-effect.waves-light.btn.light-blue.accent-3
+				i.mdi-action-autorenew.left
+				| Update unlocked skins
 
 		.row
-			.col.s12.m8.l9
+			.col.s12
 				.row.first-profile-row
 					.col.s12.m4.l3: .section
 						img.profile-image(src= user.image)
 					.col.s12.m8.l9: .section
 						h5= user.username
 						p Member since #{user.registered}.
-					
+
 					.col.s12.m8.l9: .section
 						h5 About
 						if (user.about)
 							p= user.about
 						else
 							p.grey-text You have not yet added any information about yourself.
-					
+
 					.col.s12.m8.l9: .section
 						- var progressionPercentage = ((user.wardrobe.length / allSkins.length) * 100).toFixed(1) + "%";
-						
+
 						h5 Wardrobe Progression (#{progressionPercentage})
-						
+
 						.progress.red.lighten-5
 							.determinate.red(style={width: progressionPercentage})
-						
-						p You have 
-							strong #{user.wardrobe.length} 
-							| skins in your wardrobe, leaving you with 
-							strong #{allSkins.length - user.wardrobe.length} 
-							| more skins to collect!
-				
+
+						p You have
+							strong  #{user.wardrobe.length}
+							|  skins in your wardrobe, leaving you with
+							strong  #{allSkins.length - user.wardrobe.length}
+							|  more skins to collect!
+
 				.divider
-				
+
 				.row
-					
-				
+
+
 				if user.token && characters
 					.row
 						.col.s12: .section.character-section
-							.row.flash-message
-								.col.s12.z-depth-1
-									.flash-message-title.amber.darken-1.white-text
-										h5 Character details disabled
-									.flash-message-detail
-										p Details about characters will be disabled until new features go live. Stay tuned!
-							
+							+flash-message(
+								{
+									title: 'Character details disabled',
+									detail: '<p>A detail page for characters is not developed yet, so for now take a look at this pretty list of your characters.</p>'
+								},
+								'warning'
+							)
+
 							h5 Characters
 							each character in characters
 								+character(character)
-						
 
-			.col.s12.m4.l3
+
+			//.col.s12.m4.l3
 				if user.token
 					h5 Response from v2/account
 					+apiResponse(tokenResponse)
@@ -69,10 +73,18 @@ block content
 
 					h5 Response from v2/characters
 					+apiResponse(characters)
+
+					.divider
+
+					h5 Response from v2/account/skins
+					p= unlockedSkins
 				else
 					h5 Reponse from API v2
 					p No API Token added to profile
-				
+
 	else
 		.row: .col.s12
 			p You need to have a user and to be logged in to see your profile.
+
+block js
+	script(src="/js/profile.js")

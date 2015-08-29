@@ -33,19 +33,26 @@ block content
 				| .
 			
 			h4 Features
-			h6 View items
-			ul
+			
+			h5 View items
+			ul.featuresList
 				li Using GuildWars2's official API, all unique armor and weapon skins are fetched from the API, stored in a MongoDB database, and displayed in categories.
-			h6 Search for items
-			h6 See details
-			ul
+				li By adding a valid API token, users will be able to see which skins they have unlocked!
+			
+			h5 See details
+			ul.featuresList
 				li Each skin has a detail page.
 				li If there is a page on the official wiki about the currently selected item, there will a link to that page.
 				li If the official wiki page of the currently selected item contains either a recipe or information on how to acquire the item, the according information will be pulled and displayed with the rest of the item details.
 				li Thanks to ArenaNet and the people behind the Official Wiki for giving me the opportunity to steal the code they use to generate the ingame link codes.
 				li Users are able to copy chat codes for the current skin.
-			h6 Favorites
-			ul
+			
+			h5 Search for items
+			ul.featuresList
+				li All skins containing the search phrase will be displayed in a well-mannered fashion.
+			
+			//h6 Favorites
+			//ul.featuresList
 				li By clicking "Add to favorites" on the item page, the current skin will be added to favorites.
 				li Favorites will allow users to store particular items of interest on a separate page.
 				li In order to use Favorites, you need to have a user and to be logged in.

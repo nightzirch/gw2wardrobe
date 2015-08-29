@@ -1,20 +1,35 @@
 extends ../layouts/default
 
 block content
+	+flash-message(
+		{
+			title: 'Important notices',
+			detail: '<ol><li>Create an API token on <a href="https://account.arena.net/applications">your Guild Wars 2 account page</a> with permissions to at least <strong>account</strong>, <strong>character</strong>, and <strong>unlock</strong>.</li><li>We strongly suggest you <strong>do not use the same password</strong> as you do on your Guild Wars 2 account.</li></ol>'
+		},
+		'warning'
+	)
+	
 	.row
 		.col.s12
-			form#registerForm
+			form#registerForm(role="form", method="post", action="./post")
 				.input-field.col.s12
-					input#registerUsername(type="text", name="username")
-					label(for="registerUsername") Username
+					input#username(type="text", name="username")
+					label(for="username") Username
 				.input-field.col.s12
-					input#registerPassword(type="password", name="password")
-					label(for="registerPassword") Password
+					input#email(type="text", name="email")
+					label(for="email") Email
 				.input-field.col.s12
-					input#registerPassword2(type="password", name="password2")
-					label(for="registerPassword2") Repeat password
+					input#password(type="password", name="password")
+					label(for="password") Password
 				.input-field.col.s12
-					input#registerAPIToken(type="text", name="apitoken")
-					label(for="registerAPIToken") API Token
+					input#password2(type="password", name="password2")
+					label(for="password2") Repeat password
+				.input-field.col.s12
+					input#token(type="text", name="token")
+					label(for="token") API Token
+				
 				.input-field.col
 					button.btn.waves-effect.waves-light(type="submit", title="Register") Register
+
+block js
+	script(src="/js/register.js")
