@@ -35,9 +35,8 @@ exports = module.exports = function(req, res) {
 
 	q.exec(function(err, result) {
 		if(err) {
-			
-		}
-		else {
+
+		} else {
 			res.location("/profile");
 			res.redirect("/profile");
 		}
