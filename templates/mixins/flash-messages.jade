@@ -50,9 +50,11 @@ mixin flash-message(message, type)
 							-var title = type.charAt(0).toUpperCase() + type.slice(1)
 							h5= title
 				if message.detail
-					.flash-message-detail!= message.detail
+					.flash-message-detail
+						p!= message.detail
 			else
 				.flash-message-title(class= bgClass)
 					-var title = type.charAt(0).toUpperCase() + type.slice(1)
 					h5= title
-				.flash-message-detail= message
+				.flash-message-detail
+					p= message

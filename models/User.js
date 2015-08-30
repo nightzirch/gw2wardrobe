@@ -9,8 +9,8 @@ var keystone = require('keystone'),
 var User = new keystone.List('User');
 
 User.add({
-	username: { type: String, initial: true, required: true, index: true },
-	email: { type: Types.Email, initial: true, required: true, index: true },
+	username: { type: String, initial: true, required: true, index: true, unique: true },
+	email: { type: Types.Email, initial: true, required: true, index: true, unique: true },
 	password: { type: Types.Password, initial: true, required: true },
 	registered: { type: Types.Datetime, required: true, default: Date.now},
 	about: { type: Types.Textarea },

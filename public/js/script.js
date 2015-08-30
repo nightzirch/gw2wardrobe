@@ -183,6 +183,40 @@ var wardrobe = {
 		modal.openModal();
 	},
 
+	alert: function(type, title, message, id) {
+		var classes;
+
+		switch(type) {
+			case "info":
+				classes = "light-blue accent-3 white-text";
+				break;
+			case "success":
+				classes = "light-green white-text";
+				break;
+			case "error":
+				classes = "red darken-4 white-text";
+				break;
+			case "warning":
+				classes = "amber darken-1 white-text";
+				break;
+			default:
+				classes = "";
+				break;
+		}
+
+		var flashMessage = '<div class="row flash-message" id="' + id + '"><div class="col s12 z-depth-1"><div class="flash-message-title ' + classes + '"><h5>' + title + '</h5></div><div class="flash-message-detail">'+ message + '</div></div></div>';
+
+		if($("#" + id).length > 0) {
+			$("#" + id).remove();
+		}
+
+		if($(".flash-message").length > 0) {
+			$(".flash-message").last().after(flashMessage);
+		} else {
+			$("#body").prepend(flashMessage);
+		}
+	},
+
 	// Temporary functions
 	temp: {
 		hideEmpty: function() {

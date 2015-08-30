@@ -1,4 +1,5 @@
 var keystone = require('keystone'),
+	User = keystone.list('User'),
 	async = require('async'),
 	bcrypt = require('bcrypt-nodejs');
 
@@ -17,7 +18,10 @@ exports = module.exports = function(req, res) {
 	if (validate()) {
 		post();
 	} else {
-		// Validation failed
+		// console.log("Failed");
+		//
+		// res.location("/register");
+		// res.redirect("/register");
 	}
 
 	function validateEmail(email) {
@@ -32,44 +36,35 @@ exports = module.exports = function(req, res) {
 
 	function validate() {
 		if (locals.form.username && locals.form.email && locals.form.password && locals.form.password2 && locals.form.token) {
-			if (locals.form.username.length > 5) {
+			if (locals.form.username.length > 3) {
 				if (validateEmail(locals.form.email)) {
 					if (locals.form.password == locals.form.password2) {
 						if (validateToken(locals.form.token)) {
-							console.log("Validated");
 							return true;
 						}
 					}
 				}
 			}
 		}
-		console.log("Validation failed");
-		console.log("username", locals.form.username);
-		console.log("email", locals.form.email);
-		console.log("password", locals.form.password);
-		console.log("password2", locals.form.password2);
-		console.log("token", locals.form.token);
 
 		return false;
 	}
 
 	function post() {
-		var q = keystone.list('User').model.insert({
+		var newUser = new User.model({
 			username: req.body.username,
 			email: locals.form.email,
 			password: locals.form.password,
-			token: locals.form.token,
-			registered: new Date(),
-
+			token: locals.form.token
 		});
 
-		q.exec(function(err, result) {
+		newUser.save(function(err) {
 			if(err) {
-				req.flash('error', "No armors were found in the database.");
+
 			}
 			else {
-				res.location("/profile");
-				res.redirect("/profile");
+				res.location("/login");
+				res.redirect("/login");
 			}
 		});
 	}

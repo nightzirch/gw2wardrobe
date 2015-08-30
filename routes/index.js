@@ -64,7 +64,9 @@ exports = module.exports = function(app) {
 
 	app.get('/register', routes.views.register);
 	app.post('/register/post', routes.views.registerUser);
-	// app.post('/login', routes.views.login);
+	app.get('/login', routes.views.login);
+	app.post('/login', routes.views.login);
+	app.get('/logout', routes.views.logout);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

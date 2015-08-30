@@ -54,10 +54,11 @@ mixin menu-items
 							//else
 								span.badge(id= link.badge.id, class=link.badge.new ? "new" : "", class=link.badge.content == 0 ? "hidden" : "")= link.badge.content
 					
-		li: a(href='/keystone/signout') Log Out
+		li: a(href='/logout') Log Out
 		
 		if user.canAccessKeystone
 			li.divider
 			li: a.waves-effect.waves-red(href='/keystone') Admin
 	else
-		li: a.waves-effect.waves-red(href='/keystone/signin') Log in
+		li: a.waves-effect.waves-red(href='/login') Log in
+		li: a.waves-effect.waves-red(href='/register') Register

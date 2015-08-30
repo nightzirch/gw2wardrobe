@@ -4,14 +4,18 @@ block content
 	+flash-message(
 		{
 			title: 'Important notices',
-			detail: '<ol><li>Create an API token on <a href="https://account.arena.net/applications">your Guild Wars 2 account page</a> with permissions to at least <strong>account</strong>, <strong>character</strong>, and <strong>unlock</strong>.</li><li>We strongly suggest you <strong>do not use the same password</strong> as you do on your Guild Wars 2 account.</li></ol>'
+			detail: '<ol>' +
+					'<li>Create an API token on <a href="https://account.arena.net/applications">your Guild Wars 2 account page</a> with permissions to at least <strong>account</strong>, <strong>character</strong>, and <strong>unlock</strong>.</li>' +
+					'<li>We strongly suggest you <strong>do not use the same password</strong> as you do on your Guild Wars 2 account.</li>' +
+					'<li>Because this is beta, the register process is a bit clunky and buggy, and will of course be improved later on.</li>' +
+				'</ol>'
 		},
 		'warning'
 	)
 	
 	.row
 		.col.s12
-			form#registerForm(role="form", method="post", action="./post")
+			form#registerForm(role="form", method="post", action="/register/post", onsubmit="return validate()")
 				.input-field.col.s12
 					input#username(type="text", name="username")
 					label(for="username") Username

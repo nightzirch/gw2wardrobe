@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block content
+	.row
+		.col.s12
+			form#loginForm(role="form", method="post")
+				input(type='hidden', name=csrf_token_key, value=csrf_token_value)
+				.input-field.col.s12
+					input#email(type="email", name="email")
+					label(for="email") Email
+				.input-field.col.s12
+					input#password(type="password", name="password")
+					label(for="password") Password
+				
+				.input-field.col
+					button.btn.waves-effect.waves-light(type="submit", title="Log in") Log in

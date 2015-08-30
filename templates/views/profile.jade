@@ -43,12 +43,9 @@ block content
 							strong  #{allSkins.length - user.wardrobe.length}
 							|  more skins to collect!
 
-				.divider
+				//- .divider
 
-				.row
-
-
-				if user.token && characters
+				//- if user.token && characters
 					.row
 						.col.s12: .section.character-section
 							+flash-message(
@@ -64,7 +61,7 @@ block content
 								+character(character)
 
 
-			//.col.s12.m4.l3
+			//-.col.s12.m4.l3
 				if user.token
 					h5 Response from v2/account
 					+apiResponse(tokenResponse)

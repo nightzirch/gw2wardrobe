@@ -19,14 +19,10 @@ function validate() {
                         console.log("Validated");
                         $.ajax({
                         	type: "POST",
-                        	url: "/register/post",
-                            data: {
-                                
-                            },
-                            success: function() {
-                                console.log("Registered");
-                            }
+                        	url: "/register/post"
                         });
+
+                        return true;
                     }
                 }
             }
@@ -34,6 +30,8 @@ function validate() {
     }
 
     // Validation failed
+    console.log("Validation failed");
+    wardrobe.alert("error", "Some error message", "<p>You did something wrong, but I'm not sure what. Try not do that again, maybe?</p>", "registerError")
     return false;
 }
 
