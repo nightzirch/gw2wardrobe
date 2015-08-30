@@ -8364,6 +8364,9 @@ header .nav-wrapper {
     font-size: 32px; }
   header .nav-wrapper label[for=search] {
     margin-left: -30px; }
+  header .nav-wrapper #sidenav-collapse i {
+    display: inline;
+    margin-left: 10px; }
 
 header #sidenav-collapse {
   padding-right: 20px; }
