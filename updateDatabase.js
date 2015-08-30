@@ -113,13 +113,18 @@ var skinQueue = async.queue(function (doc, callback) {
 	}, function(error, response, body){
 		// Skin fetched and parsed
 		var skin = JSON.parse(body);
-		console.log("Skin fetched with id: " + skin.id);
 
-		// Adding skin to skinsArr
-		skinsArr.push(skin);
+		if(skin.text == "ErrBadParam") {
+			console.log("Error on skin with id: " + skin.id);
+		} else {
+			console.log("Skin fetched with id: " + skin.id);
 
-		// Adding skin to wiki queue which later will add to database
-		wikiSkinQueue.push(skin);
+			// Adding skin to skinsArr
+			skinsArr.push(skin);
+
+			// Adding skin to wiki queue which later will add to database
+			wikiSkinQueue.push(skin);
+		}
 
 		// Callback which I have no idea what is doing
     	callback(error, skin);
@@ -165,7 +170,7 @@ var wikiSkinQueue = async.queue(function (doc, callback) {
 
 		console.log("Wiki site fetched for skin with id: " + skin.id);
 
-		if(skin.id != undefined) {
+		if(skin.id != undefined || skin.text == "ErrBadParam") {
 			// Load into cheerio
 			var $ = cheerio.load(body);
 
@@ -201,11 +206,11 @@ var wikiSkinQueue = async.queue(function (doc, callback) {
 					write = false;
 				}
 			}
-		}
 
-		// Adding skin to database
-		if(write == true) {
-			writeToDatabase(skin, "skin");
+			// Adding skin to database
+			if(write == true) {
+				writeToDatabase(skin, "skin");
+			}
 		}
 
 		// Callback which I have no idea what is doing
