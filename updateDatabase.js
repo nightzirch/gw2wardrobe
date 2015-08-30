@@ -165,39 +165,41 @@ var wikiSkinQueue = async.queue(function (doc, callback) {
 
 		console.log("Wiki site fetched for skin with id: " + skin.id);
 
-		// Load into cheerio
-		var $ = cheerio.load(body);
+		if(skin.id != undefined) {
+			// Load into cheerio
+			var $ = cheerio.load(body);
 
-		// If wiki page has content
-		if($(".noarticletext").length == 0) {
-			var acquisition;
+			// If wiki page has content
+			if($(".noarticletext").length == 0) {
+				var acquisition;
 
-			// If there is a recipe section
-
-
-			// If there is an Acquisition section
-				// If there is a recipe inside Acquisition section
-
-				// ul
-
-				// table
+				// If there is a recipe section
 
 
-			// Fetch the big images
-			skin.images = getLargeImages($("img"));
-		}
+				// If there is an Acquisition section
+					// If there is a recipe inside Acquisition section
 
-		// If there is no content, we might just be looking at the wrong page
-		else {
-			// Just make sure this wont be an infinite loop.
-			// If the wikiUrl does not contain the word "Skin"
-			skin.wikiUrl = getWikiUrl(skin);
+					// ul
 
-			if(skin.wikiUrl.indexOf("Skin") == -1 && skin.wikiUrl.indexOf("skin") == -1) {
-				skin.wikiUrl = skin.wikiUrl + " Skin";
-				wikiSkinQueue.push(skin);
+					// table
 
-				write = false;
+
+				// Fetch the big images
+				skin.images = getLargeImages($("img"));
+			}
+
+			// If there is no content, we might just be looking at the wrong page
+			else {
+				// Just make sure this wont be an infinite loop.
+				// If the wikiUrl does not contain the word "Skin"
+				skin.wikiUrl = getWikiUrl(skin);
+
+				if(skin.wikiUrl.indexOf("Skin") == -1 && skin.wikiUrl.indexOf("skin") == -1) {
+					skin.wikiUrl = skin.wikiUrl + " Skin";
+					wikiSkinQueue.push(skin);
+
+					write = false;
+				}
 			}
 		}
 
