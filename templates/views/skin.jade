@@ -14,11 +14,11 @@ block content
 				i.mdi-communication-chat.left
 				| Copy chat code
 
-			if user
+			//- if user
 				- for(var i = 0; i < user.favorites.length; i++) {
 				- 	var favoritted = (user.favorites.indexOf(skin.skinid) > -1) ? true : false;
 				- }
-				a.linkFavorite.waves-effect.waves-light.btn.grey(href="#", class=favoritted ? "favoritted" : "", data-skinid= skin.skinid)
+				*a.linkFavorite.waves-effect.waves-light.btn.grey(href="#", class=favoritted ? "favoritted" : "", data-skinid= skin.skinid)
 					.favoriteFalse
 						i.mdi-action-favorite-outline.left
 						| Add to favorites
