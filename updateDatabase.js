@@ -170,7 +170,7 @@ var wikiSkinQueue = async.queue(function (doc, callback) {
 
 		console.log("Wiki site fetched for skin with id: " + skin.id);
 
-		if(skin.id != undefined || skin.text == "ErrBadParam") {
+		if((skin.id != undefined && skin.name != undefined) || skin.text == "ErrBadParam") {
 			// Load into cheerio
 			var $ = cheerio.load(body);
 
